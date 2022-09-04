@@ -9,6 +9,7 @@ using namespace pros;
 using namespace c;
 using namespace std;
 
+//constants used for calculating power/voltage
 float vKp;
 float vKi;
 float vKd;

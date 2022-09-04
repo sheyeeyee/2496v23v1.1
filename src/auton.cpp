@@ -2,6 +2,7 @@
 #include "auton.h"
 #include "main.h"
 #include "robot.h"
+#include "pid.h"
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
