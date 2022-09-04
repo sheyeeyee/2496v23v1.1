@@ -1,25 +1,14 @@
 #include "api.h"
 #include "auton.h"
 #include "main.h"
+#include "pid.h"
 #include "robot.h"
 #include <valarray>
-// #include "main.cpp"
 
 using namespace pros;
 using namespace c;
 using namespace std;
 
-//creating PID constants
-float vKp;
-float vKi;
-float vKd;
-
-float error; //amount from target
-float prevError; //how is this specified/calculated??
-
-int integral;
-
-float power; //voltage provided to motors at any given time to reach the target
 
 void setConstants(float kp, float ki, float kd) {
     vKp = kp;

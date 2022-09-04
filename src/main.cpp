@@ -4,7 +4,7 @@
 #include "auton.h"
 #include "main.h"
 #include "robot.h"
-#include "pid.hpp"
+#include "pid.h"
 
 using namespace pros;
 using namespace std;
