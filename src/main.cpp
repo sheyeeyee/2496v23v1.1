@@ -97,119 +97,119 @@ void opcontrol() {
 	int time = 0;
 
 	while (true) {
-		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
-		// indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
-		// indexerScaledDeltaPos = indexerDeltaPos/1.1;
-		int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
-		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
-		double chasstempF = chasstempC *(9/5) + 32;
-		if (time % 100 == 0) con.clear();
-		else if (time % 50 == 0) {
-			cycle++;
-			if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
-			if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheelVoltage);
-			if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
-		}
+		// // indexerDeltaPos = indexerTarget - INDEXER.get_position();
+		// // indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
+		// // indexerScaledDeltaPos = indexerDeltaPos/1.1;
+		// int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
+		// double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
+		// double chasstempF = chasstempC *(9/5) + 32;
+		// if (time % 100 == 0) con.clear();
+		// else if (time % 50 == 0) {
+		// 	cycle++;
+		// 	if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
+		// 	if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheelVoltage);
+		// 	if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		// }
 		
-		//chassis arcade drive
-		int power = con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y); //power is defined as forward or backward
-		int RX = con.get_analog(E_CONTROLLER_ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
-		int turn = int(abs(RX) * RX / 75);
+		// //chassis arcade drive
+		// int power = con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y); //power is defined as forward or backward
+		// int RX = con.get_analog(E_CONTROLLER_ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
+		// int turn = int(abs(RX) * RX / 75);
 		
-		int left = power + turn;
-		int right = power - turn;
+		// int left = power + turn;
+		// int right = power - turn;
 
-		// LF.move(left);
-		// LB.move(left);
-		// RF.move(right);
-		// RB.move(right);
+		// // LF.move(left);
+		// // LB.move(left);
+		// // RF.move(right);
+		// // RB.move(right);
 
-		// chassis tank drive
-		LF.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
-		LB.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
-		RF.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
-		RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
+		// // chassis tank drive
+		// LF.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
+		// LB.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
+		// RF.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
+		// RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 
-		//intake
-		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
-			INTAKE.move(127);
-		}
-		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
-			INTAKE.move(-127);
-		}
-		else {
-			INTAKE.move(0);
-		}
-
-		//indexer
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){ //using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
-			indexerToggle = !indexerToggle;
-			if (indexerToggle)
-			{
-			INDEXER.move_relative(197,200);
-			}
-			if (indexerToggle==false)
-			{
-			INDEXER.move_relative(-197,200);
-			}
-		}
-		
-		//flywheel
-		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
-			FLY.move(flywheelVoltage);
-			FLY1.move(flywheelVoltage);
-		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
-			FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
-			FLY1.move(127);
-		}
-		else {
-			FLY.move(0);
-			FLY1.move(0);
-		}
-		
-		//angler
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)){
-			if (anglerToggle == false) {
-				angler.set_value(false);
-				anglerToggle = true;
-			}
-			else {
-				angler.set_value(true);
-				anglerToggle = false;
-			}
-		}
-
-		//flywheel speed changer
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_A)) {
-			con.rumble(".");
-			speedToggle = !speedToggle;
-			speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
-		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_B)) {
-			speedToggle == true ? slowSpeed-- : fastSpeed--;
-			speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
-		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_X)) {
-			speedToggle == true ? slowSpeed++ : fastSpeed++;
-			speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
-		}
-
-		//reset chassis motors (what is this for???)
-		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
-		// 	resetEncoders();
+		// //intake
+		// if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
+		// 	INTAKE.move(127);
+		// }
+		// else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
+		// 	INTAKE.move(-127);
+		// }
+		// else {
+		// 	INTAKE.move(0);
 		// }
 
-		//expansion
-		if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-			deployExpansion = true;
-		}
-		if (deployExpansion == true) {
-			expand.set_value(false);
-		}
+		// //indexer
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){ //using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
+		// 	indexerToggle = !indexerToggle;
+		// 	if (indexerToggle)
+		// 	{
+		// 	INDEXER.move_relative(197,200);
+		// 	}
+		// 	if (indexerToggle==false)
+		// 	{
+		// 	INDEXER.move_relative(-197,200);
+		// 	}
+		// }
+		
+		// //flywheel
+		// if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
+		// 	FLY.move(flywheelVoltage);
+		// 	FLY1.move(flywheelVoltage);
+		// }
+		// else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
+		// 	FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
+		// 	FLY1.move(127);
+		// }
+		// else {
+		// 	FLY.move(0);
+		// 	FLY1.move(0);
+		// }
+		
+		// //angler
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)){
+		// 	if (anglerToggle == false) {
+		// 		angler.set_value(false);
+		// 		anglerToggle = true;
+		// 	}
+		// 	else {
+		// 		angler.set_value(true);
+		// 		anglerToggle = false;
+		// 	}
+		// }
 
-		time += 10;
-		pros::delay(10);
+		// //flywheel speed changer
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_A)) {
+		// 	con.rumble(".");
+		// 	speedToggle = !speedToggle;
+		// 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
+		// }
+		// else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_B)) {
+		// 	speedToggle == true ? slowSpeed-- : fastSpeed--;
+		// 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
+		// }
+		// else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_X)) {
+		// 	speedToggle == true ? slowSpeed++ : fastSpeed++;
+		// 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
+		// }
+
+		// //reset chassis motors (what is this for???)
+		// // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
+		// // 	resetEncoders();
+		// // }
+
+		// //expansion
+		// if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+		// 	deployExpansion = true;
+		// }
+		// if (deployExpansion == true) {
+		// 	expand.set_value(false);
+		// }
+
+		// time += 10;
+		// pros::delay(10);
 
 		//PID testing
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
