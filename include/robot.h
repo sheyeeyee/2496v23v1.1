@@ -2,6 +2,7 @@
 //extern: external linkage
 
 #include "main.h"
+#include "pros/motors.h"
 
 #ifndef ROBOTH
 #define ROBOTH
@@ -25,6 +26,8 @@ extern pros::Controller con;
 extern pros::ADIEncoder encLeft;
 extern pros::ADIEncoder encRight;
 extern pros::ADIEncoder encMid;
+
+extern pros::Imu imu;
 
 //indexer
 extern pros::Motor INDEXER;

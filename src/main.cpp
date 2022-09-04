@@ -4,6 +4,18 @@
 #include "auton.h"
 #include "main.h"
 #include "robot.h"
+#include "pid.cpp"
+
+using namespace pros;
+using namespace std;
+
+
+// void resetEncoders() { //we can't add this to main.h because main.h doesn't refer to robot.h (where LF, LB, etc. are located)
+// 	LF.tare_position(); //or set_zero_position(0) or set_zero_position(LF.get_position()); (sets current encoder position to 0)
+// 	LB.tare_position();
+// 	RF.tare_position();
+// 	RB.tare_position();
+// }
 
 /**
  * A callback function for LLEMU's center button.
@@ -67,6 +79,7 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 
+
 int max_flywheel_speed = 480;
 int flywheelVoltage = 105;
 int cycle = 0;
@@ -99,8 +112,8 @@ void opcontrol() {
 		}
 		
 		//chassis arcade drive
-		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
-		int RX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
+		int power = con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y); //power is defined as forward or backward
+		int RX = con.get_analog(E_CONTROLLER_ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
 		int turn = int(abs(RX) * RX / 75);
 		
 		int left = power + turn;
@@ -112,10 +125,10 @@ void opcontrol() {
 		// RB.move(right);
 
 		// chassis tank drive
-		LF.move(con.get_analog(ANALOG_LEFT_Y));
-		LB.move(con.get_analog(ANALOG_LEFT_Y));
-		RF.move(con.get_analog(ANALOG_RIGHT_Y));
-		RB.move(con.get_analog(ANALOG_RIGHT_Y));
+		LF.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
+		LB.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
+		RF.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
+		RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 
 		//intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
@@ -182,9 +195,12 @@ void opcontrol() {
 			speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage = fastSpeed;
 		}
 
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
-			resetEncoders();
-		}
+		//reset chassis motors (what is this for???)
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
+		// 	resetEncoders();
+		// }
+
+		//expansion
 		if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
 			deployExpansion = true;
 		}
@@ -194,5 +210,22 @@ void opcontrol() {
 
 		time += 10;
 		pros::delay(10);
+
+		//PID testing
+		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+			driveStraight(300);
+		}
+
+		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+			driveStraight(-300);
+		}
+
+		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+			driveTurn(90);
+		}
+
+		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+			driveTurn(-90);
+		}
 	}
 }

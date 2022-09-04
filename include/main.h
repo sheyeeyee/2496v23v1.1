@@ -12,7 +12,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#ifndef _PROS_MAIN_H_
+#ifndef _PROS_MAIN_H_ //include guard
 #define _PROS_MAIN_H_
 
 /**
@@ -24,7 +24,7 @@
  * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
  * not convienent for most student programmers.
  */
-#define PROS_USE_SIMPLE_NAMES
+#define PROS_USE_SIMPLE_NAMES //basically PROS made their own slang
 
 /**
  * If defined, C++ literals will be available for use. All literals are in the
@@ -42,6 +42,7 @@
 #include "okapi/api.hpp"
 #include "pros/api_legacy.h"
 
+
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
  * Motor, you can use the namespace with the following commented out line.
@@ -50,7 +51,7 @@
  * concurrently! The okapi namespace will export all symbols inside the pros
  * namespace.
  */
-// using namespace pros;
+using namespace pros;
 // using namespace pros::literals;
 // using namespace okapi;
 
