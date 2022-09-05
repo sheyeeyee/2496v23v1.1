@@ -88,6 +88,7 @@ void driveStraight(int target) {
         if (count >= 20) break;
 
         delay(10);
+        con.print(0, 0, "%2f", encoderAvg);
     }
     
     chasMove(0, 0, 0, 0);
@@ -95,7 +96,7 @@ void driveStraight(int target) {
 
 void driveTurn(int target) { //target is inputted in autons
     setConstants(TURN_KP, TURN_KI, TURN_KD);
-    
+
     float voltage;
     float position;
     int count = 0;

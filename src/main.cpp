@@ -100,16 +100,16 @@ void opcontrol() {
 		// // indexerDeltaPos = indexerTarget - INDEXER.get_position();
 		// // indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
 		// // indexerScaledDeltaPos = indexerDeltaPos/1.1;
-		// int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
-		// double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
-		// double chasstempF = chasstempC *(9/5) + 32;
+		// // int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
+		// // double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
+		// // double chasstempF = chasstempC *(9/5) + 32;
 		// if (time % 100 == 0) con.clear();
 		// else if (time % 50 == 0) {
 		// 	cycle++;
-		// 	if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
+		// 	if (cycle % 3 == 0) con.print(0, 0, "RPM: %d",  ((LB.get_position() + RB.get_position()) / 2));
 		// 	if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheelVoltage);
-		// 	if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
-		// }
+		// 	// if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		//}
 		
 		// //chassis arcade drive
 		// int power = con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y); //power is defined as forward or backward
@@ -213,7 +213,7 @@ void opcontrol() {
 
 		//PID testing
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-			driveStraight(300);
+			driveStraight(2000);
 		}
 
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
