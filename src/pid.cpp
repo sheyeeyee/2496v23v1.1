@@ -1,15 +1,15 @@
 #include "api.h"
-#include "auton.h"
+// #include "auton.h"
 #include "main.h"
+#include "pid.h"
 #include "robot.h"
 #include <valarray>
-// #include "main.cpp"
 
 using namespace pros;
 using namespace c;
 using namespace std;
 
-//creating PID constants
+//constants used for calculating power/voltage
 float vKp;
 float vKi;
 float vKd;
@@ -20,6 +20,7 @@ float prevError; //how is this specified/calculated??
 int integral;
 
 float power; //voltage provided to motors at any given time to reach the target
+
 
 void setConstants(float kp, float ki, float kd) {
     vKp = kp;
@@ -42,7 +43,7 @@ void chasMove(int voltageLF, int voltageLB, int voltageRF, int voltageRB) { //vo
     RB.move_voltage(voltageRB);
 }
 
-float calcPID(int target, float input, int integralKi, int maxI) { //basically tuning i here
+float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
     error = target - input;
     
     if(std::abs(error) < integralKi) {
@@ -53,11 +54,11 @@ float calcPID(int target, float input, int integralKi, int maxI) { //basically t
     }
 
     if(integral >= 0) {
-        integral = std::min(integral, maxI); //min means take whichever value is smaller btwn integral and maxI
+        integral = std::min(integral, maxIntegral); //min means take whichever value is smaller btwn integral and maxI
         //integral = integral until integral is greater than maxI (to keep integral limited to maxI)
     }
     else {
-        integral = std::max(integral, -maxI); //same thing but negative max
+        integral = std::max(integral, -maxIntegral); //same thing but negative max
     }
     
     // derivative = error - prevError 
@@ -69,7 +70,7 @@ float calcPID(int target, float input, int integralKi, int maxI) { //basically t
 
 //driving straight
 void driveStraight(int target) {
-    setConstants(0.5, 0.00001, 0);
+    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     
     float voltage;
     float encoderAvg;
@@ -79,7 +80,7 @@ void driveStraight(int target) {
 
     while(true) {
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
-        voltage = calcPID(target, encoderAvg, 100, 10);
+        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
 
         chasMove(voltage, voltage, voltage, voltage);
         
@@ -92,8 +93,8 @@ void driveStraight(int target) {
     chasMove(0, 0, 0, 0);
 }
 
-void driveTurn(int target) {
-    setConstants(1, 0.5, 0);
+void driveTurn(int target) { //target is inputted in autons
+    setConstants(TURN_KP, TURN_KI, TURN_KD);
     
     float voltage;
     float position;
@@ -101,7 +102,7 @@ void driveTurn(int target) {
 
     while(true) {
         position = imu.get_rotation(); //this is where the units are set to be degrees
-        voltage = calcPID(target, position, 10, 10);
+        voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
         
         chasMove(voltage, voltage, -voltage, -voltage);
         
