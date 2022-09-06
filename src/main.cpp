@@ -217,7 +217,7 @@ void opcontrol() {
 		}
 
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-			driveStraight(-300);
+			driveStraight(-2000);
 		}
 
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {

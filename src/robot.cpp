@@ -32,7 +32,7 @@ pros::ADIEncoder encLeft ({{1, 1, 2}, false});
 pros::ADIEncoder encRight ({{1, 3, 4}, false});
 pros::ADIEncoder encMid ({{1, 5, 6}, false});
 
-pros::Imu imu (4);
+pros::Imu imu (6);
 
 //controller
 pros::Controller con (pros::E_CONTROLLER_MASTER);
