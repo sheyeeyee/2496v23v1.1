@@ -46,6 +46,7 @@ void chasMove(int voltageLF, int voltageLB, int voltageRF, int voltageRB) { //vo
 float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
     error = target - input;
     
+    //limiting i's growth
     if(std::abs(error) < integralKi) {
         integral += error;
     }
@@ -84,24 +85,24 @@ void driveStraight(int target) {
     con.clear();
     // double error_range_time = 0;
     
-
     resetEncoders();
     
-
     while(true) {
-        if (target < 1000){ 
+        // if (target < 1000){ 
              
-        }
+        // }
+
+        //heading control
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
-        if(init_heading > 180){
+        if(init_heading > 180) {
             init_heading = 360 - init_heading;
         }
 
-        if(imu.get_heading() < 180){
+        if(imu.get_heading() < 180) {
             heading_error = init_heading - imu.get_heading();
         }
-        else{
+        else {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
@@ -117,10 +118,10 @@ void driveStraight(int target) {
         // con.print(1, 0, "%2f", encoderAvg);
     }
     // chasMove(0, 0, 0, 0);
-    motor_brake (7);
-    motor_brake (8);
-    motor_brake (9);
-    motor_brake (10);
+    motor_brake(7);
+    motor_brake(8);
+    motor_brake(9);
+    motor_brake(10);
     
 }
 
@@ -141,7 +142,12 @@ void driveTurn(int target) { //target is inputted in autons
         if (count >= 20) break;
         
         delay(10);
+        con.print(0, 0, "%2f", position);
     }
 
-    chasMove(0, 0, 0, 0);
+    // chasMove(0, 0, 0, 0);
+    motor_brake(7);
+    motor_brake(8);
+    motor_brake(9);
+    motor_brake(10);
 }
