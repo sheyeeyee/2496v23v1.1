@@ -213,11 +213,11 @@ void opcontrol() {
 
 		//PID testing
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-			driveStraight(2000);
+			driveStraight(1000);
 		}
 
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-			driveStraight(-2000);
+			driveStraight(-3000);
 		}
 
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {

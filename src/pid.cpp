@@ -109,7 +109,7 @@ void driveStraight(int target) {
 
         chasMove((voltage + heading_error), (voltage + heading_error), (voltage - heading_error), (voltage - heading_error));
         
-        if (abs(target - encoderAvg) <= 5) count++;
+        if (abs(target - encoderAvg) <= 15) count++;
         if (count >= 20) break;
 
         delay(10);
