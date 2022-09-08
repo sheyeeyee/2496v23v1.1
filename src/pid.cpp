@@ -127,7 +127,7 @@ void driveStraight(int target) {
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(107, 120, 0);
+    setConstants(107.2, 0, 0);
     // cout << target << endl;
 
     float voltage;
