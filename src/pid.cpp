@@ -3,7 +3,10 @@
 #include "main.h"
 #include "pid.h"
 #include "robot.h"
-#include <valarray>
+// #include "<valarray>"
+// #include "<sstream>"
+// #include "<string>"
+
 
 using namespace pros;
 using namespace c;
@@ -121,26 +124,29 @@ void driveStraight(int target) {
     motor_brake (8);
     motor_brake (9);
     motor_brake (10);
-    
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(TURN_KP, TURN_KI, TURN_KD);
+    setConstants(107, 120, 0);
+    // cout << target << endl;
 
     float voltage;
     float position;
     int count = 0;
-
+    
     while(true) {
-        position = imu.get_rotation(); //this is where the units are set to be degrees
+
+        position = imu.get_heading(); //this is where the units are set to be degrees
         voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
+        // con.print(1, 0, "%2f", voltage);
         
         chasMove(voltage, voltage, -voltage, -voltage);
         
-        if (abs(target - position) <= 1.5) count++; 
-        if (count >= 20) break;
-        
+        if (abs(target - position) <= 0.1) count++; 
+        if (count >= 50) break;
+        con.print(0, 0, "%2f", target-position);
         delay(10);
+        // con.print(0, 0, "%2f", target);
     }
 
     chasMove(0, 0, 0, 0);
