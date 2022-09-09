@@ -127,7 +127,7 @@ void driveStraight(int target) {
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(107.2, 0, 0);
+    setConstants(1050.0, 0, 0);//kp 99 ki 178.9 undercorrecting
     // cout << target << endl;
 
     float voltage;
@@ -142,7 +142,7 @@ void driveTurn(int target) { //target is inputted in autons
         
         chasMove(voltage, voltage, -voltage, -voltage);
         
-        if (abs(target - position) <= 0.1) count++; 
+        if (abs(target - position) <= 0.25) count++; 
         if (count >= 50) break;
         con.print(0, 0, "%2f", target-position);
         delay(10);
