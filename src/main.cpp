@@ -131,48 +131,49 @@ void opcontrol() {
 		// LB.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
 		// RF.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 		// // RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
-//below 20 blue above 200 red
+	//below 20 blue above 200 red
 
-//RED OP
-if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
+	//RED AWP
+	if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
-  	LF.move(40);
-    LB.move(40);
-    RF.move(40);
-    RB.move(40);
-	delay(180);
-	
+		LF.move(40);
+		LB.move(40);
+		RF.move(40);
+		RB.move(40);
+		delay(180);
+		
 
-  	LF.move(10);
-    LB.move(10);
-    RF.move(10);
-    RB.move(10);
+		LF.move(10);
+		LB.move(10);
+		RF.move(10);
+		RB.move(10);
 
-	while (optical.get_hue() > 200) INTAKE.move(90);
-	// Redundant if (optical.get_hue() < 20) 
-	INTAKE.move(0);
-			
-	FLY.move(116);
-	FLY1.move(116);
-	driveStraight(-205);
-	driveTurn(-90);
-	driveStraight(2500);
-	driveTurn(-97.5);
-	INDEXER.move(127);
-	delay(250);
-	INDEXER.move(-127);
-	delay(650);
-	INDEXER.move(127);
-	delay(250);
-	INDEXER.move(-127);
-	delay(250);
-	INTAKE.move(127);
-	driveTurn(-25);
-	driveStraight(900);
+		while (optical.get_hue() > 200) INTAKE.move(90);
+		// Redundant if (optical.get_hue() < 20) 
+		
+		INTAKE.move(0);
+		
+		FLY.move(116);
+		FLY1.move(116);
+		driveStraight(-205);
+		driveTurn(-90);
+		driveStraight(2500);
+		driveTurn(-97.5);
+		INDEXER.move(127);
+		delay(250);
+		INDEXER.move(-127);
+		delay(650);
+		INDEXER.move(127);
+		delay(250);
+		INDEXER.move(-127);
+		delay(250);
+		INTAKE.move(127);
+		driveTurn(-25);
+		driveStraight(900);
 
-}
+	}
 
-//RED CODE
+	//RED CODE
 		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
 		// 	while (optical.get_hue() > 200){
@@ -185,8 +186,7 @@ if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
 		// }
 
-		//BLUE CODE
-
+	//BLUE CODE
 		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
 		// 	while (optical.get_hue() < 20){
