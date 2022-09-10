@@ -22,11 +22,13 @@ extern pros::Motor FLY1;
 //controller
 extern pros::Controller con;
 
+
 //sensors
 extern pros::ADIEncoder encLeft;
 extern pros::ADIEncoder encRight;
 extern pros::ADIEncoder encMid;
 
+//imu
 extern pros::Imu imu;
 
 //indexer
@@ -41,4 +43,7 @@ extern pros::c::gps_status_s_t gpsData;
 
 //expansion
 extern pros::ADIDigitalOut expand;
+
+//optical
+extern pros::Optical optical;
 #endif

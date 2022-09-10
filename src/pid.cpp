@@ -98,7 +98,7 @@ void driveStraight(int target) {
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
         if(init_heading > 180){
-            init_heading = 360 - init_heading;
+            init_heading = (360 - init_heading);
         }
 
         if(imu.get_heading() < 180){
@@ -127,8 +127,10 @@ void driveStraight(int target) {
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(1050.0, 0, 0);//kp 99 ki 178.9 undercorrecting
+    setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
     // cout << target << endl;
+
+    
 
     float voltage;
     float position;
@@ -137,13 +139,21 @@ void driveTurn(int target) { //target is inputted in autons
     while(true) {
 
         position = imu.get_heading(); //this is where the units are set to be degrees
+          if(position > 180){
+            position = ((360 - position) * -1);
+        }
+
         voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
         // con.print(1, 0, "%2f", voltage);
         
         chasMove(voltage, voltage, -voltage, -voltage);
         
-        if (abs(target - position) <= 0.25) count++; 
-        if (count >= 50) break;
+        if (abs(target - position) <= 1) count++; 
+        if (count >= 50) 
+        {
+            imu.tare_heading();
+            break;
+        }
         con.print(0, 0, "%2f", target-position);
         delay(10);
         // con.print(0, 0, "%2f", target);

@@ -44,6 +44,7 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+	optical.set_led_pwm(100);
 }
 
 /**
@@ -92,6 +93,7 @@ bool speedToggle = false;
 bool deployExpansion = false;
 int slowSpeed = 80;
 int fastSpeed = 105;
+bool rollerOn = false;
 
 void opcontrol() {
 	int time = 0;
@@ -103,13 +105,13 @@ void opcontrol() {
 		// // int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
 		// // double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		// // double chasstempF = chasstempC *(9/5) + 32;
-		// if (time % 100 == 0) con.clear();
-		// else if (time % 50 == 0) {
-		// 	cycle++;
-		// 	if (cycle % 3 == 0) con.print(0, 0, "RPM: %d",  ((LB.get_position() + RB.get_position()) / 2));
-		// 	if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheelVoltage);
-		// 	// if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
-		//}
+		if (time % 100 == 0) con.clear();
+		else if (time % 50 == 0) {
+			cycle++;
+			if (cycle % 3 == 0) con.print(0, 0, "HUE: %lf",  optical.get_hue());
+			if ((cycle+1) % 3 == 0) con.print(1, 0, "R: %lf", optical.get_raw().red);
+			if ((cycle+2) % 3 == 0) con.print(2, 0, "B: %lf", optical.get_raw().blue);
+		}
 		
 		// //chassis arcade drive
 		// int power = con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y); //power is defined as forward or backward
@@ -128,7 +130,98 @@ void opcontrol() {
 		// LF.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
 		// LB.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
 		// RF.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
-		// RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
+		// // RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
+//below 20 blue above 200 red
+
+//RED OP
+if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
+
+  	LF.move(40);
+    LB.move(40);
+    RF.move(40);
+    RB.move(40);
+	delay(180);
+	
+
+  	LF.move(10);
+    LB.move(10);
+    RF.move(10);
+    RB.move(10);
+
+while (optical.get_hue() > 200){
+				INTAKE.move(90);
+			}
+
+			if (optical.get_hue() < 20){
+				INTAKE.move(0);
+			}
+			
+
+	FLY.move(116);
+	FLY1.move(116);
+	driveStraight(-205);
+	driveTurn(-90);
+	driveStraight(2500);
+	driveTurn(-97.5);
+	INDEXER.move(127);
+	delay(250);
+	INDEXER.move(-127);
+	delay(650);
+	INDEXER.move(127);
+	delay(250);
+	INDEXER.move(-127);
+	delay(250);
+	INTAKE.move(127);
+	driveTurn(-25);
+	driveStraight(900);
+
+
+
+	
+
+
+}
+
+//RED CODE
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
+
+		// 	while (optical.get_hue() > 200){
+		// 		INTAKE.move(-90);
+		// 	}
+
+		// 	if (optical.get_hue() < 20){
+		// 		INTAKE.move(0);
+		// 	}
+
+		// }
+
+		//BLUE CODE
+
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
+
+		// 	while (optical.get_hue() < 20){
+		// 		INTAKE.move(90);
+		// 	}
+
+		// 	if (optical.get_hue() > 200){
+		// 		INTAKE.move(0);
+		// 	}
+
+		// }
+
+			// if(optical.get_hue() < 200){
+				
+			// }
+			// else if (optical.get_hue() > 210){
+			// 	INTAKE.move(0);
+			// }			
+			// else {
+			// 	INTAKE.move(0);
+			// }
+		
+		// esle{
+		// 	INTAKE.move(0);
+		// }
 
 		// //intake
 		// if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
@@ -208,7 +301,7 @@ void opcontrol() {
 		// 	expand.set_value(false);
 		// }
 
-		// time += 10;
+
 		// pros::delay(10);
 
 		//PID testing
@@ -227,5 +320,11 @@ void opcontrol() {
 		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
 			driveTurn(-90);
 		}
+		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+		{
+			imu.reset();
+		}
+
+		time += 10;
 	}
 }

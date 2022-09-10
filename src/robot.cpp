@@ -46,3 +46,7 @@ pros::Controller con (pros::E_CONTROLLER_MASTER);
 #define HEADING_INITIAL 90
 pros::Gps gps1(GPS_PORT, X_INITIAL, Y_INITIAL, HEADING_INITIAL, X_OFFSET, Y_OFFSET);
 pros::c::gps_status_s_t gpsData;
+
+//optical
+#define OPTICAL_PORT 4
+pros::Optical optical(OPTICAL_PORT);
