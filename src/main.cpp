@@ -148,15 +148,10 @@ if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
     RF.move(10);
     RB.move(10);
 
-while (optical.get_hue() > 200){
-				INTAKE.move(90);
-			}
-
-			if (optical.get_hue() < 20){
-				INTAKE.move(0);
-			}
+	while (optical.get_hue() > 200) INTAKE.move(90);
+	// Redundant if (optical.get_hue() < 20) 
+	INTAKE.move(0);
 			
-
 	FLY.move(116);
 	FLY1.move(116);
 	driveStraight(-205);
@@ -174,11 +169,6 @@ while (optical.get_hue() > 200){
 	INTAKE.move(127);
 	driveTurn(-25);
 	driveStraight(900);
-
-
-
-	
-
 
 }
 
