@@ -148,9 +148,15 @@ void opcontrol() {
 		RF.move(10);
 		RB.move(10);
 
-		while (optical.get_hue() > 200) INTAKE.move(90);
-		// Redundant if (optical.get_hue() < 20) 
-		
+		-while (optical.get_hue() > 200){
+				INTAKE.move(90);
+			}
+
+			if (optical.get_hue() < 20){
+				INTAKE.move(0);
+			} 
+			// Not redundant becuase the motor does have to sotp eventually, with just the while loop it sets the voltage to 90 then never resets-
+			//-it to zero so the motor will move at 90 forever even if the while loop breaks
 		INTAKE.move(0);
 		
 		FLY.move(116);
