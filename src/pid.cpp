@@ -129,9 +129,7 @@ void driveStraight(int target) {
 void driveTurn(int target) { //target is inputted in autons
     setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
     // cout << target << endl;
-
-    
-
+  
     float voltage;
     float position;
     int count = 0;

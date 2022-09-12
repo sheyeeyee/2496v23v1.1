@@ -133,40 +133,54 @@ void opcontrol() {
 		// // RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 	//below 20 blue above 200 red
 
+	//AUTONOMOUS ROUTES (need to put in autonomous method later)
 	//RED AWP
 	if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
+		//move forward to contact roller
 		LF.move(40);
 		LB.move(40);
 		RF.move(40);
 		RB.move(40);
 		delay(180);
 		
-
+		//move forward more??
 		LF.move(10);
 		LB.move(10);
 		RF.move(10);
 		RB.move(10);
 
+		//turn roller to blue
 		while (optical.get_hue() > 200) INTAKE.move(90);
 		// Redundant if (optical.get_hue() < 20) 
 		
 		INTAKE.move(0);
 		
+		//rev up flywheel
 		FLY.move(116);
 		FLY1.move(116);
+
+		//backwards to shooting position
 		driveStraight(-205);
 		driveTurn(-90);
+
+		//more towards shooting position
 		driveStraight(2500);
 		driveTurn(-97.5);
-		INDEXER.move(127);
+
+		//shoot disc 1
+		INDEXER.move(127); //should it be indexerToggle?
 		delay(250);
 		INDEXER.move(-127);
 		delay(650);
+
+		//shoot disc 2
 		INDEXER.move(127);
 		delay(250);
 		INDEXER.move(-127);
 		delay(250);
+
+		//intake discs
 		INTAKE.move(127);
 		driveTurn(-25);
 		driveStraight(900);
@@ -183,7 +197,6 @@ void opcontrol() {
 		// 	if (optical.get_hue() < 20){
 		// 		INTAKE.move(0);
 		// 	}
-
 		// }
 
 	//BLUE CODE
@@ -196,7 +209,6 @@ void opcontrol() {
 		// 	if (optical.get_hue() > 200){
 		// 		INTAKE.move(0);
 		// 	}
-
 		// }
 
 			// if(optical.get_hue() < 200){
@@ -209,7 +221,7 @@ void opcontrol() {
 			// 	INTAKE.move(0);
 			// }
 		
-		// esle{
+		// else{
 		// 	INTAKE.move(0);
 		// }
 
@@ -295,26 +307,26 @@ void opcontrol() {
 		// pros::delay(10);
 
 		//PID testing
-		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-			driveStraight(1000);
-		}
+		// if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+		// 	driveStraight(1000);
+		// }
 
-		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-			driveStraight(-3000);
-		}
+		// if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+		// 	driveStraight(-3000);
+		// }
 
-		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-			driveTurn(180);
-		}
+		// if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+		// 	driveTurn(180);
+		// }
 
-		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-			driveTurn(-90);
-		}
-		if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-		{
-			imu.reset();
-		}
+		// if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+		// 	driveTurn(-90);
+		// }
+		// if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+		// {
+		// 	imu.reset();
+		// }
 
-		time += 10;
+		// time += 10;
 	}
 }
