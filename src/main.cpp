@@ -169,8 +169,8 @@ void opcontrol() {
       INTAKE.move(0);
 
       // rev up flywheel
-      FLY.move(116);
-      FLY1.move(116);
+      FLY.move(109);
+      FLY1.move(109);
 
       // backwards to shooting position
       driveStraight(-205);
@@ -178,7 +178,7 @@ void opcontrol() {
 
       // more towards shooting position
       driveStraight(2500);
-      driveTurn(-97.5);
+      driveTurn(-95.5);
 
       // shoot disc 1
       INDEXER.move(127); // should it be indexerToggle?
@@ -194,15 +194,18 @@ void opcontrol() {
 
       // intake discs
       INTAKE.move(127);
-      driveTurn(-40);
+      driveTurn(-37);
 
       // slow flywheel down (intermediate)
       FLY.move(108);
       FLY1.move(108);
 
-      // continue intaking discs
-      driveStraight(1800);
-      delay(2500);
+      // intake threestack
+      driveStraight(1000);
+	  for(int i = 0; i < 15; i++) {
+		driveStraight(50);
+	  	delay(20);
+	  }
 
       // turn to shooting position
       driveTurn(46);
