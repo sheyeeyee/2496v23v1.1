@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "2496v23v1.1",
+    "project_name": "blue auton",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -308,7 +308,7 @@
       }
     },
     "upload_options": {
-      "description": "arcade",
+      "description": "a",
       "icon": "planet"
     }
   }
