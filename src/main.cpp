@@ -123,13 +123,13 @@ void opcontrol() {
     // con.get_analog(E_CONTROLLER_ANALOG_RIGHT_X); //turn is defined as left
     // (positive) or right (negative) int turn = int(abs(RX) * RX / 75);
 
-    // int left = power + turn;
-    // int right = power - turn;
+    int left = power + turn;
+    int right = power - turn;
 
-    // // LF.move(left);
-    // // LB.move(left);
-    // // RF.move(right);
-    // // RB.move(right);
+    LF.move(left);
+    LB.move(left);
+    RF.move(right);
+    RB.move(right);
 
     // // chassis tank drive
     // LF.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
