@@ -16,7 +16,7 @@ extern void driveStraight(int target);
 extern void driveTurn(int target);
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-#define STRAIGHT_KP 5.75 //7 //9.2 // 10.01 //10 works for 2000
+#define STRAIGHT_KP 10//5.75 //7 //9.2 // 10.01 //10 works for 2000
 #define STRAIGHT_KI 0.6 //0.65 //0.126//0.085 works for 2000 // 0.145 for 1000
 #define STRAIGHT_KD 0
 
