@@ -16,6 +16,7 @@
  * from where it left off.
  */
 void autonomous() {
+  bool Global = false;
      FLY.move(100);
       FLY1.move(100);
 		

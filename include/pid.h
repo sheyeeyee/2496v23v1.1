@@ -14,6 +14,8 @@ extern void resetEncoders();
 
 extern void driveStraight(int target);
 extern void driveTurn(int target);
+extern void driveAim(int target);
+
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
 #define STRAIGHT_KP 19//14//5.75 //7 //9.2 // 10.01 //10 works for 2000

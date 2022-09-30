@@ -3,6 +3,7 @@
 #include "main.h"
 #include "pid.h"
 #include "robot.h"
+#include "auton.h"
 // #include "<valarray>"
 // #include "<sstream>"
 // #include "<string>"
@@ -16,7 +17,6 @@ using namespace std;
 float vKp;
 float vKi;
 float vKd;
-
 float error; //amount from target
 float prevError; //how is this specified/calculated??
 
@@ -149,8 +149,44 @@ void driveTurn(int target) { //target is inputted in autons
         if (abs(target - position) <= 1) count++; 
         if (count >= 50) 
         {
-            imu.tare_heading();
+                            imu.tare_heading();
             break;
+
+        }
+        con.print(0, 0, "%2f", target-position);
+        delay(10);
+        // con.print(0, 0, "%2f", target);
+    }
+
+    chasMove(0, 0, 0, 0);
+}
+
+
+void driveAim(int target) { //target is inputted in autons
+    setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
+    // cout << target << endl;
+  
+    float voltage;
+    float position;
+    int count = 0;
+    
+    while(true) {
+
+        position = imu.get_heading(); //this is where the units are set to be degrees
+          if(position > 180){
+            position = ((360 - position) * -1);
+        }
+
+        voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
+        // con.print(1, 0, "%2f", voltage);
+        
+        chasMove(voltage, voltage, -voltage, -voltage);
+        
+        if (abs(target - position) <= 1) count++; 
+        if (count >= 50) 
+        {
+            break;
+
         }
         con.print(0, 0, "%2f", target-position);
         delay(10);

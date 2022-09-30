@@ -71,6 +71,7 @@ void opcontrol(void);
 #ifdef __cplusplus
 }
 #endif
+extern bool Global; 
 
 #ifdef __cplusplus
 /**
