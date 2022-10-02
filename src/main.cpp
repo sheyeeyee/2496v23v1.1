@@ -238,6 +238,8 @@ void opcontrol() {
   //     // intake more discs
   //     // asdf
   //   }
+
+  //what auton is this? (no rollers)
 // 	 if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R2)) {
 // 		FLY.move(101);
 //       	FLY1.move(101);
@@ -336,7 +338,7 @@ void opcontrol() {
 // 	 }
 
 
-//old auton
+//old auton?
 // 	  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){
 		
 //       // move forward to contact roller
@@ -432,7 +434,7 @@ void opcontrol() {
 //       // asdf
 // 	  }
 
-    
+    //what auton is this
 // 	  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)){
 //       FLY.move(98);
 //       FLY1.move(98);
@@ -487,11 +489,9 @@ void opcontrol() {
 //       INDEXER.move(0);
 //       delay(700);
 //       delay(350);
-
-
 //     }
 
-
+    //what auton is this (the difficult side?)
 //     if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)) {
 //       FLY.move(97);
 //       FLY1.move(97);
@@ -558,6 +558,7 @@ void opcontrol() {
 //       }
 
 //     }
+
     // RED CODE
     //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 

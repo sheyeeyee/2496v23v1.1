@@ -68,20 +68,20 @@ bool Global = false;
     FLY.move(100);
     FLY1.move(100);
 	
-    // move forward to contact roller
+    //move forward to contact roller constantly
     LF.move(40);
     LB.move(40);
     RF.move(40);
     RB.move(40);
     delay(180);
 
-    // move forward more??
+    //decrease motor power so chassis doesn't burn out while spinning roller
     LF.move(10);
     LB.move(10);
     RF.move(10);
     RB.move(10);
 
-    //optical sensor
+    //spin to red
     while (optical.get_hue() > 200) { //hue > 200 is red
       INTAKE.move(90);
     }
@@ -144,20 +144,20 @@ bool Global = false;
     FLY.move(100);
     FLY1.move(100);
 	
-    // move forward to contact roller
+    //move forward to contact roller constantly
     LF.move(40);
     LB.move(40);
     RF.move(40);
     RB.move(40);
     delay(180);
 
-    // move forward more??
+    //decrease motor power so chassis doesn't burn out while spinning roller
     LF.move(10);
     LB.move(10);
     RF.move(10);
     RB.move(10);
 
-    //optical sensor
+    //spin to blue
     while (optical.get_hue() < 20) { //hue < 20 is blue
       INTAKE.move(90);
     }
@@ -215,13 +215,187 @@ bool Global = false;
   }
 
 
-void red() {
+  void red() {
+    //rev flywheel
+    FLY.move(97);
+    FLY1.move(97);
 
+    //intake disc
+    INTAKE.move(127);
+    driveStraight(1000);
+    driveTurn(46.5);
+
+    //shoot disc 1
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+    delay(500);
+
+    //shoot disc 2
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+	  delay(750);
+
+    //shoot disc 3
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+	  delay(750);
+
+    //shoot disc 4
+	  INDEXER.move(127);
+    delay(250);
+    INDEXER.move(0);
+
+
+    //INDEXER.move(127); //wait what is happening
+    //delay(250);
+    INDEXER.move(-127);
+    delay(250);
+
+    //shoot disc 5
+    INDEXER.move(127);
+
+    //increase flywheel voltage from 97
+    FLY.move(115);
+    FLY1.move(115);
+
+    delay(250);
+    INDEXER.move(-127);
+	  delay(250);
+
+    //shoot disc 6??
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+	  delay(250);
+
+    //shoot disc 7???
+	  INDEXER.move(127);
+    delay(250);
+    INDEXER.move(0);
+
+    //move to roller
+    driveTurn(77.5);
+    driveStraight(1950);
+    driveTurn(56);
+
+    //stop intake
+    INTAKE.move(0);
+
+    //constant forward movement for constant contact with rollers
+    LF.move(100);
+    LB.move(100);
+    RF.move(100);
+    RB.move(100);
+    delay(250);
+
+    //decrease motor power so chassis doesn't burn out
+    LF.move(4);
+    LB.move(4);
+    RF.move(4);
+    RB.move(4);
+
+    //spin to red
+    while (optical.get_hue() > 200) {
+      INTAKE.move(90);
+    }
+    if (optical.get_hue() < 20) {
+      INTAKE.move(0);
+    }
 }
 
 
 void blue() {
+    //rev flywheel
+    FLY.move(97);
+    FLY1.move(97);
 
+    //intake disc
+    INTAKE.move(127);
+    driveStraight(1000);
+    driveTurn(46.5);
+
+    //shoot disc 1
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+    delay(500);
+
+    //shoot disc 2
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+	  delay(750);
+
+    //shoot disc 3
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+	  delay(750);
+
+    //shoot disc 4
+	  INDEXER.move(127);
+    delay(250);
+    INDEXER.move(0);
+
+
+    //INDEXER.move(127); //wait what is happening
+    //delay(250);
+    INDEXER.move(-127);
+    delay(250);
+
+    //shoot disc 5
+    INDEXER.move(127);
+
+    //increase flywheel voltage from 97
+    FLY.move(115);
+    FLY1.move(115);
+
+    delay(250);
+    INDEXER.move(-127);
+	  delay(250);
+
+    //shoot disc 6??
+    INDEXER.move(127);
+    delay(250);
+    INDEXER.move(-127);
+	  delay(250);
+
+    //shoot disc 7???
+	  INDEXER.move(127);
+    delay(250);
+    INDEXER.move(0);
+
+    //move to roller
+    driveTurn(77.5);
+    driveStraight(1950);
+    driveTurn(56);
+
+    //stop intake
+    INTAKE.move(0);
+
+    //constant forward movement for constant contact with rollers
+    LF.move(100);
+    LB.move(100);
+    RF.move(100);
+    RB.move(100);
+    delay(250);
+
+    //decrease motor power so chassis doesn't burn out
+    LF.move(4);
+    LB.move(4);
+    RF.move(4);
+    RB.move(4);
+
+    //spin to blue
+    while (optical.get_hue() < 20) {
+      INTAKE.move(90);
+    }
+    if (optical.get_hue() > 200) {
+      INTAKE.move(0);
+    }
 }
 
 

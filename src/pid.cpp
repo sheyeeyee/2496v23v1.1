@@ -126,7 +126,7 @@ void driveStraight(int target) {
     motor_brake (10);
 }
 
-void driveTurn(int target) { //target is inputted in autons
+void driveTurn(double target) { //target is inputted in autons
     setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
     // cout << target << endl;
   
@@ -162,7 +162,7 @@ void driveTurn(int target) { //target is inputted in autons
 }
 
 
-void driveAim(int target) { //target is inputted in autons
+void driveAim(double target) { //target is inputted in autons
     setConstants(1050, 0, 0); //kp 99 ki 178.9 undercorrecting //1050
     // cout << target << endl;
   
