@@ -46,4 +46,8 @@ extern pros::ADIDigitalOut expand;
 
 //optical
 extern pros::Optical optical;
+
+//limit switch
+extern pros::ADIDigitalIn lSwitch;
+
 #endif

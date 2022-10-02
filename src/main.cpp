@@ -64,7 +64,6 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -339,9 +338,7 @@ void opcontrol() {
 // 	 }
 
 
-
-
-
+//old auton
 // 	  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){
 		
 //       // move forward to contact roller
@@ -393,9 +390,6 @@ void opcontrol() {
 //       delay(450);
 //       INDEXER.move(-127);
 //       delay(600);
-
-
-	  
 
 //       // intake discs
 //       INTAKE.move(127);
@@ -566,150 +560,150 @@ void opcontrol() {
 //       }
 
 //     }
-//     // RED CODE
-//     //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
+    // RED CODE
+    //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
-//     // 	while (optical.get_hue() > 200){
-//     // 		INTAKE.move(-90);
-//     // 	}
+    // 	while (optical.get_hue() > 200){
+    // 		INTAKE.move(-90);
+    // 	}
 
-//     // 	if (optical.get_hue() < 20){
-//     // 		INTAKE.move(0);
-//     // 	}
-//     // }
+    // 	if (optical.get_hue() < 20){
+    // 		INTAKE.move(0);
+    // 	}
+    // }
 
-//     // BLUE CODE
-//     //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
+    // BLUE CODE
+    //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
 
-//     // 	while (optical.get_hue() < 20){
-//     // 		INTAKE.move(90);
-//     // 	}
+    // 	while (optical.get_hue() < 20){
+    // 		INTAKE.move(90);
+    // 	}
 
-//     // 	if (optical.get_hue() > 200){
-//     // 		INTAKE.move(0);
-//     // 	}
-//     // }
+    // 	if (optical.get_hue() > 200){
+    // 		INTAKE.move(0);
+    // 	}
+    // }
 
-//     // if(optical.get_hue() < 200){
+    // if(optical.get_hue() < 200){
 
-//     // }
-//     // else if (optical.get_hue() > 210){
-//     // 	INTAKE.move(0);
-//     // }
-//     // else {
-//     // 	INTAKE.move(0);
-//     // }
+    // }
+    // else if (optical.get_hue() > 210){
+    // 	INTAKE.move(0);
+    // }
+    // else {
+    // 	INTAKE.move(0);
+    // }
 
-//     // else{
-//     // 	INTAKE.move(0);
-//     // }
+    // else{
+    // 	INTAKE.move(0);
+    // }
 
-//     // //intake
-//     // if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
-//     // 	INTAKE.move(127);
-//     // }
-//     // else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
-//     // 	INTAKE.move(-127);
-//     // }
-//     // else {
-//     // 	INTAKE.move(0);
-//     // }
+    // //intake
+    // if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
+    // 	INTAKE.move(127);
+    // }
+    // else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
+    // 	INTAKE.move(-127);
+    // }
+    // else {
+    // 	INTAKE.move(0);
+    // }
 
-//     // //indexer
-//     // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){ //using prev
-//     // state to determine next direction with current state turning motor either
-//     // direction + off to reduce burnout 	indexerToggle = !indexerToggle; 	if
-//     // (indexerToggle)
-//     // 	{
-//     // 	INDEXER.move_relative(197,200);
-//     // 	}
-//     // 	if (indexerToggle==false)
-//     // 	{
-//     // 	INDEXER.move_relative(-197,200);
-//     // 	}
-//     // }
+    // //indexer
+    // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){ //using prev
+    // state to determine next direction with current state turning motor either
+    // direction + off to reduce burnout 	indexerToggle = !indexerToggle; 	if
+    // (indexerToggle)
+    // 	{
+    // 	INDEXER.move_relative(197,200);
+    // 	}
+    // 	if (indexerToggle==false)
+    // 	{
+    // 	INDEXER.move_relative(-197,200);
+    // 	}
+    // }
 
-//     // //flywheel
-//     // if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
-//     // 	FLY.move(flywheelVoltage);
-//     // 	FLY1.move(flywheelVoltage);
-//     // }
-//     // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
-//     // 	FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
-//     // 	FLY1.move(127);
-//     // }
-//     // else {
-//     // 	FLY.move(0);
-//     // 	FLY1.move(0);
-//     // }
+    // //flywheel
+    // if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
+    // 	FLY.move(flywheelVoltage);
+    // 	FLY1.move(flywheelVoltage);
+    // }
+    // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
+    // 	FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
+    // 	FLY1.move(127);
+    // }
+    // else {
+    // 	FLY.move(0);
+    // 	FLY1.move(0);
+    // }
 
-//     // //angler
-//     // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)){
-//     // 	if (anglerToggle == false) {
-//     // 		angler.set_value(false);
-//     // 		anglerToggle = true;
-//     // 	}
-//     // 	else {
-//     // 		angler.set_value(true);
-//     // 		anglerToggle = false;
-//     // 	}
-//     // }
+    // //angler
+    // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)){
+    // 	if (anglerToggle == false) {
+    // 		angler.set_value(false);
+    // 		anglerToggle = true;
+    // 	}
+    // 	else {
+    // 		angler.set_value(true);
+    // 		anglerToggle = false;
+    // 	}
+    // }
 
-//     // //flywheel speed changer
-//     // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_A)) {
-//     // 	con.rumble(".");
-//     // 	speedToggle = !speedToggle;
-//     // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
-//     // fastSpeed;
-//     // }
-//     // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_B)) {
-//     // 	speedToggle == true ? slowSpeed-- : fastSpeed--;
-//     // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
-//     // fastSpeed;
-//     // }
-//     // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_X)) {
-//     // 	speedToggle == true ? slowSpeed++ : fastSpeed++;
-//     // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
-//     // fastSpeed;
-//     // }
+    // //flywheel speed changer
+    // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_A)) {
+    // 	con.rumble(".");
+    // 	speedToggle = !speedToggle;
+    // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
+    // fastSpeed;
+    // }
+    // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_B)) {
+    // 	speedToggle == true ? slowSpeed-- : fastSpeed--;
+    // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
+    // fastSpeed;
+    // }
+    // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_X)) {
+    // 	speedToggle == true ? slowSpeed++ : fastSpeed++;
+    // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
+    // fastSpeed;
+    // }
 
-//     // //reset chassis motors (what is this for???)
-//     // // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
-//     // // 	resetEncoders();
-//     // // }
+    // //reset chassis motors (what is this for???)
+    // // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
+    // // 	resetEncoders();
+    // // }
 
-//     // //expansion
-//     // if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-//     // 	deployExpansion = true;
-//     // }
-//     // if (deployExpansion == true) {
-//     // 	expand.set_value(false);
-//     // }
+    // //expansion
+    // if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    // 	deployExpansion = true;
+    // }
+    // if (deployExpansion == true) {
+    // 	expand.set_value(false);
+    // }
 
-//     // pros::delay(10);
+    // pros::delay(10);
 
-//     // PID testing
-//     //  if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-//     //  	driveStraight(1000);
-//     //  }
+    // PID testing
+    //  if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+    //  	driveStraight(1000);
+    //  }
 
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-//     // 	driveStraight(-3000);
-//     // }
+    // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+    // 	driveStraight(-3000);
+    // }
 
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-//     // 	driveTurn(180);
-//     // }
+    // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+    // 	driveTurn(180);
+    // }
 
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-//     // 	driveTurn(-90);
-//     // }
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-//     // {
-//     // 	imu.reset();
-//     // }
+    // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    // 	driveTurn(-90);
+    // }
+    // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+    // {
+    // 	imu.reset();
+    // }
 
-//     // time += 10;
+    // time += 10;
 //   }
 
 // }
@@ -762,11 +756,15 @@ void opcontrol() {
 		else {
 			INTAKE.move(0);
 		}
+
+    //auto-aim
     if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){
       // FLY.move_velocity(450);
       // FLY1.move_velocity(450);
+
       driveAim(137.8);
-      	INDEXER.move(127);
+
+      INDEXER.move(127);
       delay(250);
       INDEXER.move(-127); 
 	    // FLY.move(105); 
@@ -775,20 +773,22 @@ void opcontrol() {
       INDEXER.move(127);
       delay(250);
       INDEXER.move(-127);
-	  delay(500); //wait 
-    INDEXER.move(127);
+
+	    delay(500); //wait 
+      INDEXER.move(127);
       delay(300);
       INDEXER.move(-127);
-	  delay(500); //wait
-	  INDEXER.move(127); // should it be indexerToggle?
+	    
+      delay(500); //wait
+	    INDEXER.move(127);
       delay(300);
-       INDEXER.move(-127);
-       delay(100);
+      INDEXER.move(-127);
+      
+      delay(100);
       INDEXER.move(-35);
-        delay(100);
+      delay(100);
 
       INDEXER.move(0);
-
     }
 
 		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)){

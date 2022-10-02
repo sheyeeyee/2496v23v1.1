@@ -163,7 +163,7 @@ void driveTurn(int target) { //target is inputted in autons
 
 
 void driveAim(int target) { //target is inputted in autons
-    setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
+    setConstants(1050, 0, 0); //kp 99 ki 178.9 undercorrecting //1050
     // cout << target << endl;
   
     float voltage;

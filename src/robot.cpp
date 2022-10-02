@@ -17,6 +17,9 @@
 #define FLY_PORT 17
 #define INTAKE_PORT 18
 #define FLY1_PORT 20
+#define EXPAND_PORT 'A'
+#define ANGLER_PORT 'B'
+#define SWITCH_PORT 'C'
 
 pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
@@ -34,10 +37,10 @@ pros::Motor FLY1 (FLY1_PORT, pros::E_MOTOR_GEARSET_06);
 pros::Motor INDEXER (INDEXER_PORT, pros::E_MOTOR_GEARSET_18, true);
 
 //angler
-pros::ADIDigitalOut angler ('B', true);
+pros::ADIDigitalOut angler (ANGLER_PORT, true);
 
 //expansion
-pros::ADIDigitalOut expand ('A', false);
+pros::ADIDigitalOut expand (EXPAND_PORT, false);
 
 //sensors
 pros::ADIEncoder encLeft ({{1, 1, 2}, false});
@@ -60,3 +63,6 @@ pros::c::gps_status_s_t gpsData;
 
 //optical
 pros::Optical optical(OPTICAL_PORT);
+
+//limit switch
+pros::ADIDigitalIn lSwitch (SWITCH_PORT);
