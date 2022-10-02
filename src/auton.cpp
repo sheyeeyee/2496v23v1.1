@@ -138,6 +138,7 @@ bool Global = false;
     delay(1050);
   }
 
+
   void ezBlue() {
     //rev flywheel
     FLY.move(100);
@@ -213,10 +214,25 @@ bool Global = false;
     delay(1050);
   }
 
-void autonomous() {
+
+void red() {
+
+}
+
+
+void blue() {
+
+}
+
+
+void skills() {
+
+}
+
+  void autonomous() { //this is what runs the autons
   if (currAuton == 1) ezRed();
   else if (currAuton == 2) ezBlue();
-  //else if (currAuton == 3) red();
-  //else if (currAuton == 4) blue();
-  //else if (currAuton == 5) skills();
+  else if (currAuton == 3) red();
+  else if (currAuton == 4) blue();
+  else if (currAuton == 5) skills();
 }
