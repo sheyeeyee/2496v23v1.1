@@ -149,7 +149,7 @@ void driveTurn(double target) { //target is inputted in autons
         if (abs(target - position) <= 1) count++; 
         if (count >= 50) 
         {
-                            imu.tare_heading();
+            imu.tare_heading();
             break;
 
         }

@@ -52,7 +52,7 @@ void competition_initialize() {
           con.print(0, 0, "%d Blue", currAuton);
           break;
         case 5:
-          con.print(0, 0, "%d Skills", currAuton)
+          con.print(0, 0, "%d Skills", currAuton);
       }
       delay(10);
     }
