@@ -788,22 +788,22 @@ else if(atn == 4){
 		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
 			INTAKE.move(-127);
 		}
-    else while (con.get_digital(E_CONTROLLER_DIGITAL_R1) && con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
-      con.print(0, 0, "Auto Rolling [ ", autstr, " ]");
-      // Blue Roller
-      if(atn % 2 == 0){
-        while (optical.get_hue() > 200) {
-          INTAKE.move(-90);
-          con.print(0, 0, "Going");
-        }
-        if (optical.get_hue() < 20) {
-          INTAKE.move(70);
-          delay(250);
-          INTAKE.move(0);
-          con.print(0, 2, "Done");
-          break;
-        }
-      }
+    // else while (con.get_digital(E_CONTROLLER_DIGITAL_R1) && con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
+    //   con.print(0, 0, "Auto Rolling [ ", autstr, " ]");
+    //   // Blue Roller
+    //   if(atn % 2 == 0){
+    //     while (optical.get_hue() > 200) {
+    //       INTAKE.move(-90);
+    //       con.print(0, 0, "Going");
+    //     }
+    //     if (optical.get_hue() < 20) {
+    //       INTAKE.move(70);
+    //       delay(250);
+    //       INTAKE.move(0);
+    //       con.print(0, 2, "Done");
+    //       break;
+    //     }
+    //   }
       // Red Roller
       else {
         while (optical.get_hue() < 20) {
