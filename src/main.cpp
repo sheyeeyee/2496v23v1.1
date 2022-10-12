@@ -742,7 +742,7 @@ void opcontrol() {
 			expand.set_value(true);
 		}
 
-		chassis arcade drive
+		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
 		int RX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
 		int turn = int(abs(RX) * RX / 75);
@@ -753,9 +753,6 @@ void opcontrol() {
 		LB.move(left);
 		RF.move(right);
 		RB.move(right);
-
-
-
 
 
 		// // // chassis tank drive 
@@ -781,7 +778,6 @@ else if(atn == 3){
 else if(atn == 4){
   autstr = "Blue Roller-Side";
 }
-
 
 
 
