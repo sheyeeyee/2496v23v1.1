@@ -17,202 +17,187 @@
  */
 void autonomous() {
 
+//red non-roller side
 if (atn == 1){
-  //red non-roller side
   FLY.move(100);
-      FLY1.move(100);
-      INTAKE.move(127);
-      driveStraight(1000);
-      driveTurn(40);
+  FLY1.move(100);
+  INTAKE.move(127);
+  driveStraight(1000);
+  driveTurn(40);
 
-       INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
-        FLY.move(112);
-      FLY1.move(112);
-      delay(500);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
-	  delay(750);
-    INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
-	  delay(750);
-	  INDEXER.move(127); // should it be indexerToggle?
-      delay(250);
-      INDEXER.move(0);
-
+  INDEXER.move(127);
+  delay(250);
+  INDEXER.move(-127);
+  FLY.move(112);
+  FLY1.move(112);
+  delay(500);
+  INDEXER.move(127);
+  delay(250);
+  INDEXER.move(-127);
+  delay(750);
+  INDEXER.move(127);
+  delay(250);
+  INDEXER.move(-127);
+  delay(750);
+  INDEXER.move(127); // should it be indexerToggle?
+  delay(250);
+  INDEXER.move(0);
 
     //   INDEXER.move(127);
     //   delay(250);
     //   INDEXER.move(-127);
     //   delay(250);
     //   INDEXER.move(127);
-    //        FLY.move(115);
+    //   FLY.move(115);
     //   FLY1.move(115);
     //   delay(250);
     //   INDEXER.move(-127);
-	  // delay(250);
-    // INDEXER.move(127);
+	  //   delay(250);
+    //   INDEXER.move(127);
     //   delay(250);
     //   INDEXER.move(-127);
-	  // delay(250);
-	  // INDEXER.move(127); // should it be indexerToggle?
+	  //   delay(250);
+	  //   INDEXER.move(127); // should it be indexerToggle?
     //   delay(250);
     //   INDEXER.move(0);
-      driveTurn(84);
-      driveStraight(1950);
-      driveTurn(56);
-INTAKE.move(0);
+  driveTurn(84);
+  driveStraight(1950);
+  driveTurn(56);
+  INTAKE.move(0);
 
-delay(1000);
-       LF.move(100);
-      LB.move(100);
-      RF.move(100);
-      RB.move(100);
-      delay(800);
+  delay(1000);
+  LF.move(100);
+  LB.move(100);
+  RF.move(100);
+  RB.move(100);
+  delay(800);
 
-      // move forward more??
-      LF.move(5);
-      LB.move(5);
-      RF.move(5);
-      RB.move(5);
-delay(500);
-            LF.move(2);
-      LB.move(2);
-      RF.move(2);
-      RB.move(2);
+  // move forward more??
+  LF.move(5);
+  LB.move(5);
+  RF.move(5);
+  RB.move(5);
+  delay(500);
+  LF.move(2);
+  LB.move(2);
+  RF.move(2);
+  RB.move(2);
 
+  // Auto Roller
+  while(true){
+    while (optical.get_hue() < 20){
+      INTAKE.move(-40);
+      con.print(0, 0, "Going");
+    }
 
+    if (optical.get_hue() > 200) {
+      INTAKE.move(0);
+      con.print(0, 2, "Done");
+      break;
+    }
+  }
 
-      while(true){
-         while (optical.get_hue() < 20) {
-        INTAKE.move(-40);
-         con.print(0, 0, "Going");
-      }
-
-     
-
-      if (optical.get_hue() > 200) {
-        INTAKE.move(0);
-                 con.print(0, 2, "Done");
-                 break;
-      }
-
-      }
-
-     
-            INDEXER.move(-127);
-	  delay(750);
-	  INDEXER.move(127); // should it be indexerToggle?
-      delay(250);
-      INDEXER.move(0);
+    
+  INDEXER.move(-127);
+  delay(750);
+  INDEXER.move(127); // should it be indexerToggle?
+  delay(250);
+  INDEXER.move(0);
 }
-
-else if(atn == 2){
-  
-//   //blue non-roller side
+//blue non-roller side
+else if(atn == 2){  
   FLY.move(110);
-      FLY1.move(110);
-      INTAKE.move(127);
-      driveStraight(1000);
-      driveTurn(38);
+  FLY1.move(110);
+  INTAKE.move(127);
+  driveStraight(1000);
+  driveTurn(38);
 
-       INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
-        FLY.move(117);
-      FLY1.move(117);
-      delay(500);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
-	  delay(750);
-    INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
-	  delay(750);
-	  INDEXER.move(127); // should it be indexerToggle?
-      delay(250);
-      INDEXER.move(0);
-
-
+  INDEXER.move(127);
+  delay(250);
+  INDEXER.move(-127);
+  FLY.move(117);
+  FLY1.move(117);
+  delay(500);
+  INDEXER.move(127);
+  delay(250);
+  INDEXER.move(-127);
+	delay(750);
+  INDEXER.move(127);
+  delay(250);
+  INDEXER.move(-127);
+  delay(750);
+  INDEXER.move(127); // should it be indexerToggle?
+  delay(250);
+  INDEXER.move(0);
     //   INDEXER.move(127);
     //   delay(250);
     //   INDEXER.move(-127);
     //   delay(250);
     //   INDEXER.move(127);
-    //        FLY.move(115);
+    //   FLY.move(115);
     //   FLY1.move(115);
     //   delay(250);
     //   INDEXER.move(-127);
-	  // delay(250);
-    // INDEXER.move(127);
+	  //   delay(250);
+    //   INDEXER.move(127);
     //   delay(250);
     //   INDEXER.move(-127);
-	  // delay(250);
-	  // INDEXER.move(127); // should it be indexerToggle?
+	  //   delay(250);
+	  //   INDEXER.move(127); // should it be indexerToggle?
     //   delay(250);
     //   INDEXER.move(0);
-      driveTurn(80);
-      driveStraight(1950);
-      driveTurn(56);
-INTAKE.move(0);
+  driveTurn(80);
+  driveStraight(1950);
+  driveTurn(56);
+  INTAKE.move(0);
 
-delay(1000);
-       LF.move(100);
-      LB.move(100);
-      RF.move(100);
-      RB.move(100);
-      delay(800);
+  delay(1000);
+  LF.move(100);
+  LB.move(100);
+  RF.move(100);
+  RB.move(100);
+  delay(800);
 
-      // move forward more??
-      LF.move(5);
-      LB.move(5);
-      RF.move(5);
-      RB.move(5);
-delay(500);
-            LF.move(2);
-      LB.move(2);
-      RF.move(2);
-      RB.move(2);
+  // move forward more??
+  LF.move(5);
+  LB.move(5);
+  RF.move(5);
+  RB.move(5);
+  delay(500);
+  LF.move(2);
+  LB.move(2);
+  RF.move(2);
+  RB.move(2);
 
 
       
-      while(true){
-         while (optical.get_hue() > 200) {
-        INTAKE.move(-90);
-         con.print(0, 0, "Going");
-      }
+  while(true){
+    while (optical.get_hue() > 200) {
+    INTAKE.move(-90);
+    con.print(0, 0, "Going");
+    }
 
-     
-
-      if (optical.get_hue() < 20) {
-        INTAKE.move(70);
-        delay(250);
-        INTAKE.move(0);
-
-                 con.print(0, 2, "Done");
-                 break;
-      }
-
-      }
+    if (optical.get_hue() < 20) {
+      INTAKE.move(70);
+      delay(250);
+      INTAKE.move(0);
+      con.print(0, 2, "Done");
+      break;
+    }
+  }
 
 
-     
-    //         INDEXER.move(-127);
+    // INDEXER.move(-127);
 	  // delay(750);
 	  // INDEXER.move(127); // should it be indexerToggle?
-    //   delay(250);
-    //   INDEXER.move(0);
-
-
+    // delay(250);
+    // INDEXER.move(0);
 }
+
 else if(atn == 3){
 
 //roller side red half good
- bool Global = false;
+  bool Global = false;
      FLY.move(102);
       FLY1.move(102);
 		  //    FLY.move_velocity(480);
