@@ -72,6 +72,7 @@ void opcontrol(void);
 }
 #endif
 extern bool Global; 
+extern int atn;
 
 #ifdef __cplusplus
 /**

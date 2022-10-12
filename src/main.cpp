@@ -93,19 +93,22 @@ int flywheel_voltage = 105;
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
+int atn = 2;
+
 int max_flywheel_speed = 480;
 int flywheelVoltage = 105;
 int cycle = 0;
 bool indexerToggle = false;
 int wait = 900;
 int wait2 = 250;
+string autstr;
 // int indexerstate = -1;
 //  int indexerprevstate = -1;
 bool anglerToggle = false;
 bool expandToggle = false;
 bool speedToggle = false;
 bool deployExpansion = false;
-int slowSpeed = 80;
+int slowSpeed = 84;
 int fastSpeed = 105;
 bool rollerOn = false;
 
@@ -723,18 +726,23 @@ void opcontrol() {
 		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
 		// indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
 		// indexerScaledDeltaPos = indexerDeltaPos/1.1;
-		int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
+		int flywheelVelocity = atn; //(FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		double chasstempF = chasstempC *(9/5) + 32;
 		if (time % 100 == 0) con.clear();
 		else if (time % 50 == 0) {
 			cycle++;
-			if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
+			// if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
+      	if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", autstr);
 			if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
 			if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
-		
-		//chassis arcade drive
+
+    		if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+			expand.set_value(true);
+		}
+
+		chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
 		int RX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
 		int turn = int(abs(RX) * RX / 75);
@@ -746,11 +754,36 @@ void opcontrol() {
 		RF.move(right);
 		RB.move(right);
 
+
+
+
+
 		// // // chassis tank drive 
 		// LF.move(con.get_analog(ANALOG_LEFT_Y));
 		// LB.move(con.get_analog(ANALOG_LEFT_Y));
 		// RF.move(con.get_analog(ANALOG_RIGHT_Y));
 		// RB.move(con.get_analog(ANALOG_RIGHT_Y));
+
+if(selec.get_value() == true){
+  atn ++;
+  delay(350);
+}
+
+if (atn == 1){
+  autstr = "Red Non-Roller";
+}
+else if(atn == 2){
+  autstr = "Blue Non-Roller";
+}
+else if(atn == 3){
+  autstr = "Red Roller-Side";
+}
+else if(atn == 4){
+  autstr = "Blue Roller-Side";
+}
+
+
+
 
 		//intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
@@ -807,6 +840,8 @@ void opcontrol() {
       INDEXER.move(-127);
 	  delay(300); //wait
 	  INDEXER.move(127); // should it be indexerToggle?
+      delay(350);
+      INDEXER.move(-40);
       delay(350);
       INDEXER.move(0);
 		}
@@ -870,12 +905,12 @@ void opcontrol() {
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
 			resetEncoders();
 		}
-		if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-			deployExpansion = true;
-		}
-		if (deployExpansion == true) {
-			expand.set_value(false);
-		}
+		// if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+		// 	deployExpansion = true;
+		// }
+		// if (deployExpansion == true) {
+		// 	expand.set_value(false);
+		// }
 
 		time += 10;
 		pros::delay(10);

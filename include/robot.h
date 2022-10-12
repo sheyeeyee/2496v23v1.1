@@ -37,12 +37,14 @@ extern pros::Motor INDEXER;
 //angler
 extern pros::ADIDigitalOut angler;
 
+
 //gps
 extern pros::Gps gps1;
 extern pros::c::gps_status_s_t gpsData;
 
 //expansion
 extern pros::ADIDigitalOut expand;
+extern pros::ADIDigitalIn selec;
 
 //optical
 extern pros::Optical optical;

@@ -37,7 +37,11 @@ pros::Motor INDEXER (INDEXER_PORT, pros::E_MOTOR_GEARSET_18, true);
 pros::ADIDigitalOut angler ('B', true);
 
 //expansion
-pros::ADIDigitalOut expand ('A', false);
+// pros::ext_adi_port_pair_t expand (2, 'A');
+// pros::ADIDigitalOut expand ('A', false);
+
+pros::ADIDigitalOut expand ({{3, 8}});
+pros::ADIDigitalIn selec ({{3, 7}});
 
 //sensors
 pros::ADIEncoder encLeft ({{1, 1, 2}, false});
