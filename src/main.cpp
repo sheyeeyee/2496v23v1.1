@@ -6,7 +6,6 @@
 #include "pid.h"
 #include "robot.h"
 
-
 using namespace pros;
 using namespace std;
 
@@ -81,7 +80,6 @@ void competition_initialize() {}
  */
 
 // int max_flywheel_speed = 480;
-int flywheel_voltage = 105;
 // int cycle = 0;
 // bool indexerToggle = false;
 // //int indexerstate = -1;
@@ -93,10 +91,10 @@ int flywheel_voltage = 105;
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 2;
+int atn = 0;
 
 int max_flywheel_speed = 480;
-int flywheelVoltage = 105;
+int flywheel_voltage = 105;
 int cycle = 0;
 bool indexerToggle = false;
 int wait = 900;
@@ -115,632 +113,29 @@ bool rollerOn = false;
 void opcontrol() {
   int time = 0;
 
-  while (true) {
-    // // indexerDeltaPos = indexerTarget - INDEXER.get_position();
-    // // indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
-    // // indexerScaledDeltaPos = indexerDeltaPos/1.1;
-    // // int flywheelVelocity = (FLY.get_actual_velocity() +
-    // FLY1.get_actual_velocity())/2;
-    // // double chasstempC = ((RF.get_temperature() + RB.get_temperature() +
-    // LF.get_temperature() + LB.get_temperature())/4);
-    // // double chasstempF = chasstempC *(9/5) + 32;
-    // if (time % 100 == 0)
-    //   con.clear();
-    // else if (time % 50 == 0) {
-    //   cycle++;
-    //   if (cycle % 3 == 0)
-    //     con.print(0, 0, "HUE: %lf", optical.get_hue());
-    //   if ((cycle + 1) % 3 == 0)
-    //     con.print(1, 0, "R: %lf", optical.get_raw().red);
-    //   if ((cycle + 2) % 3 == 0)
-    //     con.print(2, 0, "B: %lf", optical.get_raw().blue);
-    // }
-
-    // //chassis arcade drive
-    // int power = con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y); //power is
-    // defined as forward or backward int RX =
-    // con.get_analog(E_CONTROLLER_ANALOG_RIGHT_X); //turn is defined as left
-    // // (positive) or right (negative) int turn = int(abs(RX) * RX / 75);
-
-    // int left = power + turn;
-    // int right = power - turn;
-
-    // LF.move(left);
-    // LB.move(left);
-    // RF.move(right);
-    // RB.move(right);
-
-    // // chassis tank drive
-    // LF.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
-    // LB.move(con.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
-    // RF.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
-    // // RB.move(con.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
-    // below 20 blue above 200 red
-
-    // AUTONOMOUS ROUTES (need to put in autonomous method later)
-  //   // RED AWP
-  //   if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)) {
-
-  //     // move forward to contact roller
-  //     LF.move(40);
-  //     LB.move(40);
-  //     RF.move(40);
-  //     RB.move(40);
-  //     delay(180);
-
-  //     // move forward more??
-  //     LF.move(10);
-  //     LB.move(10);
-  //     RF.move(10);
-  //     RB.move(10);
-
-  //     while (optical.get_hue() > 200) {
-  //       INTAKE.move(90);
-  //     }
-
-  //     if (optical.get_hue() < 20) {
-  //       INTAKE.move(0);
-  //     }
-  //     // Not redundant becuase the motor does have to sotp eventually, with just
-  //     // the while loop it sets the voltage to 90 then never resets-
-  //     //-it to zero so the motor will move at 90 forever even if the while loop
-  //     //breaks
-  //     INTAKE.move(0);
-
-  //     // rev up flywheel
-  //     FLY.move(100);
-  //     FLY1.move(100);
-
-  //     // backwards to shooting position
-  //     driveStraight(-390);
-  //     driveTurn(-93);
-
-  //     // more towards shooting position
-  //     driveStraight(2500);
-  //     driveTurn(-90);
-
-  //     // shoot disc 1
-  //     INDEXER.move(127); // should it be indexerToggle?
-  //     delay(450);
-  //     INDEXER.move(-127);
-  //     delay(700);
-
-  //     // shoot disc 2
-  //     INDEXER.move(127);
-  //     delay(450);
-  //     INDEXER.move(-127);
-  //     delay(600);
-
-  //     // intake discs
-  //     INTAKE.move(127);
-  //     driveTurn(-39);
-
-  //     // slow flywheel down (intermediate)
-  //     FLY.move(98);
-  //     FLY1.move(98);
-
-  //     // intake threestack
-  //     driveStraight(1100);
-	// //   for(int i = 0; i < 15; i++) {
-	// // 	driveStraight(50);
-	// //   	delay(20);
-	// //   }
-
-  //     // turn to shooting position
-  //     driveTurn(34);
-
-	//   delay(500);
-
-  //     // shoot da threestack
-  //     INDEXER.move(127);
-  //     delay(250);
-  //     INDEXER.move(-127);
-  //     delay(250);
-  //     INDEXER.move(127);
-  //     delay(250);
-  //     INDEXER.move(-127);
-  //     delay(350);
-
-  //     // intake more discs
-  //     // asdf
-  //   }
-// 	 if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R2)) {
-// 		FLY.move(101);
-//       	FLY1.move(101);
-
-// 		driveTurn(-5);
-// 		delay(1800);
-
-// 		INDEXER.move(127);
-//      	 delay(1000);
-//     	INDEXER.move(-127);
-//       delay(1000);
-//       INDEXER.move(127);
-//       delay(1000);
-//       INDEXER.move(-127);
-// 	  delay(400);
-// 	  INDEXER.move(0);
-// 	  FLY.move(97);
-// 	  FLY1.move(97);
-
-// 	  driveTurn(-85);
-// 	  driveStraight(750);
-// 	  driveTurn(90);
-// 	  driveStraight(-215);
-// 	  driveTurn(2);
-// 	  INDEXER.move(127);
-// 	  delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	   delay(wait);
-// 	  INDEXER.move(-127);
-//       delay(wait);
-//       INDEXER.move(127);
-//       delay(wait);
-//       INDEXER.move(-127);
-// 	  delay(400);
-// 	  INDEXER.move(0);
-
-
-// 	 }
-
-
-
-
-
-// 	  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){
-		
-//       // move forward to contact roller
-//       LF.move(40);
-//       LB.move(40);
-//       RF.move(40);
-//       RB.move(40);
-//       delay(180);
-
-//       // move forward more??
-//       LF.move(10);
-//       LB.move(10);
-//       RF.move(10);
-//       RB.move(10);
-
-//       while (optical.get_hue() > 200) {
-//         INTAKE.move(90);
-//       }
-
-//       if (optical.get_hue() < 20) {
-//         INTAKE.move(0);
-//       }
-//       // Not redundant becuase the motor does have to sotp eventually, with just
-//       // the while loop it sets the voltage to 90 then never resets-
-//       //-it to zero so the motor will move at 90 forever even if the while loop
-//       //breaks
-//       INTAKE.move(0);
-
-//       // rev up flywheel
-//       FLY.move(100);
-//       FLY1.move(100);
-
-//       // backwards to shooting position
-//       driveStraight(-390);
-//       driveTurn(-93);
-
-//       // more towards shooting position
-//       driveStraight(2500);
-//       driveTurn(-90);
-
-//       // shoot disc 1
-//       INDEXER.move(127); // should it be indexerToggle?
-//       delay(450);
-//       INDEXER.move(-127);
-//       delay(700);
-
-//       // shoot disc 2
-//       INDEXER.move(127);
-//       delay(450);
-//       INDEXER.move(-127);
-//       delay(600);
-
-
-	  
-
-//       // intake discs
-//       INTAKE.move(127);
-//       driveTurn(-39);
-
-//       // slow flywheel down (intermediate)
-//       FLY.move(95);
-//       FLY1.move(95);
-
-//       // intake threestack
-//       driveStraight(1100);
-// 	  driveStraight(-200);
-// 	  driveStraight(800);
-// 	  driveStraight(-600);
-
-// 	//   for(int i = 0; i < 15; i++) {
-// 	// 	driveStraight(50);
-// 	//   	delay(20);
-// 	//   }
-
-//       // turn to shooting position
-//       driveTurn(42);
-
-// 	  delay(500);
-
-//       // shoot da threestack
-//       INDEXER.move(127);
-//       delay(600);
-//       INDEXER.move(-127);
-//       delay(600);
-//       INDEXER.move(127);
-//       delay(600);
-//       INDEXER.move(-127);
-// 	  delay(600);
-// 	  INDEXER.move(127); // should it be indexerToggle?
-//       delay(450);
-//       INDEXER.move(-127);
-//       delay(700);
-//       delay(350);
-
-//       // intake more discs
-//       // asdf
-// 	  }
-
-    
-// 	  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)){
-//       FLY.move(98);
-//       FLY1.move(98);
-		
-//       // move forward to contact roller
-//       LF.move(40);
-//       LB.move(40);
-//       RF.move(40);
-//       RB.move(40);
-//       delay(180);
-
-//       // move forward more??
-//       LF.move(10);
-//       LB.move(10);
-//       RF.move(10);
-//       RB.move(10);
-
-//       while (optical.get_hue() > 200) {
-//         INTAKE.move(90);
-//       }
-
-//       if (optical.get_hue() < 20) {
-//         INTAKE.move(0);
-//       }
-
-
-//             driveStraight(-390);
-//             driveTurn(-123);
-//             INTAKE.move(127);
-//             driveStraight(1400);
-//             driveTurn(53);
-//             driveStraight(800);
-//             driveTurn(-110);
-//             driveStraight(-750); //670
-
-//       INDEXER.move(127);
-//       delay(wait2);
-//       INDEXER.move(-127);
-//       FLY.move(115);
-//       FLY1.move(115);
-//       delay(wait2);
-//       INDEXER.move(127);
-//       delay(wait2);
-//       INDEXER.move(-127);
-// 	  delay(wait2);
-//     INDEXER.move(127);
-//       delay(wait2);
-//       INDEXER.move(-127);
-// 	  delay(wait2);
-// 	  INDEXER.move(127); // should it be indexerToggle?
-//       delay(wait2);
-//       INDEXER.move(0);
-//       delay(700);
-//       delay(350);
-
-
-//     }
-
-
-//     if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)) {
-//       FLY.move(97);
-//       FLY1.move(97);
-//       INTAKE.move(127);
-//       driveStraight(1000);
-//       driveTurn(46.5);
-
-//        INDEXER.move(127);
-//       delay(250);
-//       INDEXER.move(-127);
-//       delay(500);
-//       INDEXER.move(127);
-//       delay(250);
-//       INDEXER.move(-127);
-// 	  delay(750);
-//     INDEXER.move(127);
-//       delay(250);
-//       INDEXER.move(-127);
-// 	  delay(750);
-// 	  INDEXER.move(127); // should it be indexerToggle?
-//       delay(250);
-//       INDEXER.move(0);
-
-
-//     //   INDEXER.move(127);
-//     //   delay(250);
-//     //   INDEXER.move(-127);
-//     //   delay(250);
-//     //   INDEXER.move(127);
-//     //        FLY.move(115);
-//     //   FLY1.move(115);
-//     //   delay(250);
-//     //   INDEXER.move(-127);
-// 	  // delay(250);
-//     // INDEXER.move(127);
-//     //   delay(250);
-//     //   INDEXER.move(-127);
-// 	  // delay(250);
-// 	  // INDEXER.move(127); // should it be indexerToggle?
-//     //   delay(250);
-//     //   INDEXER.move(0);
-//       driveTurn(77.5);
-//       driveStraight(1950);
-//       driveTurn(56);
-// INTAKE.move(0);
-//        LF.move(100);
-//       LB.move(100);
-//       RF.move(100);
-//       RB.move(100);
-//       delay(250);
-
-//       // move forward more??
-//       LF.move(4);
-//       LB.move(4);
-//       RF.move(4);
-//       RB.move(4);
-
-//       while (optical.get_hue() > 200) {
-//         INTAKE.move(90);
-//       }
-
-//       if (optical.get_hue() < 20) {
-//         INTAKE.move(0);
-//       }
-
-//     }
-//     // RED CODE
-//     //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
-
-//     // 	while (optical.get_hue() > 200){
-//     // 		INTAKE.move(-90);
-//     // 	}
-
-//     // 	if (optical.get_hue() < 20){
-//     // 		INTAKE.move(0);
-//     // 	}
-//     // }
-
-//     // BLUE CODE
-//     //  if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_R1)){
-
-//     // 	while (optical.get_hue() < 20){
-//     // 		INTAKE.move(90);
-//     // 	}
-
-//     // 	if (optical.get_hue() > 200){
-//     // 		INTAKE.move(0);
-//     // 	}
-//     // }
-
-//     // if(optical.get_hue() < 200){
-
-//     // }
-//     // else if (optical.get_hue() > 210){
-//     // 	INTAKE.move(0);
-//     // }
-//     // else {
-//     // 	INTAKE.move(0);
-//     // }
-
-//     // else{
-//     // 	INTAKE.move(0);
-//     // }
-
-//     // //intake
-//     // if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
-//     // 	INTAKE.move(127);
-//     // }
-//     // else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
-//     // 	INTAKE.move(-127);
-//     // }
-//     // else {
-//     // 	INTAKE.move(0);
-//     // }
-
-//     // //indexer
-//     // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){ //using prev
-//     // state to determine next direction with current state turning motor either
-//     // direction + off to reduce burnout 	indexerToggle = !indexerToggle; 	if
-//     // (indexerToggle)
-//     // 	{
-//     // 	INDEXER.move_relative(197,200);
-//     // 	}
-//     // 	if (indexerToggle==false)
-//     // 	{
-//     // 	INDEXER.move_relative(-197,200);
-//     // 	}
-//     // }
-
-//     // //flywheel
-//     // if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
-//     // 	FLY.move(flywheelVoltage);
-//     // 	FLY1.move(flywheelVoltage);
-//     // }
-//     // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
-//     // 	FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
-//     // 	FLY1.move(127);
-//     // }
-//     // else {
-//     // 	FLY.move(0);
-//     // 	FLY1.move(0);
-//     // }
-
-//     // //angler
-//     // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)){
-//     // 	if (anglerToggle == false) {
-//     // 		angler.set_value(false);
-//     // 		anglerToggle = true;
-//     // 	}
-//     // 	else {
-//     // 		angler.set_value(true);
-//     // 		anglerToggle = false;
-//     // 	}
-//     // }
-
-//     // //flywheel speed changer
-//     // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_A)) {
-//     // 	con.rumble(".");
-//     // 	speedToggle = !speedToggle;
-//     // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
-//     // fastSpeed;
-//     // }
-//     // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_B)) {
-//     // 	speedToggle == true ? slowSpeed-- : fastSpeed--;
-//     // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
-//     // fastSpeed;
-//     // }
-//     // else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_X)) {
-//     // 	speedToggle == true ? slowSpeed++ : fastSpeed++;
-//     // 	speedToggle == true ? flywheelVoltage = slowSpeed : flywheelVoltage =
-//     // fastSpeed;
-//     // }
-
-//     // //reset chassis motors (what is this for???)
-//     // // if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
-//     // // 	resetEncoders();
-//     // // }
-
-//     // //expansion
-//     // if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-//     // 	deployExpansion = true;
-//     // }
-//     // if (deployExpansion == true) {
-//     // 	expand.set_value(false);
-//     // }
-
-//     // pros::delay(10);
-
-//     // PID testing
-//     //  if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-//     //  	driveStraight(1000);
-//     //  }
-
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-//     // 	driveStraight(-3000);
-//     // }
-
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-//     // 	driveTurn(180);
-//     // }
-
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-//     // 	driveTurn(-90);
-//     // }
-//     // if(con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-//     // {
-//     // 	imu.reset();
-//     // }
-
-//     // time += 10;
-//   }
-
-// }
-
-
-
-// void opcontrol() {
-// 	int time = 0;
-
 	while (true) {
 		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
 		// indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
 		// indexerScaledDeltaPos = indexerDeltaPos/1.1;
-		int flywheelVelocity = atn; //(FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
+
+    //displaying flywheel velocity and chassis motor temperatures
+		int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		double chasstempF = chasstempC *(9/5) + 32;
-		if (time % 100 == 0) con.clear();
-		else if (time % 50 == 0) {
+		
+    if (time % 100 == 0) con.clear();
+		
+    else if (time % 50 == 0) {
 			cycle++;
 			// if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
-      	if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", autstr);
-			if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
-			if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+      if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", autstr); //autstr //%s
+		  if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
+		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
-
-    		if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
 			expand.set_value(true);
 		}
+
 
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
@@ -754,32 +149,31 @@ void opcontrol() {
 		RF.move(right);
 		RB.move(right);
 
-
-		// // // chassis tank drive 
+		// chassis tank drive 
 		// LF.move(con.get_analog(ANALOG_LEFT_Y));
 		// LB.move(con.get_analog(ANALOG_LEFT_Y));
 		// RF.move(con.get_analog(ANALOG_RIGHT_Y));
 		// RB.move(con.get_analog(ANALOG_RIGHT_Y));
 
-if(selec.get_value() == true){
-  atn ++;
-  delay(350);
-}
 
-if (atn == 1){
-  autstr = "Red Non-Roller";
-}
-else if(atn == 2){
-  autstr = "Blue Non-Roller";
-}
-else if(atn == 3){
-  autstr = "Red Roller-Side";
-}
-else if(atn == 4){
-  autstr = "Blue Roller-Side";
-}
+    //auton selector
+    if(selec.get_value() == true){
+      atn ++;
+      delay(350);
+    }
 
-
+    if (atn == 1){
+      autstr = "Red Non-Roller";
+    }
+    else if(atn == 2){
+      autstr = "Blue Non-Roller";
+    }
+    else if(atn == 3){
+      autstr = "Red Roller";
+    }
+    else if(atn == 4){
+      autstr = "Blue Roller";
+    }
 
 		//intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
@@ -788,103 +182,159 @@ else if(atn == 4){
 		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
 			INTAKE.move(-127);
 		}
-    // else while (con.get_digital(E_CONTROLLER_DIGITAL_R1) && con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
-    //   con.print(0, 0, "Auto Rolling [ ", autstr, " ]");
-    //   // Blue Roller
-    //   if(atn % 2 == 0){
-    //     while (optical.get_hue() > 200) {
-    //       INTAKE.move(-90);
-    //       con.print(0, 0, "Going");
-    //     }
-    //     if (optical.get_hue() < 20) {
-    //       INTAKE.move(70);
-    //       delay(250);
-    //       INTAKE.move(0);
-    //       con.print(0, 2, "Done");
-    //       break;
-    //     }
-    //   }
-      // Red Roller
-      else {
-        while (optical.get_hue() < 20) {
-          INTAKE.move(90);
-          con.print(0, 0, "Going");
-        }
-        if (optical.get_hue() > 200) {
-          INTAKE.move(-70);
-          delay(250);
-          INTAKE.move(0);
-          con.print(0, 2, "Done");
-          break;
-        }
-      }
-    }
 		else {
 			INTAKE.move(0);
 		}
 
-  while(true){
-    while (optical.get_hue() > 200) {
-      INTAKE.move(-90);
-      con.print(0, 0, "Going");
-    }
-
-    if (optical.get_hue() < 20) {
-      INTAKE.move(70);
-      delay(250);
-      INTAKE.move(0);
-      con.print(0, 2, "Done");
-      break;
-    }
-  }
-
-    if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){
+    //aim assist
+    if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
       // FLY.move_velocity(450);
       // FLY1.move_velocity(450);
-      driveAim(137.8);
-      	INDEXER.move(127);
+    if(atn == 1){
+      driveAim(215); //125
+      INDEXER.move(127);
       delay(250);
       INDEXER.move(-127); 
-	    // FLY.move(105); 
+
+	    // FLY.move(105);
       // FLY1.move(105);
-      delay(500); //wait
+
+      delay(500);
       INDEXER.move(127);
       delay(250);
       INDEXER.move(-127);
-	  delay(500); //wait 
-    INDEXER.move(127);
+
+	    delay(500);
+      INDEXER.move(127);
       delay(300);
       INDEXER.move(-127);
-	  delay(500); //wait
-	  INDEXER.move(127); // should it be indexerToggle?
-      delay(300);
-       INDEXER.move(-127);
-       delay(100);
-      INDEXER.move(-35);
-        delay(100);
 
+	    delay(500);
+	    INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+      delay(120);
+      INDEXER.move(-35);
+      delay(100);
+      INDEXER.move(0);
+    }
+    else if(atn == 2){
+       driveAim(-145); //125
+      INDEXER.move(127);
+      delay(250);
+      INDEXER.move(-127); 
+
+	    // FLY.move(105);
+      // FLY1.move(105);
+
+      delay(500);
+      INDEXER.move(127);
+      delay(250);
+      INDEXER.move(-127);
+
+	    delay(500);
+      INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+	    delay(500);
+	    INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+      delay(100);
+      INDEXER.move(-35);
+      delay(100);
       INDEXER.move(0);
 
     }
-
-		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)){
-		INDEXER.move(127);
+    else if(atn == 3){
+       driveAim(-10); //125
+      INDEXER.move(127);
       delay(250);
       INDEXER.move(-127); 
-	    FLY.move(98); 
-      FLY1.move(98);
-      delay(250); //wait
+
+	    // FLY.move(105);
+      // FLY1.move(105);
+
+      delay(500);
       INDEXER.move(127);
       delay(250);
       INDEXER.move(-127);
-	  delay(350); //wait 
-    INDEXER.move(127);
+
+	    delay(500);
+      INDEXER.move(127);
       delay(300);
       INDEXER.move(-127);
-	  delay(300); //wait
-	  INDEXER.move(127); // should it be indexerToggle?
+
+	    delay(500);
+	    INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+      delay(100);
+      INDEXER.move(-35);
+      delay(100);
+      INDEXER.move(0);
+
+    }
+    else if(atn == 4){
+       driveAim(215); //125
+      INDEXER.move(127);
+      delay(250);
+      INDEXER.move(-127); 
+
+	    // FLY.move(105);
+      // FLY1.move(105);
+
+      delay(500);
+      INDEXER.move(127);
+      delay(250);
+      INDEXER.move(-127);
+
+	    delay(500);
+      INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+	    delay(500);
+	    INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+      delay(100);
+      INDEXER.move(-35);
+      delay(100);
+      INDEXER.move(0);
+
+    }
+    }
+
+    //three-shot
+		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)){
+		  INDEXER.move(127);
+      delay(250);
+      INDEXER.move(-127);
+
+	    FLY.move(90); 
+      FLY1.move(90);
+
+      delay(250);
+      INDEXER.move(127);
+      delay(250);
+      INDEXER.move(-127);
+
+	    delay(350);
+      INDEXER.move(127);
+      delay(300);
+      INDEXER.move(-127);
+
+	    delay(300);
+	    INDEXER.move(127);
       delay(350);
       INDEXER.move(-40);
+
       delay(350);
       INDEXER.move(0);
 		}
@@ -906,9 +356,6 @@ else if(atn == 4){
 		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
 			FLY.move(flywheel_voltage);
 			FLY1.move(flywheel_voltage);
-      // FLY.move_velocity(420);
-      // FLY1.move_velocity(420);
-
 		}
 		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
 			FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
@@ -945,6 +392,7 @@ else if(atn == 4){
 			speedToggle == true ? flywheel_voltage = slowSpeed : flywheel_voltage = fastSpeed;
 		}
 
+    //reset all motor encoders
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
 			resetEncoders();
 		}
@@ -958,5 +406,4 @@ else if(atn == 4){
 		time += 10;
 		pros::delay(10);
 	}
-}
 }

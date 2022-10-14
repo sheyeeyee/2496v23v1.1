@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "blue auton",
+    "project_name": "arc",
     "target": "v5",
     "templates": {
       "kernel": {
