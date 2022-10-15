@@ -174,6 +174,12 @@ void opcontrol() {
     else if(atn == 4){
       autstr = "Blue Roller";
     }
+    else if(atn == 5){
+      autstr = "Skip";
+    }
+    else if(atn == 6){
+      autstr = "Skillz";
+    }
 
 		//intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
@@ -190,125 +196,124 @@ void opcontrol() {
     if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
       // FLY.move_velocity(450);
       // FLY1.move_velocity(450);
-    if(atn == 1){
-      driveAim(215); //125
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127); 
+      if(atn == 1){
+        driveAim(215); //125
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127); 
 
-	    // FLY.move(105);
-      // FLY1.move(105);
+        // FLY.move(105);
+        // FLY1.move(105);
 
-      delay(500);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127);
 
-	    delay(500);
-      INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-	    delay(500);
-	    INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-      delay(120);
-      INDEXER.move(-35);
-      delay(100);
-      INDEXER.move(0);
-    }
-    else if(atn == 2){
-       driveAim(-145); //125
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127); 
+        delay(120);
+        INDEXER.move(-35);
+        delay(100);
+        INDEXER.move(0);
+      }
+      else if(atn == 2){
+        driveAim(-145); //125
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127); 
 
-	    // FLY.move(105);
-      // FLY1.move(105);
+        // FLY.move(105);
+        // FLY1.move(105);
 
-      delay(500);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127);
 
-	    delay(500);
-      INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-	    delay(500);
-	    INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-      delay(100);
-      INDEXER.move(-35);
-      delay(100);
-      INDEXER.move(0);
+        delay(100);
+        INDEXER.move(-35);
+        delay(100);
+        INDEXER.move(0);
 
-    }
-    else if(atn == 3){
-       driveAim(-10); //125
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127); 
+      }
+      else if(atn == 3){
+        driveAim(-10); //125
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127); 
 
-	    // FLY.move(105);
-      // FLY1.move(105);
+        // FLY.move(105);
+        // FLY1.move(105);
 
-      delay(500);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127);
 
-	    delay(500);
-      INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-	    delay(500);
-	    INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-      delay(100);
-      INDEXER.move(-35);
-      delay(100);
-      INDEXER.move(0);
+        delay(100);
+        INDEXER.move(-35);
+        delay(100);
+        INDEXER.move(0);
 
-    }
-    else if(atn == 4){
-       driveAim(215); //125
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127); 
+      }
+      else if(atn == 4){
+        driveAim(215); //125
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127); 
 
-	    // FLY.move(105);
-      // FLY1.move(105);
+        // FLY.move(105);
+        // FLY1.move(105);
 
-      delay(500);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(250);
+        INDEXER.move(-127);
 
-	    delay(500);
-      INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-	    delay(500);
-	    INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+        delay(500);
+        INDEXER.move(127);
+        delay(300);
+        INDEXER.move(-127);
 
-      delay(100);
-      INDEXER.move(-35);
-      delay(100);
-      INDEXER.move(0);
-
-    }
+        delay(100);
+        INDEXER.move(-35);
+        delay(100);
+        INDEXER.move(0);
+      }
     }
 
     //three-shot
