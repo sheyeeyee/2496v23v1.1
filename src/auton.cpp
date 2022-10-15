@@ -475,64 +475,64 @@ void autonomous() {
   else if(atn == 6){
 
 
-    FLY.move(89);
-    FLY1.move(89);
+    FLY.move(87);
+    FLY1.move(87);
+    angler.set_value(false);
     
-    delay(4000);
+    delay(2500);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
 
-    delay(4000);
+    delay(2500);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
 
-    delay(4000);
+    delay(2500);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(2500);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(2500);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(3000);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(3000);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(3000);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(3000);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    delay(4000);
-    INDEXER.move(127);
-    delay(250);
-    INDEXER.move(-127);
+    // delay(3000);
+    // INDEXER.move(127);
+    // delay(250);
+    // INDEXER.move(-127);
 
-    driveStraight(-3600);
-    driveTurn(-65);
-
-    
-    
+    driveStraight(-2600);
+    driveTurn(72);
+    driveStraight(900);
+      
     LF.move(100);
     LB.move(100);
     RF.move(100);
@@ -551,6 +551,11 @@ void autonomous() {
     LB.move(0);
     RF.move(0);
     RB.move(0);
+
+    INTAKE.move(-90);
+    delay(200);
+    INTAKE.move(0);
+
 
     while(true){
     while (optical.get_hue() < 20) {

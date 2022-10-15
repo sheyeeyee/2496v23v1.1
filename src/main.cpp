@@ -91,7 +91,7 @@ void competition_initialize() {}
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 0;
+int atn = 6;
 
 int max_flywheel_speed = 480;
 int flywheel_voltage = 105;
