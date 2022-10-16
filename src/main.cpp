@@ -123,7 +123,7 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 0;
+int atn = 1;
 string autstr;
 
 int max_flywheel_speed = 480;
@@ -143,7 +143,7 @@ int fastSpeed = 105;
 bool rollerOn = false;
 
 void opcontrol() {
-  int time = 0;
+  int time = 6;
 
 	while (true) {
 		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
@@ -172,8 +172,7 @@ void opcontrol() {
 		int turn = int(abs(RX) * RX / 75);
 		int left = power + turn;
 		int right = power - turn;
-
-		LF.move(left);
+    LF.move(left);
 		LB.move(left);
 		RF.move(right);
 		RB.move(right);
@@ -384,6 +383,28 @@ void opcontrol() {
 			INDEXER.move_relative(-197,200);
 			}
 		}
+
+    while(con.get_digital(E_CONTROLLER_DIGITAL_DOWN)){
+
+      		int powerlw = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
+		int RXX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
+		int turnlw = int(abs(RX) * RX / 75);
+		int leftlw = power + turn;
+		int rightlw = power - turn;
+    // LF.move(left);
+		// LB.move(left);
+		// RF.move(right);
+		// RB.move(right);
+		// int leftlw = power + turn;
+		// int rightlw = power - turn;
+      
+		LF.move(leftlw/3);
+		LB.move(leftlw/3);
+		RF.move(rightlw/3);
+		RB.move(rightlw/3);
+
+    
+    }
 		
 		//flywheel
 		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
