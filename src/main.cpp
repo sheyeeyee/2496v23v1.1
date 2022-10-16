@@ -91,7 +91,7 @@ void competition_initialize() {}
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 6;
+int atn = 0;
 
 int max_flywheel_speed = 480;
 int flywheel_voltage = 105;
@@ -132,10 +132,7 @@ void opcontrol() {
 		  if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
-    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-			expand.set_value(true);
-		}
-
+    
 
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
@@ -178,143 +175,131 @@ void opcontrol() {
       autstr = "Skip";
     }
     else if(atn == 6){
-      autstr = "Skillz";
+      autstr = "Skills";
     }
-
-		//intake
-		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
-			INTAKE.move(127);
-		}
-		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
-			INTAKE.move(-127);
-		}
-		else {
-			INTAKE.move(0);
-		}
 
     //aim assist
-    if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
-      // FLY.move_velocity(450);
-      // FLY1.move_velocity(450);
-      if(atn == 1){
-        driveAim(215); //125
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127); 
+    // if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
+    //   // FLY.move_velocity(450);
+    //   // FLY1.move_velocity(450);
+    //   if(atn == 1){
+    //     driveAim(215); //125
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127); 
 
-        // FLY.move(105);
-        // FLY1.move(105);
+    //     // FLY.move(105);
+    //     // FLY1.move(105);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(120);
-        INDEXER.move(-35);
-        delay(100);
-        INDEXER.move(0);
-      }
-      else if(atn == 2){
-        driveAim(-145); //125
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127); 
+    //     delay(120);
+    //     INDEXER.move(-35);
+    //     delay(100);
+    //     INDEXER.move(0);
+    //   }
+    //   else if(atn == 2){
+    //     driveAim(-145); //125
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127); 
 
-        // FLY.move(105);
-        // FLY1.move(105);
+    //     // FLY.move(105);
+    //     // FLY1.move(105);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(100);
-        INDEXER.move(-35);
-        delay(100);
-        INDEXER.move(0);
+    //     delay(100);
+    //     INDEXER.move(-35);
+    //     delay(100);
+    //     INDEXER.move(0);
+    //   }
+    //   else if(atn == 3){
+    //     driveAim(-10); //125
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127); 
 
-      }
-      else if(atn == 3){
-        driveAim(-10); //125
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127); 
+    //     // FLY.move(105);
+    //     // FLY1.move(105);
 
-        // FLY.move(105);
-        // FLY1.move(105);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(100);
+    //     INDEXER.move(-35);
+    //     delay(100);
+    //     INDEXER.move(0);
 
-        delay(100);
-        INDEXER.move(-35);
-        delay(100);
-        INDEXER.move(0);
+    //   }
+    //   else if(atn == 4){
+    //     driveAim(215); //125
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127); 
 
-      }
-      else if(atn == 4){
-        driveAim(215); //125
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127); 
+    //     // FLY.move(105);
+    //     // FLY1.move(105);
 
-        // FLY.move(105);
-        // FLY1.move(105);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(250);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(250);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
+    //     delay(500);
+    //     INDEXER.move(127);
+    //     delay(300);
+    //     INDEXER.move(-127);
 
-        delay(500);
-        INDEXER.move(127);
-        delay(300);
-        INDEXER.move(-127);
-
-        delay(100);
-        INDEXER.move(-35);
-        delay(100);
-        INDEXER.move(0);
-      }
-    }
+    //     delay(100);
+    //     INDEXER.move(-35);
+    //     delay(100);
+    //     INDEXER.move(0);
+    //   }
+    // }
 
     //three-shot
 		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)){
@@ -342,6 +327,17 @@ void opcontrol() {
 
       delay(350);
       INDEXER.move(0);
+		}
+
+    //intake
+		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
+			INTAKE.move(127);
+		}
+		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
+			INTAKE.move(-127);
+		}
+		else {
+			INTAKE.move(0);
 		}
 
 		//indexer
@@ -380,6 +376,11 @@ void opcontrol() {
 				angler.set_value(true);
 				anglerToggle = false;
 			}
+		}
+
+    //expansion
+    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+			expand.set_value(true);
 		}
 
 		//flywheel speed changer
