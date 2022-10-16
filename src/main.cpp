@@ -63,7 +63,39 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+    // int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
+		// double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
+		// double chasstempF = chasstempC *(9/5) + 32;
+    
+    // int atn = 0;
+    // string autstr;
+
+    // //auton selector
+    // if(selec.get_value() == true){
+    //   atn ++;
+    //   delay(350);
+    // }
+
+    // if (atn == 1){
+    //   autstr = "Red Non-Roller";
+    // }
+    // else if(atn == 2){
+    //   autstr = "Blue Non-Roller";
+    // }
+    // else if(atn == 3){
+    //   autstr = "Red Roller";
+    // }
+    // else if(atn == 4){
+    //   autstr = "Blue Roller";
+    // }
+    // else if(atn == 5){
+    //   autstr = "Skip";
+    // }
+    // else if(atn == 6){
+    //   autstr = "Skills";
+    // }
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -92,6 +124,7 @@ void competition_initialize() {}
 // int fastSpeed = 105;
 
 int atn = 0;
+string autstr;
 
 int max_flywheel_speed = 480;
 int flywheel_voltage = 105;
@@ -99,7 +132,6 @@ int cycle = 0;
 bool indexerToggle = false;
 int wait = 900;
 int wait2 = 250;
-string autstr;
 // int indexerstate = -1;
 //  int indexerprevstate = -1;
 bool anglerToggle = false;
