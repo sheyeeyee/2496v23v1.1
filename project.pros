@@ -309,7 +309,8 @@
     },
     "upload_options": {
       "description": "a",
-      "icon": "planet"
+      "icon": "planet",
+      "slot": 1
     }
   }
 }

@@ -64,37 +64,7 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {
-    // int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
-		// double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
-		// double chasstempF = chasstempC *(9/5) + 32;
-    
-    // int atn = 0;
-    // string autstr;
-
-    // //auton selector
-    // if(selec.get_value() == true){
-    //   atn ++;
-    //   delay(350);
-    // }
-
-    // if (atn == 1){
-    //   autstr = "Red Non-Roller";
-    // }
-    // else if(atn == 2){
-    //   autstr = "Blue Non-Roller";
-    // }
-    // else if(atn == 3){
-    //   autstr = "Red Roller";
-    // }
-    // else if(atn == 4){
-    //   autstr = "Blue Roller";
-    // }
-    // else if(atn == 5){
-    //   autstr = "Skip";
-    // }
-    // else if(atn == 6){
-    //   autstr = "Skills";
-    // }
+    //add auton selector here
 }
 
 /**
@@ -123,7 +93,7 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 1;
+int atn = 0;
 string autstr;
 
 int max_flywheel_speed = 480;
@@ -143,7 +113,7 @@ int fastSpeed = 105;
 bool rollerOn = false;
 
 void opcontrol() {
-  int time = 6;
+  int time = 0;
 
 	while (true) {
 		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
@@ -169,9 +139,11 @@ void opcontrol() {
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
 		int RX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
+
 		int turn = int(abs(RX) * RX / 75);
 		int left = power + turn;
 		int right = power - turn;
+
     LF.move(left);
 		LB.move(left);
 		RF.move(right);
@@ -383,28 +355,6 @@ void opcontrol() {
 			INDEXER.move_relative(-197,200);
 			}
 		}
-
-    while(con.get_digital(E_CONTROLLER_DIGITAL_DOWN)){
-
-      		int powerlw = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
-		int RXX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
-		int turnlw = int(abs(RX) * RX / 75);
-		int leftlw = power + turn;
-		int rightlw = power - turn;
-    // LF.move(left);
-		// LB.move(left);
-		// RF.move(right);
-		// RB.move(right);
-		// int leftlw = power + turn;
-		// int rightlw = power - turn;
-      
-		LF.move(leftlw/3);
-		LB.move(leftlw/3);
-		RF.move(rightlw/3);
-		RB.move(rightlw/3);
-
-    
-    }
 		
 		//flywheel
 		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
