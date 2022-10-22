@@ -93,7 +93,7 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 0;
+int atn = 1;
 string autstr;
 
 int max_flywheel_speed = 480;
@@ -144,16 +144,16 @@ void opcontrol() {
 		int left = power + turn;
 		int right = power - turn;
 
-    LF.move(left);
-		LB.move(left);
-		RF.move(right);
-		RB.move(right);
+    // LF.move(left);
+		// LB.move(left);
+		// RF.move(right);
+		// RB.move(right);
 
 		// chassis tank drive 
-		// LF.move(con.get_analog(ANALOG_LEFT_Y));
-		// LB.move(con.get_analog(ANALOG_LEFT_Y));
-		// RF.move(con.get_analog(ANALOG_RIGHT_Y));
-		// RB.move(con.get_analog(ANALOG_RIGHT_Y));
+		LF.move(con.get_analog(ANALOG_LEFT_Y));
+		LB.move(con.get_analog(ANALOG_LEFT_Y));
+		RF.move(con.get_analog(ANALOG_RIGHT_Y));
+		RB.move(con.get_analog(ANALOG_RIGHT_Y));
 
 
     //auton selector
