@@ -100,6 +100,7 @@ int max_flywheel_speed = 480;
 int flywheel_voltage = 105;
 int cycle = 0;
 bool indexerToggle = false;
+int indexerPos = 190;
 int wait = 900;
 int wait2 = 250;
 // int indexerstate = -1;
@@ -348,11 +349,11 @@ void opcontrol() {
 			indexerToggle = !indexerToggle;
 			if (indexerToggle)
 			{
-			INDEXER.move_relative(197,200);
+			INDEXER.move_relative(indexerPos,200);
 			}
 			if (indexerToggle==false)
 			{
-			INDEXER.move_relative(-197,200);
+			INDEXER.move_relative(-indexerPos,200);
 			}
 		}
 		
