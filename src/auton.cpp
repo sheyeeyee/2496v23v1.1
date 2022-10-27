@@ -30,8 +30,8 @@ void autonomous() {
   //RED NON-ROLLER
   if (atn == 1){
     //set flywheel voltage
-    FLY.move(110);
-    FLY1.move(110);
+    FLY.move(105);
+    FLY1.move(105);
 
     //outtake to prevent disc jam
     INTAKE.move(127);
@@ -49,8 +49,8 @@ void autonomous() {
     INDEXER.move(-127);
 
     //speed up flywheel from 100
-    FLY.move(113);
-    FLY1.move(113);
+    FLY.move(104);
+    FLY1.move(104);
 
     //shoot disc 2
     delay(2000);
@@ -72,7 +72,7 @@ void autonomous() {
     INDEXER.move(0);
 
     //turn towards roller
-    driveTurn(76);
+    driveTurn(72);
     driveStraight(1985);
     driveTurn(57);
     delay(100);
@@ -80,12 +80,12 @@ void autonomous() {
 
     // INTAKE.move(-127);
     // delay(350);
-    
+    INTAKE.move(-110);
     LF.move(40);
     LB.move(40);
     RF.move(40);
     RB.move(40);
-    delay(500);
+    delay(900);
 
     //drive backwards immediately after spinning roller
     // driveStraight(-300);
@@ -107,12 +107,12 @@ void autonomous() {
     //spin roller to red
     while(true){
       while (optical.get_hue() < 20) {
-      INTAKE.move(-90);
+      INTAKE.move(-80);
       con.print(0, 0, "Going");
       }
 
       if (optical.get_hue() > 200) {
-        INTAKE.move(90);
+        INTAKE.move(40);
         delay(180);
         INTAKE.move(0);
         con.print(0, 2, "Done");
@@ -132,18 +132,18 @@ void autonomous() {
   //BLUE NON-ROLLER
   else if(atn == 2){
     //set flywheel voltage
-    FLY.move(100);
-    FLY1.move(100);
+    FLY.move(109);
+    FLY1.move(109);
 
     //intake singular disc (not sure if disc gets jammed or not)
-    INTAKE.move(-127);
+    INTAKE.move(127);
     driveStraight(1000);
     // delay(1000);
     // driveStraight(-400);
     // delay(200);
     // driveStraight(400);
     // delay(200);
-    driveTurn(48);
+    driveTurn(50);
 
     //shoot disc 1
     INDEXER.move(127);
@@ -209,10 +209,10 @@ void autonomous() {
     delay(500);
 
     // move forward more??
-    LF.move(5);
-    LB.move(5);
-    RF.move(5);
-    RB.move(5);
+    LF.move(6);
+    LB.move(6);
+    RF.move(6);
+    RB.move(6);
 
     delay(100);
 
@@ -225,12 +225,12 @@ void autonomous() {
     //spin roller to blue
      while(true){
       while (optical.get_hue() > 200) {
-      INTAKE.move(-90);
+      INTAKE.move(-110);
       con.print(0, 0, "Going");
       }
 
       if (optical.get_hue() < 20) {
-        INTAKE.move(90);
+        INTAKE.move(110);
         delay(180);
         INTAKE.move(0);
         con.print(0, 2, "Done");
@@ -283,12 +283,12 @@ void autonomous() {
       //spin roller to red
       while(true){
         while (optical.get_hue() < 20) {
-        INTAKE.move(-90);
+        INTAKE.move(-10);
         con.print(0, 0, "Going");
         }
 
         if (optical.get_hue() > 200) {
-          INTAKE.move(90);
+          INTAKE.move(40);
           delay(180);
           INTAKE.move(0);
           con.print(0, 2, "Done");
@@ -312,7 +312,7 @@ void autonomous() {
       driveStraight(-320);
       driveTurn(-125);
       INTAKE.move(127);
-      driveStraight(1200);
+      driveStraight(1350);
       driveTurn(-47);
       delay(250);
       // driveStraight(750);

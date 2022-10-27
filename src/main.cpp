@@ -93,7 +93,7 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 1;
+int atn = 3;
 string autstr;
 
 int max_flywheel_speed = 480;
@@ -106,11 +106,15 @@ int wait2 = 250;
 // int indexerstate = -1;
 //  int indexerprevstate = -1;
 bool anglerToggle = false;
-bool expandToggle = false;
+
 bool speedToggle = false;
+
+bool expandToggle = false;
 bool deployExpansion = false;
+
 int slowSpeed = 84;
 int fastSpeed = 105;
+
 bool rollerOn = false;
 
 void opcontrol() {
@@ -145,16 +149,16 @@ void opcontrol() {
 		int left = power + turn;
 		int right = power - turn;
 
-    // LF.move(left);
-		// LB.move(left);
-		// RF.move(right);
-		// RB.move(right);
+    LF.move(left);
+		LB.move(left);
+		RF.move(right);
+		RB.move(right);
 
 		// chassis tank drive 
-		LF.move(con.get_analog(ANALOG_LEFT_Y));
-		LB.move(con.get_analog(ANALOG_LEFT_Y));
-		RF.move(con.get_analog(ANALOG_RIGHT_Y));
-		RB.move(con.get_analog(ANALOG_RIGHT_Y));
+		// LF.move(con.get_analog(ANALOG_LEFT_Y));
+		// LB.move(con.get_analog(ANALOG_LEFT_Y));
+		// RF.move(con.get_analog(ANALOG_RIGHT_Y));
+		// RB.move(con.get_analog(ANALOG_RIGHT_Y));
 
 
     //auton selector
@@ -306,7 +310,7 @@ void opcontrol() {
     // }
 
     //three-shot
-		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)){
+		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)) {
 		  INDEXER.move(127);
       delay(250);
       INDEXER.move(-127);
@@ -334,10 +338,10 @@ void opcontrol() {
 		}
 
     //intake
-		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)){
+		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)) {
 			INTAKE.move(127);
 		}
-		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)){
+		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
 			INTAKE.move(-127);
 		}
 		else {
@@ -345,24 +349,22 @@ void opcontrol() {
 		}
 
 		//indexer
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)){ // using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
+		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)) { // using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
 			indexerToggle = !indexerToggle;
-			if (indexerToggle)
-			{
+			if (indexerToggle) {
 			INDEXER.move_relative(indexerPos,200);
 			}
-			if (indexerToggle==false)
-			{
+			if (indexerToggle==false) {
 			INDEXER.move_relative(-indexerPos,200);
 			}
 		}
 		
 		//flywheel
-		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)){
+		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)) {
 			FLY.move(flywheel_voltage);
 			FLY1.move(flywheel_voltage);
 		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)){
+		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
 			FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
 			FLY1.move(127);
 		}
@@ -372,11 +374,12 @@ void opcontrol() {
 		}
 		
 		//angler
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)){
+		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)) {
 			if (anglerToggle == false) {
 				angler.set_value(false);
 				anglerToggle = true;
-			} else {
+			}
+      else {
 				angler.set_value(true);
 				anglerToggle = false;
 			}
