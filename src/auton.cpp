@@ -30,8 +30,8 @@ void autonomous() {
   //RED NON-ROLLER
   if (atn == 1){
     //set flywheel voltage
-    FLY.move(102);
-    FLY1.move(102);
+    FLY.move(108);
+    FLY1.move(108);
 
     //outtake to prevent disc jam
     INTAKE.move(127);
@@ -41,7 +41,7 @@ void autonomous() {
     // delay(200);
     // driveStraight(400);
     // delay(200);
-    driveTurn(50);
+    driveTurn(48);
 
     //shoot disc 1
     INDEXER.move(127);
@@ -132,8 +132,8 @@ void autonomous() {
   //BLUE NON-ROLLER
   else if(atn == 2){
     //set flywheel voltage
-    FLY.move(109);
-    FLY1.move(109);
+    FLY.move(110);
+    FLY1.move(110);
 
     //intake singular disc (not sure if disc gets jammed or not)
     INTAKE.move(127);
@@ -143,25 +143,25 @@ void autonomous() {
     // delay(200);
     // driveStraight(400);
     // delay(200);
-    driveTurn(50);
-
+    driveTurn(49);
+    delay(500);
     //shoot disc 1
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
 
     //speed up flywheel from 100
-    FLY.move(114);
-    FLY1.move(114);
+    // FLY.move(114);
+    // FLY1.move(114);
 
     //shoot disc 2
-    delay(500);
+    delay(750);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
 
     //shoot disc 3
-    delay(750);
+    delay(500);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
@@ -251,8 +251,8 @@ void autonomous() {
   else if(atn == 3){
     bool Global = false;
     
-      FLY.move(104);
-      FLY1.move(104);
+      FLY.move(109);
+      FLY1.move(109);
       
       // FLY.move_velocity(480);
       // FLY1.move_velocity(480);
@@ -310,10 +310,10 @@ void autonomous() {
       // RB.move(10);
 
       driveStraight(-320);
-      driveTurn(-125);
+      driveTurn(-126);
       INTAKE.move(127);
-      driveStraight(1350);
-      driveTurn(-47);
+      driveStraight(1380);
+      driveTurn(-48);
       delay(250);
       // driveStraight(750);
       // driveTurn(-110);
@@ -523,70 +523,70 @@ void autonomous() {
 
   //SKILLS
   else if(atn == 6){
-    FLY.move(81);
-    FLY1.move(81);
+    FLY.move(84);
+    FLY1.move(84);
     angler.set_value(false);
     
     //shoot disc 1
     delay(2500);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 2
     delay(2500);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 3
     delay(2500);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 4
     delay(2500);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 5
     delay(2500);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 6
     delay(3000);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 7
     delay(3000);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 8
     delay(3000);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 9
     delay(3000);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
 
     //shoot disc 10
     delay(3000);
     INDEXER.move(127);
-    delay(250);
+    delay(240);
     INDEXER.move(-127);
-    delay(200);
+    delay(250);
 
     //first roller
     driveStraight(-2600);
@@ -618,7 +618,7 @@ void autonomous() {
     //spin roller to red
     while(true){
       while (optical.get_hue() > 200) {
-      INTAKE.move(127);
+      INTAKE.move(100);
       con.print(0, 0, "Going");
       }
 
@@ -659,16 +659,16 @@ void autonomous() {
     driveStraight(720);
     driveStraight(-400);
     driveStraight(750);
-    INTAKE.move(127);
-
-    delay(2000);
-    INTAKE.move(-127);
+    // INTAKE.move(127);
 
     delay(1000);
+    // INTAKE.move(-127);
 
-    INTAKE.move(127);
+    // delay(1000);
 
-    delay(2000);
+    // INTAKE.move(127);
+
+    // delay(2000);
 
     LF.move(100);
     LB.move(100);
@@ -681,7 +681,20 @@ void autonomous() {
     LB.move(5);
     RF.move(5);
     RB.move(5);
+    while(true){
+        while (optical.get_hue() > 200) {
+        INTAKE.move(100);
+        con.print(0, 0, "Going");
+        }
 
+        if (optical.get_hue() < 20) {
+          INTAKE.move(-100);
+          delay(130);
+          INTAKE.move(0);
+          con.print(0, 2, "Done");
+          break;
+        }
+    }
     delay(500);
 
     // LF.move(-50);
