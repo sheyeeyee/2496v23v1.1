@@ -225,12 +225,12 @@ void autonomous() {
     //spin roller to blue
      while(true){
       while (optical.get_hue() > 200) {
-      INTAKE.move(-110);
+      INTAKE.move(110);
       con.print(0, 0, "Going");
       }
 
       if (optical.get_hue() < 20) {
-        INTAKE.move(110);
+        INTAKE.move(-110);
         delay(180);
         INTAKE.move(0);
         con.print(0, 2, "Done");
@@ -251,13 +251,14 @@ void autonomous() {
   else if(atn == 3){
     bool Global = false;
     
-      FLY.move(109);
-      FLY1.move(109);
+      FLY.move(111);
+      FLY1.move(111);
       
       // FLY.move_velocity(480);
       // FLY1.move_velocity(480);
 
-      INTAKE.move(127);
+      // 127
+      INTAKE.move(-58);
       delay(350);
       
       LF.move(40);
@@ -278,23 +279,24 @@ void autonomous() {
       LB.move(5);
       RF.move(5);
       RB.move(5);
-      delay(500);    
+      delay(300);    
 
       //spin roller to red
-      while(true){
-        while (optical.get_hue() < 20) {
-        INTAKE.move(-10);
-        con.print(0, 0, "Going");
-        }
+      // while(true){
+      //   while (optical.get_hue() < 20) {
+      //   INTAKE.move(-127);
+      //   con.print(0, 0, "Going");
+      //   }
 
-        if (optical.get_hue() > 200) {
-          INTAKE.move(40);
-          delay(180);
-          INTAKE.move(0);
-          con.print(0, 2, "Done");
-          break;
-        }
-      }
+      //   if (optical.get_hue() > 200) {
+      //     INTAKE.move(70);
+      //     // 180
+      //     delay(180);
+      //     INTAKE.move(0);
+      //     con.print(0, 2, "Done");
+      //     break;
+      //   }
+      // }
 
       // // move forward to contact roller
       // LF.move(40);
@@ -309,11 +311,13 @@ void autonomous() {
       // RF.move(10);
       // RB.move(10);
 
+      INTAKE.move(0);
+
       driveStraight(-320);
       driveTurn(-126);
       INTAKE.move(127);
       driveStraight(1380);
-      driveTurn(-48);
+      driveTurn(-46);
       delay(250);
       // driveStraight(750);
       // driveTurn(-110);
@@ -347,19 +351,21 @@ void autonomous() {
   else if(atn == 4){
     bool Global = false;
     
-      FLY.move(106);
-      FLY1.move(106);
+      FLY.move(111);
+      FLY1.move(111);
+      
       // FLY.move_velocity(480);
       // FLY1.move_velocity(480);
 
-      INTAKE.move(127);
+      // 127
+      INTAKE.move(-58);
       delay(350);
-
-      LF.move(30);
-      LB.move(30);
-      RF.move(30);
-      RB.move(30);
-      delay(2000);
+      
+      LF.move(40);
+      LB.move(40);
+      RF.move(40);
+      RB.move(40);
+      delay(500);
 
       // move forward more??
       LF.move(5);
@@ -369,55 +375,69 @@ void autonomous() {
 
       delay(100);
 
-      LF.move(0);
-      LB.move(0);
-      RF.move(0);
-      RB.move(0);
-      // delay(500);
+      LF.move(5);
+      LB.move(5);
+      RF.move(5);
+      RB.move(5);
+      delay(300);    
+
+      //spin roller to red
+      // while(true){
+      //   while (optical.get_hue() < 20) {
+      //   INTAKE.move(-127);
+      //   con.print(0, 0, "Going");
+      //   }
+
+      //   if (optical.get_hue() > 200) {
+      //     INTAKE.move(70);
+      //     // 180
+      //     delay(180);
+      //     INTAKE.move(0);
+      //     con.print(0, 2, "Done");
+      //     break;
+      //   }
+      // }
+
+      // // move forward to contact roller
+      // LF.move(40);
+      // LB.move(40);
+      // RF.move(40);
+      // RB.move(40);
+      // delay(180);
+
+      // // move forward more??
+      // LF.move(10);
+      // LB.move(10);
+      // RF.move(10);
+      // RB.move(10);
 
       INTAKE.move(0);
 
-      //spin roller to blue
-      while(true){
-        while (optical.get_hue() > 200) {
-        INTAKE.move(-127);
-        con.print(0, 0, "Going");
-        }
-
-        if (optical.get_hue() < 20) {
-          INTAKE.move(127);
-          delay(150);
-          INTAKE.move(0);
-          con.print(0, 2, "Done");
-          break;
-        }
-      }
-
-      driveStraight(-390);
-      driveTurn(-125);
+      driveStraight(-320);
+      driveTurn(-126);
       INTAKE.move(127);
-      driveStraight(1400);
-      driveTurn(-48);
-
+      driveStraight(1380);
+      driveTurn(-47);
+      delay(250);
       // driveStraight(750);
       // driveTurn(-110);
       // driveStraight(-700);
-
       INDEXER.move(127);
-              
+            
+      //shoot discs  
       delay(250);
       INDEXER.move(-127); 
-      delay(3000);
+      delay(2500);
       INDEXER.move(127);
 
       delay(250);
       INDEXER.move(-127);
-      delay(3000);
+      delay(2500);//delay
       INDEXER.move(127);
 
       delay(250);
       INDEXER.move(-127);
-      delay(3000);
+      delay(2500);
       INDEXER.move(127);
 
       delay(250);
@@ -592,7 +612,7 @@ void autonomous() {
     driveStraight(-2600);
     driveTurn(75);
     driveStraight(380); //390?
-    INTAKE.move(127);
+    INTAKE.move(120);
     
     // delay(350);
       
@@ -600,7 +620,7 @@ void autonomous() {
     LB.move(50);
     RF.move(50);
     RB.move(50);
-    delay(1000);
+    delay(300);
 
     // move forward more??
     LF.move(5);
@@ -615,21 +635,22 @@ void autonomous() {
     RF.move(0);
     RB.move(0);
     // delay(500);
+    
     //spin roller to red
-    while(true){
-      while (optical.get_hue() > 200) {
-      INTAKE.move(100);
-      con.print(0, 0, "Going");
-      }
+    // while(true){
+    //   while (optical.get_hue() > 200) {
+    //   INTAKE.move(110);
+    //   con.print(0, 0, "Going");
+    //   }
 
-      if (optical.get_hue() < 20) {
-        INTAKE.move(-100);
-        delay(130);
-        INTAKE.move(0);
-        con.print(0, 2, "Done");
-        break;
-      }
-    }
+    //   if (optical.get_hue() < 20) {
+    //     INTAKE.move(-100);
+    //     delay(130);
+    //     INTAKE.move(0);
+    //     con.print(0, 2, "Done");
+    //     break;
+    //   }
+    // }
 
     delay(250);
     FLY.move(0);
@@ -656,46 +677,48 @@ void autonomous() {
     driveTurn(90);
     INTAKE.move(127);
 
-    driveStraight(720);
+    driveStraight(750);
     driveStraight(-400);
     driveStraight(750);
-    // INTAKE.move(127);
+    INTAKE.move(127);
+
+    delay(300);
+    INTAKE.move(-127);
 
     delay(1000);
-    // INTAKE.move(-127);
 
-    // delay(1000);
+    INTAKE.move(127);
 
-    // INTAKE.move(127);
+    delay(2000);
 
-    // delay(2000);
+    // LF.move(100);
+    // LB.move(100);
+    // RF.move(100);
+    // RB.move(100);
+    // delay(100);
 
-    LF.move(100);
-    LB.move(100);
-    RF.move(100);
-    RB.move(100);
-    delay(250);
+    // // move forward more
+    // LF.move(5);
+    // LB.move(5);
+    // RF.move(5);
+    // RB.move(5);
+    
+    // while(true){
+    //   while (optical.get_hue() > 200) {
+    //   INTAKE.move(110);
+    //   con.print(0, 0, "Going");
+    //   }
+      
+    //   if (optical.get_hue() < 20) {
+    //     INTAKE.move(-100);
+    //     delay(130);
+    //     INTAKE.move(0);
+    //     con.print(0, 2, "Done");
+    //     break;
+    //   }
+    // }
 
-    // move forward more
-    LF.move(5);
-    LB.move(5);
-    RF.move(5);
-    RB.move(5);
-    while(true){
-        while (optical.get_hue() > 200) {
-        INTAKE.move(100);
-        con.print(0, 0, "Going");
-        }
-
-        if (optical.get_hue() < 20) {
-          INTAKE.move(-100);
-          delay(130);
-          INTAKE.move(0);
-          con.print(0, 2, "Done");
-          break;
-        }
-    }
-    delay(500);
+    delay(300);
 
     // LF.move(-50);
     // LB.move(-50);
@@ -741,8 +764,8 @@ void autonomous() {
 
     //move to get to expansion spot
     delay(400);
-    driveStraight(-1000);
-    driveTurn(-60);
+    driveStraight(-925);
+    driveTurn(-55);
     driveStraight(600);
     INTAKE.move(0);
     
@@ -751,7 +774,7 @@ void autonomous() {
     delay(1500);
 
     //turn to get 4 tiles from chassis
-    driveTurn(45);
+    driveTurn(40);
     driveStraight(-70);
   }
 }

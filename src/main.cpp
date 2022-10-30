@@ -93,7 +93,7 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 2;
+int atn = 0;
 string autstr;
 
 int max_flywheel_speed = 480;
