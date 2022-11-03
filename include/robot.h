@@ -11,6 +11,9 @@ extern pros::Motor LF;
 extern pros::Motor LB;
 extern pros::Motor RF;
 extern pros::Motor RB;
+extern pros::Motor RM;
+extern pros::Motor LM;
+
 
 //intake
 extern pros::Motor INTAKE;

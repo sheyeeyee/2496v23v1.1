@@ -11,17 +11,21 @@
 #define IMU_PORT 6
 #define LF_PORT 7
 #define LB_PORT 8
-#define RF_PORT 9
-#define RB_PORT 10
+#define LM_PORT 9
+#define RF_PORT 10
+#define RM_PORT 11
+#define RB_PORT 12
 #define GPS_PORT 16
 #define FLY_PORT 17
 #define INTAKE_PORT 18
 #define FLY1_PORT 20
 
-pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RF (RF_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor RM (RM_PORT, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor LM (LM_PORT, pros::E_MOTOR_GEARSET_06, true);
 
 //intake
 pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);

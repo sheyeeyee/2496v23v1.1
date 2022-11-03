@@ -151,6 +151,8 @@ void opcontrol() {
 
     LF.move(left);
 		LB.move(left);
+    LM.move(left);
+		RM.move(right);
 		RF.move(right);
 		RB.move(right);
 
@@ -162,7 +164,7 @@ void opcontrol() {
 
 
     //auton selector
-    if(selec.get_value() == true){
+    if(selec.get_value() == true){ // brain was here
       atn ++;
       delay(350);
     }
