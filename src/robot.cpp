@@ -9,7 +9,7 @@
 #define INDEXER_PORT 1
 #define OPTICAL_PORT 4
 #define IMU_PORT 6
-#define LF_PORT 7
+#define LF_PORT 1
 #define LB_PORT 8
 #define LM_PORT 9
 #define RF_PORT 10
@@ -21,10 +21,10 @@
 #define FLY1_PORT 20
 
 pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor RF (RF_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor RM (RM_PORT, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor RM (RM_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor LM (LM_PORT, pros::E_MOTOR_GEARSET_06, true);
 
 //intake

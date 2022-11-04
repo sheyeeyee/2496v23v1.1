@@ -281,21 +281,22 @@ void autonomous() {
       delay(500);    
 
       //spin roller to red
-      while(true){
-        while (optical.get_hue() < 20) {
-        INTAKE.move(-10);
-        con.print(0, 0, "Going");
-        }
+      // while(true){
+      //   while (optical.get_hue() < 20) {
+      //   INTAKE.move(-10);
+      //   con.print(0, 0, "Going");
+      //   }
 
-        if (optical.get_hue() > 200) {
-          INTAKE.move(40);
-          delay(180);
-          INTAKE.move(0);
-          con.print(0, 2, "Done");
-          break;
-        }
-      }
-
+      //   if (optical.get_hue() > 200) {
+      //     INTAKE.move(40);
+      //     delay(180);
+      //     INTAKE.move(0);
+      //     con.print(0, 2, "Done");
+      //     break;
+      //   }
+      // }
+      INTAKE.move(-40);
+      delay(2000);
       // // move forward to contact roller
       // LF.move(40);
       // LB.move(40);
