@@ -93,7 +93,7 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 0;
+int atn = 6;
 string autstr;
 
 int max_flywheel_speed = 480;
@@ -386,7 +386,7 @@ void opcontrol() {
 		}
 
     //expansion
-    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    if (con.get_digital((pros::E_CONTROLLER_DIGITAL_LEFT)) && con.get_digital(E_CONTROLLER_DIGITAL_A) ) {
 			expand.set_value(true);
 		}
 
