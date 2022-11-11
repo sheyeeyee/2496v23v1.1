@@ -80,7 +80,7 @@ void autonomous() {
 
     // INTAKE.move(-127);
     // delay(350);
-    INTAKE.move(-110);
+  
     LF.move(40);
     LB.move(40);
     RF.move(40);
@@ -102,7 +102,14 @@ void autonomous() {
     LB.move(5);
     RF.move(5);
     RB.move(5);
-    delay(500);    
+    delay(500);   
+      con.print(1, 0, "yes");
+          delay(2);
+         INTAKE.move_relative(400, 200);
+
+          con.print(0, 0, "hi");
+          delay(10000);
+ 
 
     //spin roller to red
     // while(true){
@@ -552,8 +559,8 @@ delay(1000);
 
   //SKILLS
   else if(atn == 6){
-    FLY.move(107);
-    FLY1.move(107);
+    FLY.move(108); //107
+    FLY1.move(108); //107
     // angler.set_value(false);
     
     //shoot disc 1

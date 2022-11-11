@@ -45,6 +45,8 @@ void initialize() {
 
   pros::lcd::register_btn1_cb(on_center_button);
   optical.set_led_pwm(100);
+
+   
 }
 
 /**
@@ -52,7 +54,15 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {}
+void disabled() {
+  // if(selec.get_value() == true){
+  //     atn ++;
+  //     delay(350);
+  //   }
+  
+}
+int atn;
+string autstr;
 
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
@@ -64,6 +74,38 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {
+    //  int atn;
+while(true){
+
+
+      if(selec.get_value() == true){
+      atn ++;
+
+      delay(350);
+    }
+    
+    if (atn == 1){
+      autstr = "Red Non-Roller";
+    }
+    else if(atn == 2){
+      autstr = "Blue Non-Roller";
+    }
+    else if(atn == 3){
+      autstr = "Red Roller";
+    }
+    else if(atn == 4){
+      autstr = "Blue Roller";
+    }
+    else if(atn == 5){
+      autstr = "Skip";
+    }
+    else if(atn == 6){
+      autstr = "Skills";
+    }
+
+      con.clear();
+    con.print(0, 0, "Aut: %s", autstr);
+}
     //add auton selector here
 }
 
@@ -93,8 +135,8 @@ void competition_initialize() {
 // int slowSpeed = 80;
 // int fastSpeed = 105;
 
-int atn = 6;
-string autstr;
+
+
 
 int max_flywheel_speed = 480;
 int flywheel_voltage = 105;
@@ -162,29 +204,29 @@ void opcontrol() {
 
 
     //auton selector
-    if(selec.get_value() == true){
-      atn ++;
-      delay(350);
-    }
+    // if(selec.get_value() == true){
+    //   atn ++;
+    //   delay(350);
+    // }
 
-    if (atn == 1){
-      autstr = "Red Non-Roller";
-    }
-    else if(atn == 2){
-      autstr = "Blue Non-Roller";
-    }
-    else if(atn == 3){
-      autstr = "Red Roller";
-    }
-    else if(atn == 4){
-      autstr = "Blue Roller";
-    }
-    else if(atn == 5){
-      autstr = "Skip";
-    }
-    else if(atn == 6){
-      autstr = "Skills";
-    }
+    // if (atn == 1){
+    //   autstr = "Red Non-Roller";
+    // }
+    // else if(atn == 2){
+    //   autstr = "Blue Non-Roller";
+    // }
+    // else if(atn == 3){
+    //   autstr = "Red Roller";
+    // }
+    // else if(atn == 4){
+    //   autstr = "Blue Roller";
+    // }
+    // else if(atn == 5){
+    //   autstr = "Skip";
+    // }
+    // else if(atn == 6){
+    //   autstr = "Skills";
+    // }
 
     //aim assist
     // if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
