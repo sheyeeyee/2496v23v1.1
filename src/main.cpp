@@ -176,8 +176,8 @@ void opcontrol() {
 		
     else if (time % 50 == 0) {
 			cycle++;
-			// if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
-      if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", autstr); //autstr //%s
+			if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
+      // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", autstr); //autstr //%s
 		  if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
@@ -191,17 +191,16 @@ void opcontrol() {
 		int left = power + turn;
 		int right = power - turn;
 
-    LF.move(left);
-		LB.move(left);
-		RF.move(right);
-		RB.move(right);
+    // LF.move(left);
+		// LB.move(left);
+		// RF.move(right);
+		// RB.move(right);
 
 		// chassis tank drive 
-		// LF.move(con.get_analog(ANALOG_LEFT_Y));
-		// LB.move(con.get_analog(ANALOG_LEFT_Y));
-		// RF.move(con.get_analog(ANALOG_RIGHT_Y));
-		// RB.move(con.get_analog(ANALOG_RIGHT_Y));
-
+		LF.move(con.get_analog(ANALOG_LEFT_Y));
+		LB.move(con.get_analog(ANALOG_LEFT_Y));
+		RF.move(con.get_analog(ANALOG_RIGHT_Y));
+		RB.move(con.get_analog(ANALOG_RIGHT_Y));
 
     //auton selector
     // if(selec.get_value() == true){
