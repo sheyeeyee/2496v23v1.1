@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "tank",
+    "project_name": "a",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -308,9 +308,9 @@
       }
     },
     "upload_options": {
-      "description": "tank",
+      "description": "a",
       "icon": "alien",
-      "slot": 2
+      "slot": 1
     }
   }
 }

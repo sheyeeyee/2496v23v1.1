@@ -30,8 +30,8 @@ void autonomous() {
   //RED NON-ROLLER
   if (atn == 1){
     //set flywheel voltage
-    FLY.move(105); //108
-    FLY1.move(105); //108
+    FLY.move(118); //108
+    FLY1.move(118); //108
 
     //outtake to prevent disc jam
     INTAKE.move(127);
@@ -267,8 +267,8 @@ void autonomous() {
   else if(atn == 3){
     bool Global = false;
     
-      FLY.move(104); //105
-      FLY1.move(104); //105
+      FLY.move(114); //105
+      FLY1.move(114); //105
       
       // FLY.move_velocity(480);
       // FLY1.move_velocity(480);
@@ -561,8 +561,8 @@ delay(1000);
 
   //SKILLS
   else if(atn == 6){
-    FLY.move(108); //107
-    FLY1.move(108); //107
+    FLY.move(120); //108
+    FLY1.move(120); //108
     // angler.set_value(false);
     
     //shoot disc 1
@@ -644,7 +644,7 @@ delay(1000);
     LB.move(50);
     RF.move(50);
     RB.move(50);
-    delay(300);
+    delay(700);
 
     // move forward more??
     LF.move(5);
