@@ -30,8 +30,8 @@ void autonomous() {
   //RED NON-ROLLER
   if (atn == 1){
     //set flywheel voltage
-    FLY.move(108); //108
-    FLY1.move(108); //108
+    FLY.move(115); //108
+    FLY1.move(115); //108
 
     //outtake to prevent disc jam
     INTAKE.move(127);
@@ -41,7 +41,7 @@ void autonomous() {
     // delay(200);
     // driveStraight(400);
     // delay(200);
-    driveTurn(45);
+    driveTurn(39);
 
     //shoot disc 1
     INDEXER.move(127);
@@ -49,17 +49,17 @@ void autonomous() {
     INDEXER.move(-127);
     INTAKE.move(-127);
     //speed up flywheel from 100
-    FLY.move(102);
-    FLY1.move(102);
+    FLY.move(115);
+    FLY1.move(115);
 
     //shoot disc 2
-    delay(2000);
+    delay(1500);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
 
     //shoot disc 3
-    delay(2000);
+    delay(1500);
     INDEXER.move(127);
     delay(250);
     INDEXER.move(-127);
@@ -72,7 +72,7 @@ void autonomous() {
     INDEXER.move(0);
 
     //turn towards roller
-    driveTurn(79);
+    driveTurn(86);
     driveStraight(1985);
     driveTurn(58);
     delay(100);
@@ -334,7 +334,7 @@ delay(1000);
       driveTurn(-126);
       INTAKE.move(127);
       driveStraight(1380);
-      driveTurn(-48);
+      driveTurn(-55);
       delay(250);
       // driveStraight(750);
       // driveTurn(-110);
