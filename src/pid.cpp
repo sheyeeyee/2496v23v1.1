@@ -73,7 +73,7 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
     return power;
 }
 
-//driving straight
+//driving straight/heading control
 void driveStraight(int target) {
     setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     //  double start_head = 0; 

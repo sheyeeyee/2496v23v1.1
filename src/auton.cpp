@@ -30,8 +30,8 @@ void autonomous() {
   //RED NON-ROLLER
   if (atn == 1){
     //set flywheel voltage
-    FLY.move(115); //108
-    FLY1.move(115); //108
+    FLY.move(127); //108
+    FLY1.move(127); //108
 
     //outtake to prevent disc jam
     INTAKE.move(127);
@@ -41,7 +41,7 @@ void autonomous() {
     // delay(200);
     // driveStraight(400);
     // delay(200);
-    driveTurn(39);
+    driveTurn(45);
 
     //shoot disc 1
     INDEXER.move(127);
@@ -72,7 +72,7 @@ void autonomous() {
     INDEXER.move(0);
 
     //turn towards roller
-    driveTurn(86);
+    driveTurn(79);
     driveStraight(1985);
     driveTurn(58);
     delay(100);
@@ -267,8 +267,8 @@ void autonomous() {
   else if(atn == 3){
     bool Global = false;
     
-      FLY.move(114); //105
-      FLY1.move(114); //105
+      FLY.move(127); //105
+      FLY1.move(127); //105
       
       // FLY.move_velocity(480);
       // FLY1.move_velocity(480);
@@ -314,8 +314,8 @@ void autonomous() {
       //   }
 //       // }
 // INTAKE.move_relative(400, 200);
-INTAKE.move_relative(-150, 200);
-delay(1000);
+      INTAKE.move_relative(-150, 200);
+      delay(1000);
       // // move forward to contact roller
       // LF.move(40);
       // LB.move(40);
@@ -331,10 +331,10 @@ delay(1000);
 
 
       driveStraight(-320);
-      driveTurn(-126);
+      driveTurn(-128);
       INTAKE.move(127);
       driveStraight(1380);
-      driveTurn(-55);
+      driveTurn(-48);
       delay(250);
       // driveStraight(750);
       // driveTurn(-110);
@@ -561,8 +561,8 @@ delay(1000);
 
   //SKILLS
   else if(atn == 6){
-    FLY.move(120); //108
-    FLY1.move(120); //108
+    FLY.move(127); //108
+    FLY1.move(127); //108
     // angler.set_value(false);
     
     //shoot disc 1
