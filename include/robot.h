@@ -19,8 +19,8 @@ extern pros::Motor LM;
 extern pros::Motor INTAKE;
 
 //flywheel
-extern pros::Motor FLY;
-extern pros::Motor FLY1;
+extern pros::Motor CATA;
+
 
 //controller
 extern pros::Controller con;
@@ -48,6 +48,7 @@ extern pros::c::gps_status_s_t gpsData;
 //expansion
 extern pros::ADIDigitalOut expand;
 extern pros::ADIDigitalIn selec;
+extern pros::ADIDigitalIn catalim;
 
 //optical
 extern pros::Optical optical;

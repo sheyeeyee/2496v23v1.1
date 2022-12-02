@@ -111,22 +111,37 @@ bool speedToggle = false;
 
 bool expandToggle = false;
 bool deployExpansion = false;
+int catal = 0;
 
 int slowSpeed = 84;
 int fastSpeed = 105;
 
 bool rollerOn = false;
+// void runcata() {
+//     while(catalim.get_value() == false){
+//          CATA.move(-127);
+//        }
+// }
 
 void opcontrol() {
+
+  // pros::Task rcata(runcata);
   int time = 0;
 
 	while (true) {
+      // pros::Task rcata(runcata);
+
+// void rucata() {
+//        while(catalim.get_value() == false){
+//         CATA.move(-127);
+//       }
+// }
 		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
 		// indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
 		// indexerScaledDeltaPos = indexerDeltaPos/1.1;
 
     //displaying flywheel velocity and chassis motor temperatures
-		int flywheelVelocity = (FLY.get_actual_velocity() + FLY1.get_actual_velocity())/2;
+		// int CATATEMP = (CATA.get_temperature());
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		double chasstempF = chasstempC *(9/5) + 32;
 		
@@ -135,7 +150,7 @@ void opcontrol() {
     else if (time % 50 == 0) {
 			cycle++;
 			// if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
-      if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", autstr); //autstr //%s
+      // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
 		  if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
@@ -149,18 +164,20 @@ void opcontrol() {
 		int left = power + turn;
 		int right = power - turn;
 
-    LF.move(left);
-		LB.move(left);
-    LM.move(left);
-		RM.move(right);
-		RF.move(right);
-		RB.move(right);
+    // LF.move(left);
+		// LB.move(left);
+    // LM.move(left);
+		// RM.move(right);
+		// RF.move(right);
+		// RB.move(right);
 
 		// chassis tank drive 
-		// LF.move(con.get_analog(ANALOG_LEFT_Y));
-		// LB.move(con.get_analog(ANALOG_LEFT_Y));
-		// RF.move(con.get_analog(ANALOG_RIGHT_Y));
-		// RB.move(con.get_analog(ANALOG_RIGHT_Y));
+		LF.move(con.get_analog(ANALOG_LEFT_Y));
+		LB.move(con.get_analog(ANALOG_LEFT_Y));
+		RF.move(con.get_analog(ANALOG_RIGHT_Y));
+		RB.move(con.get_analog(ANALOG_RIGHT_Y));
+    RM.move(con.get_analog(ANALOG_RIGHT_Y));
+		LM.move(con.get_analog(ANALOG_LEFT_Y));
 
 
     //auton selector
@@ -187,7 +204,9 @@ void opcontrol() {
     else if(atn == 6){
       autstr = "Skills";
     }
-
+      //  if (catalim.get_value() == false){
+      //   CATA.move(-127);
+      //  }
     //aim assist
     // if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
     //   // FLY.move_velocity(450);
@@ -311,33 +330,33 @@ void opcontrol() {
     //   }
     // }
 
-    //three-shot
-		if (con.get_digital(E_CONTROLLER_DIGITAL_UP)) {
-		  INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
+    // //three-shot
+		// if (con.get_digital(E_CONTROLLER_DIGITAL_UP)) {
+		//   INDEXER.move(127);
+    //   delay(250);
+    //   INDEXER.move(-127);
 
-	    FLY.move(90); 
-      FLY1.move(90);
+	  //   FLY.move(90); 
+    //   FLY1.move(90);
 
-      delay(250);
-      INDEXER.move(127);
-      delay(250);
-      INDEXER.move(-127);
+    //   delay(250);
+    //   INDEXER.move(127);
+    //   delay(250);
+    //   INDEXER.move(-127);
 
-	    delay(350);
-      INDEXER.move(127);
-      delay(300);
-      INDEXER.move(-127);
+	  //   delay(350);
+    //   INDEXER.move(127);
+    //   delay(300);
+    //   INDEXER.move(-127);
 
-	    delay(300);
-	    INDEXER.move(127);
-      delay(350);
-      INDEXER.move(-40);
+	  //   delay(300);
+	  //   INDEXER.move(127);
+    //   delay(350);
+    //   INDEXER.move(-40);
 
-      delay(350);
-      INDEXER.move(0);
-		}
+    //   delay(350);
+    //   INDEXER.move(0);
+		// }
 
     //intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)) {
@@ -351,29 +370,61 @@ void opcontrol() {
 		}
 
 		//indexer
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)) { // using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
-			indexerToggle = !indexerToggle;
-			if (indexerToggle) {
-			INDEXER.move_relative(indexerPos,200);
-			}
-			if (indexerToggle==false) {
-			INDEXER.move_relative(-indexerPos,200);
-			}
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)) { // using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
+		// 	indexerToggle = !indexerToggle;
+		// 	if (indexerToggle) {
+		// 	INDEXER.move_relative(indexerPos,200);
+		// 	}
+		// 	if (indexerToggle==false) {
+		// 	INDEXER.move_relative(-indexerPos,200);
+		// 	}
+		// }
+		//CATA
+    // 	if (con.get_digital(E_CONTROLLER_DIGITAL_L1)) {
+    //     // catal = 1;
+		// 	CATA.move(127);
+		// }
+		// else if(con.get_digital(E_CONTROLLER_DIGITAL_L2)) {
+		// 	CATA.move(-127);
+		// }
+		// else {
+		// 	CATA.move(0);
+		// }
+
+        	if (((con.get_digital(E_CONTROLLER_DIGITAL_L1)) == true) || (catalim.get_value() == false)) {
+        // catal = 1;
+			CATA.move(-127);
 		}
-		
+    else{
+      CATA.move(0);
+    }
+
+    // if (catal = 1){
+    //   CATA.move(-127);
+    //   delay(400);
+    //   CATA.move(0);
+    //   // CATA.move_relative(-50, 200);
+    //   // delay(1000);
+   
+    //   catal = 0;
+    // }
+    // else {
+    //   CATA.move(0);
+    //   catal = 0;
+    // }
+
 		//flywheel
-		if (con.get_digital(E_CONTROLLER_DIGITAL_L2)) {
-			FLY.move(flywheel_voltage);
-			FLY1.move(flywheel_voltage);
-		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
-			FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
-			FLY1.move(127);
-		}
-		else {
-			FLY.move(0);
-			FLY1.move(0);
-		}
+		// if (con.get_digital(E_CONTROLLER_DIGITAL_L2)) {
+		// 	CATA.move(127);
+		// }
+		// else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
+		// 	FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
+		// 	FLY1.move(127);
+		// }
+		// else {
+		// 	FLY.move(0);
+		// 	FLY1.move(0);
+		// }
 		
 		//angler
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)) {
