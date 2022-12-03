@@ -63,8 +63,44 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
+
+int atn;
+string autstr;
+
 void competition_initialize() {
-    //add auton selector here
+    while(true){
+      if(selec.get_value() == true){
+        atn ++;
+        delay(350);
+      }
+    
+      if (atn == 1){
+        autstr = "Red Non-Roller";
+        con.print(0, 0, "Aut 1: %s", autstr);
+      }
+      else if(atn == 2){
+        autstr = "Blue Non-Roller";
+        con.print(0, 0, "Aut 2: %s", autstr);
+      }
+      else if(atn == 3){
+        autstr = "Red Roller";
+        con.print(0, 0, "Aut 3: %s", autstr);
+      }
+      else if(atn == 4){
+        autstr = "Blue Roller";
+        con.print(0, 0, "Aut 4: %s", autstr);
+      }
+      else if(atn == 5){
+        autstr = "AWP";
+        con.print(0, 0, "Aut 5: %s", autstr);
+      }
+      else if(atn == 6){
+        autstr = "Skills";
+        con.print(0, 0, "Aut 6: %s", autstr);
+      }
+      con.clear();
+      // con.print(0, 0, "Aut: %s", autstr);
+    }
 }
 
 /**
@@ -81,67 +117,21 @@ void competition_initialize() {
  * task, not resume it from where it left off.
  */
 
-// int max_flywheel_speed = 480;
-// int cycle = 0;
-// bool indexerToggle = false;
-// //int indexerstate = -1;
-// // int indexerprevstate = -1;
-// bool anglerToggle = false; 
-// bool expandToggle = false;
-// bool speedToggle = false;
-// bool deployExpansion = false;
-// int slowSpeed = 80;
-// int fastSpeed = 105;
-
-int atn = 3;
-string autstr;
-
-int max_flywheel_speed = 480;
-int flywheel_voltage = 105;
 int cycle = 0;
-bool indexerToggle = false;
-int indexerPos = 190;
 int wait = 900;
 int wait2 = 250;
-// int indexerstate = -1;
-//  int indexerprevstate = -1;
+
 bool anglerToggle = false;
-
-bool speedToggle = false;
-
 bool expandToggle = false;
 bool deployExpansion = false;
-int catal = 0;
-
-int slowSpeed = 84;
-int fastSpeed = 105;
 
 bool rollerOn = false;
-// void runcata() {
-//     while(catalim.get_value() == false){
-//          CATA.move(-127);
-//        }
-// }
 
 void opcontrol() {
-
-  // pros::Task rcata(runcata);
   int time = 0;
 
 	while (true) {
-      // pros::Task rcata(runcata);
-
-// void rucata() {
-//        while(catalim.get_value() == false){
-//         CATA.move(-127);
-//       }
-// }
-		// indexerDeltaPos = indexerTarget - INDEXER.get_position();
-		// indexerDir = int(std::abs(indexerDeltaPos)/indexerDeltaPos);
-		// indexerScaledDeltaPos = indexerDeltaPos/1.1;
-
-    //displaying flywheel velocity and chassis motor temperatures
-		// int CATATEMP = (CATA.get_temperature());
+    //printing stuff
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		double chasstempF = chasstempC *(9/5) + 32;
 		
@@ -149,9 +139,7 @@ void opcontrol() {
 		
     else if (time % 50 == 0) {
 			cycle++;
-			// if (cycle % 3 == 0) con.print(0, 0, "RPM: %d", flywheelVelocity);
       // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
-		  if ((cycle+1) % 3 == 0) con.print(1, 0, "FV: %d", flywheel_voltage);
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
     
@@ -165,19 +153,19 @@ void opcontrol() {
 		int right = power - turn;
 
     // LF.move(left);
-		// LB.move(left);
     // LM.move(left);
-		// RM.move(right);
+		// LB.move(left);
 		// RF.move(right);
+		// RM.move(right);
 		// RB.move(right);
 
 		// chassis tank drive 
 		LF.move(con.get_analog(ANALOG_LEFT_Y));
+		LM.move(con.get_analog(ANALOG_LEFT_Y));
 		LB.move(con.get_analog(ANALOG_LEFT_Y));
 		RF.move(con.get_analog(ANALOG_RIGHT_Y));
-		RB.move(con.get_analog(ANALOG_RIGHT_Y));
     RM.move(con.get_analog(ANALOG_RIGHT_Y));
-		LM.move(con.get_analog(ANALOG_LEFT_Y));
+		RB.move(con.get_analog(ANALOG_RIGHT_Y));
 
 
     //auton selector
@@ -204,270 +192,47 @@ void opcontrol() {
     else if(atn == 6){
       autstr = "Skills";
     }
-      //  if (catalim.get_value() == false){
-      //   CATA.move(-127);
-      //  }
-    //aim assist
-    // if (con.get_digital(E_CONTROLLER_DIGITAL_RIGHT)){ // brian was here
-    //   // FLY.move_velocity(450);
-    //   // FLY1.move_velocity(450);
-    //   if(atn == 1){
-    //     driveAim(215); //125
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127); 
-
-    //     // FLY.move(105);
-    //     // FLY1.move(105);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(120);
-    //     INDEXER.move(-35);
-    //     delay(100);
-    //     INDEXER.move(0);
-    //   }
-    //   else if(atn == 2){
-    //     driveAim(-145); //125
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127); 
-
-    //     // FLY.move(105);
-    //     // FLY1.move(105);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(100);
-    //     INDEXER.move(-35);
-    //     delay(100);
-    //     INDEXER.move(0);
-    //   }
-    //   else if(atn == 3){
-    //     driveAim(-10); //125
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127); 
-
-    //     // FLY.move(105);
-    //     // FLY1.move(105);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(100);
-    //     INDEXER.move(-35);
-    //     delay(100);
-    //     INDEXER.move(0);
-
-    //   }
-    //   else if(atn == 4){
-    //     driveAim(215); //125
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127); 
-
-    //     // FLY.move(105);
-    //     // FLY1.move(105);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(250);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(500);
-    //     INDEXER.move(127);
-    //     delay(300);
-    //     INDEXER.move(-127);
-
-    //     delay(100);
-    //     INDEXER.move(-35);
-    //     delay(100);
-    //     INDEXER.move(0);
-    //   }
-    // }
-
-    // //three-shot
-		// if (con.get_digital(E_CONTROLLER_DIGITAL_UP)) {
-		//   INDEXER.move(127);
-    //   delay(250);
-    //   INDEXER.move(-127);
-
-	  //   FLY.move(90); 
-    //   FLY1.move(90);
-
-    //   delay(250);
-    //   INDEXER.move(127);
-    //   delay(250);
-    //   INDEXER.move(-127);
-
-	  //   delay(350);
-    //   INDEXER.move(127);
-    //   delay(300);
-    //   INDEXER.move(-127);
-
-	  //   delay(300);
-	  //   INDEXER.move(127);
-    //   delay(350);
-    //   INDEXER.move(-40);
-
-    //   delay(350);
-    //   INDEXER.move(0);
-		// }
 
     //intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)) {
 			INTAKE.move(127);
 		}
-		else if(con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
+		else if (con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
 			INTAKE.move(-127);
 		}
 		else {
 			INTAKE.move(0);
 		}
 
-		//indexer
-		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L1)) { // using prev state to determine next direction with current state turning motor either direction + off to reduce burnout
-		// 	indexerToggle = !indexerToggle;
-		// 	if (indexerToggle) {
-		// 	INDEXER.move_relative(indexerPos,200);
-		// 	}
-		// 	if (indexerToggle==false) {
-		// 	INDEXER.move_relative(-indexerPos,200);
-		// 	}
-		// }
-		//CATA
-    // 	if (con.get_digital(E_CONTROLLER_DIGITAL_L1)) {
-    //     // catal = 1;
-		// 	CATA.move(127);
-		// }
-		// else if(con.get_digital(E_CONTROLLER_DIGITAL_L2)) {
-		// 	CATA.move(-127);
-		// }
-		// else {
-		// 	CATA.move(0);
-		// }
-
-        	if (((con.get_digital(E_CONTROLLER_DIGITAL_L1)) == true) || (catalim.get_value() == false)) {
-        // catal = 1;
+    //cata
+    if ((con.get_digital(E_CONTROLLER_DIGITAL_L1) == true) || (catalim.get_value() == false)) {
 			CATA.move(-127);
 		}
-    else{
+    else {
       CATA.move(0);
     }
-
-    // if (catal = 1){
-    //   CATA.move(-127);
-    //   delay(400);
-    //   CATA.move(0);
-    //   // CATA.move_relative(-50, 200);
-    //   // delay(1000);
-   
-    //   catal = 0;
-    // }
-    // else {
-    //   CATA.move(0);
-    //   catal = 0;
-    // }
-
-		//flywheel
-		// if (con.get_digital(E_CONTROLLER_DIGITAL_L2)) {
-		// 	CATA.move(127);
-		// }
-		// else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
-		// 	FLY.move(127); //good flywheel voltage for loader: 460-480 RPM
-		// 	FLY1.move(127);
-		// }
-		// else {
-		// 	FLY.move(0);
-		// 	FLY1.move(0);
-		// }
 		
-		//angler
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)) {
-			if (anglerToggle == false) {
-				angler.set_value(false);
-				anglerToggle = true;
-			}
-      else {
-				angler.set_value(true);
-				anglerToggle = false;
-			}
-		}
+		//angler (might use for v2)
+		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)) {
+		// 	if (anglerToggle == false) {
+		// 		angler.set_value(false);
+		// 		anglerToggle = true;
+		// 	}
+    //   else {
+		// 		angler.set_value(true);
+		// 		anglerToggle = false;
+		// 	}
+		// }
 
     //expansion
     if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
 			expand.set_value(true);
 		}
 
-		//flywheel speed changer
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_A)) {
-			con.rumble(".");
-			speedToggle = !speedToggle;
-			speedToggle == true ? flywheel_voltage = slowSpeed : flywheel_voltage = fastSpeed;
-		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_B)) {
-			speedToggle == true ? slowSpeed-- : fastSpeed--;
-			speedToggle == true ? flywheel_voltage = slowSpeed : flywheel_voltage = fastSpeed;
-		}
-		else if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_X)) {
-			speedToggle == true ? slowSpeed++ : fastSpeed++;
-			speedToggle == true ? flywheel_voltage = slowSpeed : flywheel_voltage = fastSpeed;
-		}
-
     //reset all motor encoders
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
 			resetEncoders();
 		}
-		// if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-		// 	deployExpansion = true;
-		// }
-		// if (deployExpansion == true) {
-		// 	expand.set_value(false);
-		// }
 
 		time += 10;
 		pros::delay(10);

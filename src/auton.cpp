@@ -22,8 +22,8 @@ void autonomous() {
     //AUTON 2: BLUE NON-ROLLER
     //AUTON 3: RED ROLLER
     //AUTON 4: BLUE ROLLER
-//     //AUTON 5: SKILL (unused)
-//     //AUTON 6: SKILLS
+    //AUTON 5: FULL AWP
+    //AUTON 6: SKILLS
 
 // //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 
@@ -428,99 +428,11 @@ void autonomous() {
 
 // //55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
 
-//   //UNUSED SKILL
-//   else if(atn == 5){
-//     //set flywheel voltage
-//     FLY.move(100);
-//     FLY1.move(100);
+//   else if (atn == 5) {
 
-//     //intake discs
-//     INTAKE.move(127);
-//     driveStraight(1000);
-//     driveTurn(48);
-
-//     //shoot disc 1
-//     INDEXER.move(127);
-//     delay(250);
-//     INDEXER.move(-127);
-
-//     //speed up flywheel from 100
-//     FLY.move(114);
-//     FLY1.move(114);
-
-//     //shoot disc 2
-//     delay(500);
-//     INDEXER.move(127);
-//     delay(250);
-//     INDEXER.move(-127);
-
-//     //shoot disc 3
-//     delay(750);
-//     INDEXER.move(127);
-//     delay(250);
-//     INDEXER.move(-127);
-
-//     //shoot disc 4
-//     delay(750);
-//     INDEXER.move(127);
-//     delay(250);
-//     INDEXER.move(0);
-
-//     //turn towards roller
-//     driveTurn(78);
-//     driveStraight(1950);
-//     driveTurn(56);
-//     INTAKE.move(0);
-
-//     //move intricately towards roller for proper contact
-//     delay(1000);
-//     LF.move(100);
-//     LB.move(100);
-//     RF.move(100);
-//     RB.move(100);
-//     delay(800);
-
-//     //move forward even more intricately for proper contact
-//     LF.move(5);
-//     LB.move(5);
-//     RF.move(5);
-//     RB.move(5);
-//     delay(500);
-//     LF.move(2);
-//     LB.move(2);
-//     RF.move(2);
-//     RB.move(2);
-
-//     //spin roller
-//     while(true){
-//       while (optical.get_hue() > 200) {
-//       INTAKE.move(-90);
-//       con.print(0, 0, "Going");
-//       }
-
-//       if (optical.get_hue() < 20) {
-//         INTAKE.move(70);
-//         delay(250);
-//         INTAKE.move(0);
-//         con.print(0, 2, "Done");
-//         break;
-//       }
-//     }
-
-//     //back and turn away from roller, face corner disc
-//     driveStraight(-100);
-//     driveTurn(-90);
-
-//     //intake disc
-//     INTAKE.move(127);
-//     driveStraight(100);
-//     delay(1000);
-
-//     //turn around to intake more discs
-//     driveTurn(-45);
 //   }
 
-// //6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+// //666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
 
 //   //SKILLS
 //   else if(atn == 6){
@@ -756,74 +668,3 @@ void autonomous() {
 //     driveStraight(-70);
 //   }
 }
-
-
-// //Red attmpt full op too slow
-//   // bool Global = false;
-//     // FLY.move(102);
-//     // FLY1.move(102);
-
-// 	  // FLY.move_velocity(480);
-//     // FLY1.move_velocity(480);
-		
-//     // // move forward to contact roller
-//     // LF.move(40);
-//     // LB.move(40);
-//     // RF.move(40);
-//     // RB.move(40);
-//     // delay(180);
-
-//     // // move forward more??
-//     // LF.move(10);
-//     // LB.move(10);
-//     // RF.move(10);
-//     // RB.move(10);
-
-//     // while (optical.get_hue() < 20) {
-//     //   INTAKE.move(90);
-//     // }
-
-//     // if (optical.get_hue() > 200) {
-//     //   INTAKE.move(0);
-//     // }
-
-
-//     // driveStraight(-390); //prev -390
-//     // driveTurn(-125);
-//     // INTAKE.move(127);
-
-//     // driveStraight(3200);
-//     // driveTurn(-70);
-
-//     // driveStraight(750);
-//     // driveTurn(-110);
-
-//     // driveStraight(-700);
-
-//     // INDEXER.move(127);
-//     // delay(250);
-//     // INDEXER.move(-127);
-//     // delay(600);
-
-//     // INDEXER.move(127);
-
-//     // FLY.move(108);
-//     // FLY1.move(108);
-
-//     // delay(250);
-//     // INDEXER.move(-127);
-//     // delay(600);
-//     // INDEXER.move(127);
-
-//     // delay(250);
-//     // INDEXER.move(-127);
-//     // delay(600);
-//     // INDEXER.move(127);
-
-//     // delay(250);
-//     // INDEXER.move(0);
-
-//     // delay(400);
-
-//     // driveTurn(56);
-//     // driveStraight(3300);

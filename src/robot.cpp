@@ -10,8 +10,8 @@
 #define OPTICAL_PORT 4
 #define IMU_PORT 6
 #define LF_PORT 1
-#define LB_PORT 8
 #define LM_PORT 9
+#define LB_PORT 8
 #define RF_PORT 10
 #define RM_PORT 11
 #define RB_PORT 12
@@ -21,11 +21,11 @@
 
 
 pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor LM (LM_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor RF (RF_PORT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RM (RM_PORT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor LM (LM_PORT, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
 
 //intake
 pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);
@@ -33,20 +33,16 @@ pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);
 //flywheel
 pros::Motor CATA (CATA_PORT, pros::E_MOTOR_GEARSET_06);
 
-
-//indexer
-pros::Motor INDEXER (INDEXER_PORT, pros::E_MOTOR_GEARSET_18, true);
-
 //angler
-pros::ADIDigitalOut angler ('B', true);
+// pros::ADIDigitalOut angler ('B', true);
+
+//cata limit switch
 pros::ADIDigitalIn catalim ('H');
 
-
 //expansion
-// pros::ext_adi_port_pair_t expand (2, 'A');
-// pros::ADIDigitalOut expand ('A', false);
-
 pros::ADIDigitalOut expand ({{3, 8}});
+
+//auton selector
 pros::ADIDigitalIn selec ({{3, 7}});
 
 //sensors
