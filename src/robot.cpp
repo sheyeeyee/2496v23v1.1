@@ -20,7 +20,7 @@
 #define INTAKE_PORT 18
 
 
-pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor LF (LF_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor LM (LM_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor RF (RF_PORT, pros::E_MOTOR_GEARSET_06, false);

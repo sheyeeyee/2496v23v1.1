@@ -129,6 +129,8 @@ bool rollerOn = false;
 
 void opcontrol() {
   int time = 0;
+  bool arcToggle = false;
+  bool tankToggle = true;
 
 	while (true) {
     //printing stuff
@@ -142,7 +144,6 @@ void opcontrol() {
       // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
-    
 
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
@@ -152,20 +153,26 @@ void opcontrol() {
 		int left = power + turn;
 		int right = power - turn;
 
-    // LF.move(left);
-    // LM.move(left);
-		// LB.move(left);
-		// RF.move(right);
-		// RM.move(right);
-		// RB.move(right);
-
-		// chassis tank drive 
-		LF.move(con.get_analog(ANALOG_LEFT_Y));
-		LM.move(con.get_analog(ANALOG_LEFT_Y));
-		LB.move(con.get_analog(ANALOG_LEFT_Y));
-		RF.move(con.get_analog(ANALOG_RIGHT_Y));
-    RM.move(con.get_analog(ANALOG_RIGHT_Y));
-		RB.move(con.get_analog(ANALOG_RIGHT_Y));
+    if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+      arcToggle = !arcToggle;
+      tankToggle = !tankToggle;
+    }
+    if (tankToggle) {
+      LF.move(con.get_analog(ANALOG_LEFT_Y));
+      LM.move(con.get_analog(ANALOG_LEFT_Y));
+      LB.move(con.get_analog(ANALOG_LEFT_Y));
+      RF.move(con.get_analog(ANALOG_RIGHT_Y));
+      RM.move(con.get_analog(ANALOG_RIGHT_Y));
+      RB.move(con.get_analog(ANALOG_RIGHT_Y));
+    }
+    if (arcToggle) {
+      LF.move(left);
+      LM.move(left);
+      LB.move(left);
+      RF.move(right);
+      RM.move(right);
+      RB.move(right);
+    }
 
 
     //auton selector
