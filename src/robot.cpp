@@ -8,7 +8,7 @@
 
 #define INDEXER_PORT 1
 #define OPTICAL_PORT 4
-#define IMU_PORT 6
+#define IMU_PORT 2
 #define LF_PORT 1
 #define LM_PORT 9
 #define LB_PORT 8
@@ -34,13 +34,14 @@ pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor CATA (CATA_PORT, pros::E_MOTOR_GEARSET_06);
 
 //angler
-// pros::ADIDigitalOut angler ('B', true);
+pros::ADIDigitalOut angler ('B', false);
 
 //cata limit switch
 pros::ADIDigitalIn catalim ('H');
 
 //expansion
-pros::ADIDigitalOut expand ({{3, 8}});
+// pros::ADIDigitalOut expand ({{3, 8}});
+pros::ADIDigitalOut expand ('G');
 
 //auton selector
 pros::ADIDigitalIn selec ({{3, 7}});

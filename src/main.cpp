@@ -142,6 +142,7 @@ void opcontrol() {
     else if (time % 50 == 0) {
 			cycle++;
       // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
+      if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error ); //autstr //%s
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
 
@@ -218,18 +219,21 @@ void opcontrol() {
     else {
       CATA.move(0);
     }
-		
-		//angler (might use for v2)
-		// if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_Y)) {
-		// 	if (anglerToggle == false) {
-		// 		angler.set_value(false);
-		// 		anglerToggle = true;
-		// 	}
-    //   else {
-		// 		angler.set_value(true);
-		// 		anglerToggle = false;
-		// 	}
-		// }
+    //pid helper
+		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
+			driveTurn(90);
+		}
+		// angler (might use for v2)
+		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {
+			if (anglerToggle == false) {
+				angler.set_value(false);
+				anglerToggle = true;
+			}
+      else {
+				angler.set_value(true);
+				anglerToggle = false;
+			}
+		}
 
     //expansion
     if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {

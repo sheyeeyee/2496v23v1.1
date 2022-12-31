@@ -15,21 +15,22 @@ extern void resetEncoders();
 extern void driveStraight(int target);
 extern void driveTurn(int target);
 extern void driveAim(int target);
+extern float error;
 
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-#define STRAIGHT_KP 19 //19 //14//5.75 //7 //9.2 // 10.01 //10 works for 2000
-#define STRAIGHT_KI 0.75 //0.5 //0.6 //0.65 //0.126//0.085 works for 2000 // 0.145 for 1000
-#define STRAIGHT_KD 0
+#define STRAIGHT_KP 9.5 //80 9.5 77 15 // 1519 70 71 70
+#define STRAIGHT_KI 0.2 //0.2 0.2 0.25 0.4 // 0.8 0.5 0.5 0.9
+#define STRAIGHT_KD 0 //1488 25 50 57
 
 //tune straight integral-specific here: voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
 #define STRAIGHT_INTEGRAL_KI 430
 #define STRAIGHT_MAX_INTEGRAL 2000
 
 
-//tune turn constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);
-#define TURN_KP 1
-#define TURN_KI 0.5
+//tune turnt constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);
+#define TURN_KP 0.0
+#define TURN_KI 0.00
 #define TURN_KD 0
 
 //tune turn integral-specific here: voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);

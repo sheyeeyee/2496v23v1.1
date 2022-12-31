@@ -21,6 +21,7 @@ float error; //amount from target
 float prevError; //how is this specified/calculated??
 
 int integral;
+int derivative;
 
 float power; //voltage provided to motors at any given time to reach the target
 
@@ -36,14 +37,18 @@ void resetEncoders() { //reset the chassis motors every time a target is reached
     LB.tare_position();
 	RF.tare_position();
 	RB.tare_position();
+    RM.tare_position();
+	LM.tare_position();
 }
 
 //setting method for driving straight or turning (pos neg voltages change directions)
-void chasMove(int voltageLF, int voltageLB, int voltageRF, int voltageRB) { //voltage to each chassis motor
+void chasMove(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int voltageRB, int voltageRM) { //voltage to each chassis motor
     LF.move_voltage(voltageLF);
     LB.move_voltage(voltageLB);
     RF.move_voltage(voltageRF);
     RB.move_voltage(voltageRB);
+    LM.move_voltage(voltageLB);
+    RM.move_voltage(voltageRF);
 }
 
 float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
@@ -64,9 +69,9 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
         integral = std::max(integral, -maxIntegral); //same thing but negative max
     }
     
-    // derivative = error - prevError 
+    derivative = error - prevError;
 
-    power = (vKp * error) + (vKi * integral); //+ (vKd * derivative);
+    power = (vKp * error) + (vKi * integral) - (vKd * derivative); //+ (vKd * derivative);
 
     // con.print(0, 0, "%2f", (integral * 0.035));
 
@@ -108,10 +113,9 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 1500;
+        heading_error = heading_error * 0;
 
-        chasMove((voltage + heading_error), (voltage + heading_error), (voltage - heading_error), (voltage - heading_error));
-        
+        chasMove( (voltage + heading_error), (voltage + heading_error), (voltage + heading_error), (voltage - heading_error), (voltage - heading_error), (voltage - heading_error));
         if (abs(target - encoderAvg) <= 15) count++;
         if (count >= 20) break;
 
@@ -120,15 +124,23 @@ void driveStraight(int target) {
         // con.print(1, 0, "%2f", encoderAvg);
     }
     // chasMove(0, 0, 0, 0);
-    motor_brake (7);
+    motor_brake (1);
     motor_brake (8);
     motor_brake (9);
     motor_brake (10);
+    motor_brake (11);
+    motor_brake (12);
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
+    setConstants(300, 160, 80);
+    //over // 200 150 0
+    //under 82 190 0
+    //kd profile one// 200 190 100
+    //kd profile two// 200 190 130
+    //kd profile three // 1000 190 939
     // cout << target << endl;
+
   
     float voltage;
     float position;
@@ -144,7 +156,7 @@ void driveTurn(int target) { //target is inputted in autons
         voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
         // con.print(1, 0, "%2f", voltage);
         
-        chasMove(voltage, voltage, -voltage, -voltage);
+        chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
         if (abs(target - position) <= 1) count++; 
         if (count >= 50) 
@@ -158,7 +170,7 @@ void driveTurn(int target) { //target is inputted in autons
         // con.print(0, 0, "%2f", target);
     }
 
-    chasMove(0, 0, 0, 0);
+    chasMove(0, 0, 0, 0, 0, 0);
 }
 
 
@@ -180,7 +192,7 @@ void driveAim(int target) { //target is inputted in autons
         voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
         // con.print(1, 0, "%2f", voltage);
         
-        chasMove(voltage, voltage, -voltage, -voltage);
+        chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
         if (abs(target - position) <= 1) count++; 
         if (count >= 50) 
@@ -193,5 +205,5 @@ void driveAim(int target) { //target is inputted in autons
         // con.print(0, 0, "%2f", target);
     }
 
-    chasMove(0, 0, 0, 0);
+    chasMove(0, 0, 0, 0, 0, 0);
 }
