@@ -113,7 +113,7 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 0;
+        heading_error = heading_error * 100;
 
         chasMove( (voltage + heading_error), (voltage + heading_error), (voltage + heading_error), (voltage - heading_error), (voltage - heading_error), (voltage - heading_error));
         if (abs(target - encoderAvg) <= 15) count++;
@@ -133,12 +133,16 @@ void driveStraight(int target) {
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(300, 160, 80);
+    setConstants(200, 150, 30);
     //over // 200 150 0
     //under 82 190 0
     //kd profile one// 200 190 100
     //kd profile two// 200 190 130
     //kd profile three // 1000 190 939
+    // 300 160 80
+    //600 160 540
+    //1000 110 925
+    //1000 120 939
     // cout << target << endl;
 
   

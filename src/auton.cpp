@@ -16,6 +16,67 @@
  * from where it left off.
  */
 void autonomous() {
+  INTAKE.move(127);
+  delay(300);
+  int i = 0;
+  while (i <= 2){
+    delay (1500);
+    CATA.move(-127);
+    delay(190);
+    while(catalim.get_value() == false){
+      	CATA.move(-127);
+    }
+    CATA.move(0);
+    i++;
+  }
+  CATA.move(0);
+  driveStraight(-600);
+  driveTurn(35);
+  angler.set_value(true);
+  driveStraight(1670);
+  angler.set_value(false);
+  delay(600);
+  driveTurn(-24);
+  driveStraight(1100);
+  INTAKE.move(0);
+      LF.move(60);
+      LM.move(60);
+      LB.move(60);
+      RF.move(60);
+      RM.move(60);
+      RB.move(60);
+      delay(450);
+
+      LF.move(10);
+      LM.move(10);
+      LB.move(10);
+      RF.move(10);
+      RM.move(10);
+      RB.move(10);
+        INTAKE.move_relative(1100, 600);
+        delay(800);
+      driveStraight(-820);
+      driveTurn(-85);
+      driveStraight(600);
+      INTAKE.move(0);
+      LF.move(60);
+      LM.move(60);
+      LB.move(60);
+      RF.move(60);
+      RM.move(60);
+      RB.move(60);
+      delay(450);
+  
+      LF.move(10);
+      LM.move(10);
+      LB.move(10);
+      RF.move(10);
+      RM.move(10);
+      RB.move(10);
+      INTAKE.move_relative(1100, 600);
+      delay(800);
+       driveStraight(-700);
+
 
   //INDEX
     //AUTON 1: RED NON-ROLLER
