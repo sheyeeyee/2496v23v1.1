@@ -154,7 +154,7 @@ void opcontrol() {
 		int left = power + turn;
 		int right = power - turn;
 
-    if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+    if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
       arcToggle = !arcToggle;
       tankToggle = !tankToggle;
     }
@@ -221,8 +221,8 @@ void opcontrol() {
     }
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      // driveStraight(1000);
-			driveTurn(90);
+      driveStraight(1000);
+			// driveTurn(90);
 		}
 		// angler (might use for v2)
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {

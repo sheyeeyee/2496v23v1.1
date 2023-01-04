@@ -22,7 +22,7 @@ void autonomous() {
   while (i <= 2){
     delay (1500);
     CATA.move(-127);
-    delay(190);
+    delay(400);
     while(catalim.get_value() == false){
       	CATA.move(-127);
     }
@@ -31,9 +31,9 @@ void autonomous() {
   }
   CATA.move(0);
   driveStraight(-600);
-  driveTurn(35);
+  driveTurn(36);
   angler.set_value(true);
-  driveStraight(1670);
+  driveStraight(1690); //1670
   angler.set_value(false);
   delay(600);
   driveTurn(-24);
@@ -75,7 +75,30 @@ void autonomous() {
       RB.move(10);
       INTAKE.move_relative(1100, 600);
       delay(800);
-       driveStraight(-700);
+      
+      driveStraight(-1250);
+      driveTurn(46);
+      driveStraight(-4200);
+      driveStraight(400);
+      driveTurn(-115);
+      INTAKE.move(127);
+      driveStraight(-1450);
+      driveTurn(-35);
+      driveStraight(250);
+  // delay(300);
+  i = 0;
+  while (i <= 2){
+    delay (1500);
+    CATA.move(-127);
+    delay(190);
+    while(catalim.get_value() == false){
+      	CATA.move(-127);
+    }
+    CATA.move(0);
+    i++;
+  }
+
+
 
 
   //INDEX

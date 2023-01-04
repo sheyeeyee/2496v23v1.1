@@ -19,9 +19,9 @@ extern float error;
 
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-#define STRAIGHT_KP 9.5 //80 9.5 77 15 // 1519 70 71 70
-#define STRAIGHT_KI 0.2 //0.2 0.2 0.25 0.4 // 0.8 0.5 0.5 0.9
-#define STRAIGHT_KD 0 //1488 25 50 57
+#define STRAIGHT_KP 17 //80 9.5 77 15 // 1519 70 71 70
+#define STRAIGHT_KI 0.6 //0.2 0.2 0.25 0.4 // 0.8 0.5 0.5 0.9
+#define STRAIGHT_KD 8 //1488 25 50 57
 
 //tune straight integral-specific here: voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
 #define STRAIGHT_INTEGRAL_KI 430

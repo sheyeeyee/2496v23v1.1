@@ -19,6 +19,7 @@ float vKi;
 float vKd;
 float error; //amount from target
 float prevError; //how is this specified/calculated??
+float h;
 
 int integral;
 int derivative;
@@ -113,9 +114,15 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 100;
+        heading_error = heading_error * 300;
+        h = 1/error;
+        if (h > 100){
+           h = 30;
+        }
 
-        chasMove( (voltage + heading_error), (voltage + heading_error), (voltage + heading_error), (voltage - heading_error), (voltage - heading_error), (voltage - heading_error));
+        h = h * -20000;
+
+        chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 15) count++;
         if (count >= 20) break;
 
@@ -133,7 +140,7 @@ void driveStraight(int target) {
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(200, 150, 30);
+    setConstants(200, 160, 30);
     //over // 200 150 0
     //under 82 190 0
     //kd profile one// 200 190 100
