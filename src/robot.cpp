@@ -33,7 +33,7 @@ pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);
 //flywheel
 pros::Motor CATA (CATA_PORT, pros::E_MOTOR_GEARSET_06);
 
-//angler
+//angler for intake
 pros::ADIDigitalOut angler ('B', false);
 
 //cata limit switch

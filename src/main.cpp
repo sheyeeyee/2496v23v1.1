@@ -219,12 +219,14 @@ void opcontrol() {
     else {
       CATA.move(0);
     }
+    
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       driveStraight(1000);
 			// driveTurn(90);
 		}
-		// angler (might use for v2)
+		
+    // angler
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {
 			if (anglerToggle == false) {
 				angler.set_value(false);
@@ -237,7 +239,7 @@ void opcontrol() {
 		}
 
     //expansion
-    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT) && con.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			expand.set_value(true);
 		}
 

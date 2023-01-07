@@ -18,3 +18,4 @@ temp.errors
 .cache/clangd/index/main.cpp.C6F6F4D87D2F8D2E.idx
 *.idx
 *.idx
+*.idx
