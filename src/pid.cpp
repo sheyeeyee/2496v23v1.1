@@ -45,11 +45,11 @@ void resetEncoders() { //reset the chassis motors every time a target is reached
 //setting method for driving straight or turning (pos neg voltages change directions)
 void chasMove(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int voltageRB, int voltageRM) { //voltage to each chassis motor
     LF.move_voltage(voltageLF);
+    LM.move_voltage(voltageLB);
     LB.move_voltage(voltageLB);
     RF.move_voltage(voltageRF);
-    RB.move_voltage(voltageRB);
-    LM.move_voltage(voltageLB);
     RM.move_voltage(voltageRF);
+    RB.move_voltage(voltageRB);
 }
 
 float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
@@ -98,24 +98,25 @@ void driveStraight(int target) {
     
 
     while(true) {
-        if (target < 1000){ 
+        if (target < 1000) { 
              
         }
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
-        if(init_heading > 180){
+        
+        if(init_heading > 180) {
             init_heading = (360 - init_heading);
         }
 
-        if(imu.get_heading() < 180){
+        if(imu.get_heading() < 180) {
             heading_error = init_heading - imu.get_heading();
         }
-        else{
+        else {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
         heading_error = heading_error * 300;
-        h = 1/error;
+        h = 1 / error;
         if (h > 100){
            h = 30;
         }
@@ -152,15 +153,13 @@ void driveTurn(int target) { //target is inputted in autons
     //1000 120 939
     // cout << target << endl;
 
-  
     float voltage;
     float position;
     int count = 0;
     
     while(true) {
-
         position = imu.get_heading(); //this is where the units are set to be degrees
-          if(position > 180){
+        if(position > 180) {
             position = ((360 - position) * -1);
         }
 
@@ -170,11 +169,9 @@ void driveTurn(int target) { //target is inputted in autons
         chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
         if (abs(target - position) <= 1) count++; 
-        if (count >= 50) 
-        {
-                            imu.tare_heading();
+        if (count >= 50) {
+            imu.tare_heading();
             break;
-
         }
         con.print(0, 0, "%2f", target-position);
         delay(10);
