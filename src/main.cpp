@@ -142,7 +142,7 @@ void opcontrol() {
     else if (time % 50 == 0) {
 			cycle++;
       // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
-      if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error ); //autstr //%s
+      if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); //autstr //%s
 		  if ((cycle+2) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
 

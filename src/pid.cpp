@@ -53,6 +53,7 @@ void chasMove(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int vo
 }
 
 float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
+    prevError = error;
     error = target - input;
     
     if(std::abs(error) < integralKi) {
@@ -115,16 +116,16 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 300;
+        heading_error = heading_error * 0;//300
         h = 1 / error;
         if (h > 100){
            h = 30;
         }
 
-        h = h * -20000;
+        h = h * 0; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
-        if (abs(target - encoderAvg) <= 15) count++;
+        if (abs(target - encoderAvg) <= 5) count++;
         if (count >= 20) break;
 
         delay(10);
@@ -141,7 +142,7 @@ void driveStraight(int target) {
 }
 
 void driveTurn(int target) { //target is inputted in autons
-    setConstants(200, 160, 30);
+    setConstants(TURN_KP, TURN_KI, TURN_KD);
     //over // 200 150 0
     //under 82 190 0
     //kd profile one// 200 190 100
