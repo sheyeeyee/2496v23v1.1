@@ -18,6 +18,8 @@ float vKp;
 float vKi;
 float vKd;
 float error; //amount from target
+float viewvol;
+
 float prevError; //how is this specified/calculated??
 float h;
 
@@ -71,7 +73,7 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
         integral = std::max(integral, -maxIntegral); //same thing but negative max
     }
     
-    derivative = error - prevError;
+    derivative = std::abs(error - prevError);
 
     power = (vKp * error) + (vKi * integral) - (vKd * derivative); //+ (vKd * derivative);
 
@@ -104,7 +106,7 @@ void driveStraight(int target) {
         }
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
-        
+        viewvol = voltage;
         if(init_heading > 180) {
             init_heading = (360 - init_heading);
         }
@@ -116,20 +118,21 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 0;//300
+        heading_error = heading_error * 300;//300
         h = 1 / error;
         if (h > 100){
            h = 30;
         }
 
-        h = h * 0; ////-20000
+        h = h * -10000; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
         if (count >= 20) break;
 
         delay(10);
-        con.print(0, 0, "%2f", encoderAvg);
+        con.print(0, 0, "%2f", encoderAvg); //encoderAvg
+        con.print(2, 0, "%2f", voltage);
         // con.print(1, 0, "%2f", encoderAvg);
     }
     // chasMove(0, 0, 0, 0);
