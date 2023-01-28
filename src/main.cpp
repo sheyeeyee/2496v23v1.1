@@ -143,8 +143,8 @@ void opcontrol() {
 			cycle++;
       // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
       if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); 
-      if ((cycle+2) % 3 == 0) con.print(2, 0, "Volatge: %f", viewvol); //autstr //%s
-		  if ((cycle+3) % 3 == 0) con.print(3, 0, "Temp: %f", chasstempC);
+      if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %f", viewvol); //autstr //%s
+		  if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
 
 		//chassis arcade drive
@@ -223,7 +223,7 @@ void opcontrol() {
     
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      driveStraight(1000);
+      driveTurn(83);
 			// driveTurn(90);
 		}
 		

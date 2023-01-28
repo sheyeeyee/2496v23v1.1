@@ -437,22 +437,22 @@ void autonomous() {
 //   else if(atn == 6){
     //run intake to ensure discs fall into the right place
       INTAKE.move(127);
-      delay(300);
+      // delay(300);
       
-      //shoot three cycles
+      // //shoot three cycles
       int i = 0;
-      while (i <= 2) {
-        delay (1500);
-        CATA.move(-127);
-        delay(400);
+      // while (i <= 2) {
+      //   delay (1500);
+      //   CATA.move(-127);
+      //   delay(400);
         
-        while(catalim.get_value() == false) {
-            CATA.move(-127);
-        }
-        CATA.move(0);
-        i++;
-      }
-      CATA.move(0);
+      //   while(catalim.get_value() == false) {
+      //       CATA.move(-127);
+      //   }
+      //   CATA.move(0);
+      //   i++;
+      // }
+      // CATA.move(0);
 
       //reposition by going backwards for enough space to turn towards next spot
       driveStraight(-600);
@@ -460,7 +460,7 @@ void autonomous() {
 
       //intake up for 3-stack
       angler.set_value(true);
-      driveStraight(1690); //1670
+      driveStraight(1750); //1670
       angler.set_value(false);
       delay(600);
 

@@ -92,6 +92,8 @@ void driveStraight(int target) {
     int count = 0;
     double init_heading = imu.get_heading();
     double heading_error = 0;
+    int cycle = 0; // Controller Display Cycle
+    int time = 0;
     
     con.clear();
     // double error_range_time = 0;
@@ -124,16 +126,25 @@ void driveStraight(int target) {
            h = 30;
         }
 
-        h = h * -10000; ////-20000
+        h = h * 0000; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
         if (count >= 20) break;
 
         delay(10);
-        con.print(0, 0, "%2f", encoderAvg); //encoderAvg
-        con.print(2, 0, "%2f", voltage);
-        // con.print(1, 0, "%2f", encoderAvg);
+        
+        // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
+        // con.print(2, 0, "%2f", voltage);
+
+        if (time % 100 == 0) con.clear();
+		else if (time % 50 == 0) {
+			cycle++;
+            if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
+            if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
+            // if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		}
+        time += 10;
     }
     // chasMove(0, 0, 0, 0);
     motor_brake (1);
