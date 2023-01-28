@@ -43,6 +43,9 @@ pros::ADIDigitalIn catalim ('H');
 // pros::ADIDigitalOut expand ({{3, 8}});
 pros::ADIDigitalOut expand ('G');
 
+// extender
+pros::ADIDigitalOut extender ('F');
+
 //auton selector
 pros::ADIDigitalIn selec ({{3, 7}});
 
