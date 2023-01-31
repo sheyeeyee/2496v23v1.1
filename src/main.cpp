@@ -125,6 +125,8 @@ bool anglerToggle = false;
 bool expandToggle = false;
 bool deployExpansion = false;
 
+bool extenderToggle = false;
+
 bool rollerOn = false;
 
 void opcontrol() {
@@ -242,6 +244,11 @@ void opcontrol() {
     //expansion
     if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT) && con.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			expand.set_value(true);
+		}
+
+      //extender
+    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+			extender.set_value(!extenderToggle);
 		}
 
     //reset all motor encoders

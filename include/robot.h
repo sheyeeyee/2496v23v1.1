@@ -2,6 +2,7 @@
 //extern: external linkage
 
 #include "main.h"
+#include "pros/adi.hpp"
 #include "pros/motors.h"
 
 #ifndef ROBOTH
@@ -49,6 +50,9 @@ extern pros::c::gps_status_s_t gpsData;
 extern pros::ADIDigitalOut expand;
 extern pros::ADIDigitalIn selec;
 extern pros::ADIDigitalIn catalim;
+
+// extender
+extern pros::ADIDigitalOut extender;
 
 //optical
 extern pros::Optical optical;
