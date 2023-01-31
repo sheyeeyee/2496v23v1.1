@@ -225,7 +225,7 @@ void opcontrol() {
     
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      driveTurn(83);
+      driveStraight(1500);
 			// driveTurn(90);
 		}
 		
