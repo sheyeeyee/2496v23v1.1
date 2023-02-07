@@ -441,18 +441,18 @@ void autonomous() {
       
       // //shoot three cycles
       int i = 0;
-      // while (i <= 2) {
-      //   delay (1500);
-      //   CATA.move(-127);
-      //   delay(400);
+      while (i <= 2) {
+        delay (1500);
+        CATA.move(-127);
+        delay(400);
         
-      //   while(catalim.get_value() == false) {
-      //       CATA.move(-127);
-      //   }
-      //   CATA.move(0);
-      //   i++;
-      // }
-      // CATA.move(0);
+        while(catalim.get_value() == false) {
+            CATA.move(-127);
+        }
+        CATA.move(0);
+        i++;
+      }
+      CATA.move(0);
 
       //reposition by going backwards for enough space to turn towards next spot
       driveStraight(-600);
@@ -460,13 +460,14 @@ void autonomous() {
 
       //intake up for 3-stack
       angler.set_value(true);
-      driveStraight(1750); //1670
+      driveStraight(1670); //1670
       angler.set_value(false);
       delay(600);
 
       //turn toward roller
-      driveTurn(-24);
-      driveStraight(1100);
+      driveTurn(-28);
+      driveStraight(1000);
+      INTAKE.move(0);
 
       //move forward to far (first) roller
       INTAKE.move(0);
@@ -487,14 +488,16 @@ void autonomous() {
         RB.move(10);
 
         //spin the intake a certain amount
+        // INTAKE.move(127);
         INTAKE.move_relative(1100, 600);
         delay(800);
+        INTAKE.move(127);
         
       //back out from roller
       driveStraight(-820);
 
       //turn toward other roller
-      driveTurn(-85);
+      driveTurn(-88);
 
       //move to roller
       driveStraight(600);
@@ -519,39 +522,15 @@ void autonomous() {
         //spin the intake a certain amount for second roller
         INTAKE.move_relative(1100, 600);
         delay(800);
-      
-      //back out from second roller
-      driveStraight(-1250);
 
-      //turn right to position for run across the field
-      driveTurn(46);
 
-      //backward across field to push discs out of the way
-      driveStraight(-4200);
+         driveStraight(-700);
 
-      //forward to reposition for next match loader
-      driveStraight(400);
+      //turn right to position for expansion
+      driveTurn(-15);
+      driveStraight(-1800);
+      driveTurn(13);
 
-      //turn a lot to back into match loader
-      driveTurn(-115);
-
-      //start intake to make sure discs fall into place again
-      INTAKE.move(127);
-
-      //drive back toward second match loader
-      driveStraight(-1450);
-
-      //turn to adjust to second match loader
-      driveTurn(-35);
-
-      //forward to adjust more to second match loader
-      driveStraight(250);
-      // delay(300);
-      
-      //shoot three cycles at second match loader
-      i = 0;
-      while (i <= 2) {
-        delay (1500);
         CATA.move(-127);
         delay(190);
 
@@ -559,83 +538,160 @@ void autonomous() {
             CATA.move(-127);
         }
         CATA.move(0);
-        i++;
-      }
 
-      //reposition by going backwards for enough space to turn towards next spot (expansion)
-      driveStraight(-600);
-      driveTurn(36);
+        driveStraight(1100);
+        driveTurn(-127);
+        INTAKE.move(127);
+        driveStraight(2000);
+        driveTurn(90);
+         CATA.move(-127);
+        delay(190);
 
-      //intake up for 3-stack
-      angler.set_value(true);
-      driveStraight(1690); //1670
-      angler.set_value(false);
-      delay(600);
+        while(catalim.get_value() == false) {
+            CATA.move(-127);
+        }
+        CATA.move(0);
 
-      //turn toward roller
-      driveTurn(-24);
-      driveStraight(1100);
-
-      //second set of rollers
-      //move forward to far (first) roller
-      INTAKE.move(0);
-        LF.move(60);
-        LM.move(60);
-        LB.move(60);
-        RF.move(60);
-        RM.move(60);
-        RB.move(60);
-        delay(450);
-
-        //less voltage toward roller to prevent too much friction
-        LF.move(10);
-        LM.move(10);
-        LB.move(10);
-        RF.move(10);
-        RM.move(10);
-        RB.move(10);
-
-        //spin the intake a certain amount
-        INTAKE.move_relative(1100, 600);
-        delay(800);
         
-      //back out from roller
-      driveStraight(-820);
-
-      //turn toward other roller
-      driveTurn(-85);
-
-      //move to roller
-      driveStraight(600);
       
-      //move forward to second roller
-      INTAKE.move(0);
-        LF.move(60);
-        LM.move(60);
-        LB.move(60);
-        RF.move(60);
-        RM.move(60);
-        RB.move(60);
-        delay(450);
-      
-        LF.move(10);
-        LM.move(10);
-        LB.move(10);
-        RF.move(10);
-        RM.move(10);
-        RB.move(10);
-
-        //spin the intake a certain amount for second roller
-        INTAKE.move_relative(1100, 600);
-        delay(800);
-      
-      //back out from second roller
-      driveStraight(-1250);
-
-      //turn right to position for expansion
-      driveTurn(46);
 
       //expansion
       expand.set_value(true);
   // }
+
+
+
+  ////////////////////////////////////end//////
+      
+//       //back out from second roller
+//       driveStraight(-1250);
+
+//       //turn right to position for run across the field
+//       driveTurn(46);
+
+//       //backward across field to push discs out of the way
+//       driveStraight(-4200);
+
+//       //forward to reposition for next match loader
+//       driveStraight(400);
+
+//       //turn a lot to back into match loader
+//       driveTurn(-115);
+
+//       //start intake to make sure discs fall into place again
+//       INTAKE.move(127);
+
+//       //drive back toward second match loader
+//       driveStraight(-1450);
+
+//       //turn to adjust to second match loader
+//       driveTurn(-35);
+
+//       //forward to adjust more to second match loader
+//       driveStraight(250);
+//       // delay(300);
+      
+//       //shoot three cycles at second match loader
+//       i = 0;
+//       while (i <= 2) {
+//         delay (1500);
+//         CATA.move(-127);
+//         delay(190);
+
+//         while(catalim.get_value() == false) {
+//             CATA.move(-127);
+//         }
+//         CATA.move(0);
+//         i++;
+//       }
+
+//       //reposition by going backwards for enough space to turn towards next spot (expansion)
+//       driveStraight(-600);
+//       driveTurn(36);
+
+//       //intake up for 3-stack
+//       angler.set_value(true);
+//       driveStraight(1690); //1670
+//       angler.set_value(false);
+//       delay(600);
+
+//       //turn toward roller
+//       driveTurn(-24);
+//       driveStraight(1100);
+
+//       //second set of rollers
+//       //move forward to far (first) roller
+//       INTAKE.move(0);
+//         LF.move(60);
+//         LM.move(60);
+//         LB.move(60);
+//         RF.move(60);
+//         RM.move(60);
+//         RB.move(60);
+//         delay(450);
+
+//         //less voltage toward roller to prevent too much friction
+//         LF.move(10);
+//         LM.move(10);
+//         LB.move(10);
+//         RF.move(10);
+//         RM.move(10);
+//         RB.move(10);
+
+//         //spin the intake a certain amount
+//         INTAKE.move_relative(1100, 600);
+//         delay(800);
+        
+//       //back out from roller
+//       driveStraight(-820);
+
+//       //turn toward other roller
+//       driveTurn(-85);
+
+//       //move to roller
+//       driveStraight(600);
+      
+//       //move forward to second roller
+//       INTAKE.move(0);
+//         LF.move(60);
+//         LM.move(60);
+//         LB.move(60);
+//         RF.move(60);
+//         RM.move(60);
+//         RB.move(60);
+//         delay(450);
+      
+//         LF.move(10);
+//         LM.move(10);
+//         LB.move(10);
+//         RF.move(10);
+//         RM.move(10);
+//         RB.move(10);
+
+//         //spin the intake a certain amount for second roller
+//         INTAKE.move_relative(1100, 600);
+//         delay(800);
+      
+//       //back out from second roller
+//       driveStraight(-500);
+
+//       //turn right to position for expansion
+//       driveTurn(5);
+//       driveStraight(-500);
+//        i = 0;
+//       while (i <= 0) {
+//         delay (1500);
+//         CATA.move(-127);
+//         delay(190);
+
+//         while(catalim.get_value() == false) {
+//             CATA.move(-127);
+//         }
+//         CATA.move(0);
+//         i++;
+//       }
+
+//       //expansion
+//       expand.set_value(true);
+//   // }
 }

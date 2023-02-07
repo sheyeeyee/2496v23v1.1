@@ -75,6 +75,10 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
     
     derivative = std::abs(error - prevError);
 
+    if (target < 0){
+        derivative *= -1;
+    }
+
     power = (vKp * error) + (vKi * integral) - (vKd * derivative); //+ (vKd * derivative);
 
     // con.print(0, 0, "%2f", (integral * 0.035));
@@ -87,6 +91,12 @@ void driveStraight(int target) {
     setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     //  double start_head = 0; 
     // double end_head = 0;
+    if (target < 0){
+         setConstants(56, 0.4, 878);
+    }
+    else{
+         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    }
     float voltage;
     float encoderAvg;
     int count = 0;
@@ -120,7 +130,7 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 300;//300
+        heading_error = heading_error * 160;//70
         h = 1 / error;
         if (h > 100){
            h = 30;
@@ -157,6 +167,7 @@ void driveStraight(int target) {
 
 void driveTurn(int target) { //target is inputted in autons
     setConstants(TURN_KP, TURN_KI, TURN_KD);
+    imu.tare_heading();
     //over // 200 150 0
     //under 82 190 0
     //kd profile one// 200 190 100
