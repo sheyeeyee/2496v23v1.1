@@ -437,9 +437,9 @@ void autonomous() {
 //   else if(atn == 6){
     //run intake to ensure discs fall into the right place
       INTAKE.move(127);
-      // delay(300);
+      delay(300);
       
-      // //shoot three cycles
+      //shoot three cycles
       int i = 0;
       while (i <= 2) {
         delay (1500);
@@ -454,6 +454,10 @@ void autonomous() {
       }
       CATA.move(0);
 
+
+
+
+////////////////////first auto
       //reposition by going backwards for enough space to turn towards next spot
       driveStraight(-600);
       driveTurn(36);
@@ -529,7 +533,8 @@ void autonomous() {
       //turn right to position for expansion
       driveTurn(-15);
       driveStraight(-1800);
-      driveTurn(13);
+      driveTurn(21);
+      
 
         CATA.move(-127);
         delay(190);
@@ -538,12 +543,14 @@ void autonomous() {
             CATA.move(-127);
         }
         CATA.move(0);
+        driveTurn(-12);
 
-        driveStraight(1100);
-        driveTurn(-127);
+        driveStraight(950);
+        driveTurn(-125);
         INTAKE.move(127);
-        driveStraight(2000);
-        driveTurn(90);
+        driveSlow(2000);
+        driveTurn(83);
+        driveSmall(-200);
          CATA.move(-127);
         delay(190);
 
@@ -552,11 +559,32 @@ void autonomous() {
         }
         CATA.move(0);
 
+        driveSmall(150);
+
+        driveTurn(-87);
+      angler.set_value(true);
+      driveStraight(1050); //1670
+      angler.set_value(false);
+      delay(600);
+        driveTurn(89);
+        driveStraight(-1250);
+        driveTurn(-48);
+        CATA.move(-127);
+        delay(190);
+
+        while(catalim.get_value() == false) {
+            CATA.move(-127);
+        }
+        CATA.move(0);
+
+        
+     
+
         
       
 
       //expansion
-      expand.set_value(true);
+      // expand.set_value(true);
   // }
 
 

@@ -92,7 +92,7 @@ void driveStraight(int target) {
     //  double start_head = 0; 
     // double end_head = 0;
     if (target < 0){
-         setConstants(56, 0.4, 878);
+         setConstants(55, 0.5, 878); //0.4
     }
     else{
          setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
@@ -194,7 +194,7 @@ void driveTurn(int target) { //target is inputted in autons
         
         chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
-        if (abs(target - position) <= 1) count++; 
+        if (abs(target - position) <= 0.68) count++; 
         if (count >= 50) {
             imu.tare_heading();
             break;
@@ -240,4 +240,157 @@ void driveAim(int target) { //target is inputted in autons
     }
 
     chasMove(0, 0, 0, 0, 0, 0);
+}
+
+
+
+
+//////////////////////////////////////////////
+void driveSlow(int target) {
+    setConstants(20, 0.5, 800);
+    // 10 .5 400
+    //  double start_head = 0; 
+    // double end_head = 0;
+
+    float voltage;
+    float encoderAvg;
+    int count = 0;
+    double init_heading = imu.get_heading();
+    double heading_error = 0;
+    int cycle = 0; // Controller Display Cycle
+    int time = 0;
+    
+    con.clear();
+    // double error_range_time = 0;
+    
+
+    resetEncoders();
+    
+
+    while(true) {
+        if (target < 1000) { 
+             
+        }
+        encoderAvg = (LB.get_position() + RB.get_position()) / 2;
+        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
+        viewvol = voltage;
+        if(init_heading > 180) {
+            init_heading = (360 - init_heading);
+        }
+
+        if(imu.get_heading() < 180) {
+            heading_error = init_heading - imu.get_heading();
+        }
+        else {
+            heading_error = ((360 - imu.get_heading()) - init_heading);
+        }
+        
+        heading_error = heading_error * 160;//70
+        h = 1 / error;
+        if (h > 100){
+           h = 30;
+        }
+
+        h = h * 0000; ////-20000
+
+        chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
+        if (abs(target - encoderAvg) <= 5) count++;
+        if (count >= 20) break;
+
+        delay(10);
+        
+        // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
+        // con.print(2, 0, "%2f", voltage);
+
+        if (time % 100 == 0) con.clear();
+		else if (time % 50 == 0) {
+			cycle++;
+            if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
+            if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
+            // if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		}
+        time += 10;
+    }
+    // chasMove(0, 0, 0, 0);
+    motor_brake (1);
+    motor_brake (8);
+    motor_brake (9);
+    motor_brake (10);
+    motor_brake (11);
+    motor_brake (12);
+}
+
+void driveSmall(int target) {
+    setConstants(52, 0.35, 878);
+    // 10 .5 400
+    //  double start_head = 0; 
+    // double end_head = 0;
+
+    float voltage;
+    float encoderAvg;
+    int count = 0;
+    double init_heading = imu.get_heading();
+    double heading_error = 0;
+    int cycle = 0; // Controller Display Cycle
+    int time = 0;
+    
+    con.clear();
+    // double error_range_time = 0;
+    
+
+    resetEncoders();
+    
+
+    while(true) {
+        if (target < 1000) { 
+             
+        }
+        encoderAvg = (LB.get_position() + RB.get_position()) / 2;
+        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
+        viewvol = voltage;
+        if(init_heading > 180) {
+            init_heading = (360 - init_heading);
+        }
+
+        if(imu.get_heading() < 180) {
+            heading_error = init_heading - imu.get_heading();
+        }
+        else {
+            heading_error = ((360 - imu.get_heading()) - init_heading);
+        }
+        
+        heading_error = heading_error * 160;//70
+        h = 1 / error;
+        if (h > 100){
+           h = 30;
+        }
+
+        h = h * 0000; ////-20000
+
+        chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
+        if (abs(target - encoderAvg) <= 5) count++;
+        if (count >= 20) break;
+
+        delay(10);
+        
+        // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
+        // con.print(2, 0, "%2f", voltage);
+
+        if (time % 100 == 0) con.clear();
+		else if (time % 50 == 0) {
+			cycle++;
+            if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
+            if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
+            // if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		}
+        time += 10;
+        
+    }
+    // chasMove(0, 0, 0, 0);
+    motor_brake (1);
+    motor_brake (8);
+    motor_brake (9);
+    motor_brake (10);
+    motor_brake (11);
+    motor_brake (12);
 }
