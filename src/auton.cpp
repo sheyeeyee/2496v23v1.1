@@ -561,13 +561,13 @@ void autonomous() {
 
         driveSmall(150);
 
-        driveTurn(-87);
+        driveTurn(-86);
       angler.set_value(true);
-      driveStraight(1050); //1670
+      driveStraight(900); //1670
       angler.set_value(false);
       delay(600);
-        driveTurn(89);
-        driveStraight(-1250);
+        driveTurn(90);
+        driveStraight(-1200);
         driveTurn(-48);
         CATA.move(-127);
         delay(190);
@@ -578,6 +578,10 @@ void autonomous() {
         CATA.move(0);
 
         
+        driveTurn(11);
+        driveStraight(1900);
+
+        //Gerald was here Brandon is being weird to me right now
      
 
         

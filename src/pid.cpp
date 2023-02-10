@@ -89,6 +89,7 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
 //driving straight
 void driveStraight(int target) {
     setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    int timeout = 3500;
     //  double start_head = 0; 
     // double end_head = 0;
     if (target < 0){
@@ -140,7 +141,7 @@ void driveStraight(int target) {
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
-        if (count >= 20) break;
+        if (count >= 20 || time > timeout) break;
 
         delay(10);
         
@@ -167,7 +168,9 @@ void driveStraight(int target) {
 
 void driveTurn(int target) { //target is inputted in autons
     setConstants(TURN_KP, TURN_KI, TURN_KD);
+    int timeout = 3700;
     imu.tare_heading();
+    int time = 0;
     //over // 200 150 0
     //under 82 190 0
     //kd profile one// 200 190 100
@@ -195,52 +198,19 @@ void driveTurn(int target) { //target is inputted in autons
         chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
         if (abs(target - position) <= 0.68) count++; 
-        if (count >= 50) {
+        if (count >= 20 || time > timeout) {
             imu.tare_heading();
             break;
         }
         con.print(0, 0, "%2f", target-position);
         delay(10);
+        time += 10;
         // con.print(0, 0, "%2f", target);
     }
 
     chasMove(0, 0, 0, 0, 0, 0);
 }
 
-
-void driveAim(int target) { //target is inputted in autons
-    setConstants(1050, 0, 0);//kp 99 ki 178.9 undercorrecting //1050
-    // cout << target << endl;
-  
-    float voltage;
-    float position;
-    int count = 0;
-    
-    while(true) {
-
-        position = imu.get_heading(); //this is where the units are set to be degrees
-          if(position > 180){
-            position = ((360 - position) * -1);
-        }
-
-        voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
-        // con.print(1, 0, "%2f", voltage);
-        
-        chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
-        
-        if (abs(target - position) <= 1) count++; 
-        if (count >= 50) 
-        {
-            break;
-
-        }
-        con.print(0, 0, "%2f", target-position);
-        delay(10);
-        // con.print(0, 0, "%2f", target);
-    }
-
-    chasMove(0, 0, 0, 0, 0, 0);
-}
 
 
 
@@ -248,6 +218,7 @@ void driveAim(int target) { //target is inputted in autons
 //////////////////////////////////////////////
 void driveSlow(int target) {
     setConstants(20, 0.5, 800);
+    int timeout = 4000;
     // 10 .5 400
     //  double start_head = 0; 
     // double end_head = 0;
@@ -295,7 +266,7 @@ void driveSlow(int target) {
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
-        if (count >= 20) break;
+         if (count >= 20 || time > timeout) break;
 
         delay(10);
         
@@ -322,6 +293,7 @@ void driveSlow(int target) {
 
 void driveSmall(int target) {
     setConstants(52, 0.35, 878);
+    int timeout = 1500;
     // 10 .5 400
     //  double start_head = 0; 
     // double end_head = 0;
@@ -369,7 +341,7 @@ void driveSmall(int target) {
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
-        if (count >= 20) break;
+         if (count >= 20 || time > timeout) break;
 
         delay(10);
         
