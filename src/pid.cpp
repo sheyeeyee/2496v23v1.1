@@ -90,6 +90,12 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
 void driveStraight(int target) {
     setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     int timeout = 3500;
+    if (target < 850){
+        int timeout = 1800;
+    }
+    else{
+    int timeout = 3500;
+    }
     //  double start_head = 0; 
     // double end_head = 0;
     if (target < 0){
@@ -114,6 +120,14 @@ void driveStraight(int target) {
     
 
     while(true) {
+        if (catalim.get_value() == false) {
+			CATA.move(-127);
+		} else {
+      CATA.move(0);
+    }
+
+
+
         if (target < 1000) { 
              
         }
@@ -141,7 +155,11 @@ void driveStraight(int target) {
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
-        if (count >= 20 || time > timeout) break;
+        if (count >= 20 || time > timeout){
+            CATA.move(0);
+        break;
+        
+        } 
 
         delay(10);
         
@@ -168,7 +186,7 @@ void driveStraight(int target) {
 
 void driveTurn(int target) { //target is inputted in autons
     setConstants(TURN_KP, TURN_KI, TURN_KD);
-    int timeout = 3700;
+    int timeout = 2100;
     imu.tare_heading();
     int time = 0;
     //over // 200 150 0
