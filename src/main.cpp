@@ -227,9 +227,8 @@ void opcontrol() {
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       // driveSlow(2000);
       // driveStraight(1500);
-			driveSmall(150);
-		}
-		
+			driveTurn(-86);
+    }
     // angler
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {
 			if (anglerToggle == false) {

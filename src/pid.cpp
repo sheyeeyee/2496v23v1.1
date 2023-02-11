@@ -205,6 +205,11 @@ void driveTurn(int target) { //target is inputted in autons
     int count = 0;
     
     while(true) {
+         if (catalim.get_value() == false) {
+			CATA.move(-127);
+		} else {
+      CATA.move(0);
+    }
         position = imu.get_heading(); //this is where the units are set to be degrees
         if(position > 180) {
             position = ((360 - position) * -1);
@@ -257,6 +262,11 @@ void driveSlow(int target) {
     
 
     while(true) {
+         if (catalim.get_value() == false) {
+			CATA.move(-127);
+		} else {
+      CATA.move(0);
+    }
         if (target < 1000) { 
              
         }

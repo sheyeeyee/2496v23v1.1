@@ -590,7 +590,7 @@ void autonomous() {
 
         
         driveTurn(-25);
-        driveStraight(1400);
+        driveStraight(1600);
         driveTurn(-86);
         driveStraight(500);
         INTAKE.move(0);
@@ -648,6 +648,7 @@ void autonomous() {
 
         driveStraight(-700);
         driveTurn(-45);
+        driveStraight(300);
 
 
 

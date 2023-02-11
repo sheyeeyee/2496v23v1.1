@@ -32,9 +32,9 @@ extern float viewvol;
 
 
 //tune turnt constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);
-#define TURN_KP 1700 //150 //110 //90 gval:800 wth: 1800 REALLYGOOD: 1800 // 1640
-#define TURN_KI 0.310 // 80 //200 gval:20 wth: 20 REALLYGOOD:0.5
-#define TURN_KD 15150 //850 gval:850 wth: 15000 REALLYGOOD:15000
+#define TURN_KP 1200 //150 //110 //90 gval:800 wth: 1800 REALLYGOOD: 1800 // 1640 ehh 1400
+#define TURN_KI 0.45 // 80 //200 gval:20 wth: 20 REALLYGOOD:0.5 ehh 0.2
+#define TURN_KD 10000 //850 gval:850 wth: 15000 REALLYGOOD:15000 ehh 17000
 
 //tune turn integral-specific here: voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
 #define TURN_INTEGRAL_KI 10
