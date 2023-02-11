@@ -442,21 +442,16 @@ void autonomous() {
       //shoot three cycles
       int i = 0;
       while (i <= 2) {
-      while(catalim.get_value() == false) {
-      CATA.move(-127);
-        }
+        while(catalim.get_value() == false) CATA.move(-127);
         CATA.move(0);
         delay(1500);
         CATA.move(-127);
         delay(400);
         
-
         CATA.move(0);
         i++;
       }
       CATA.move(0);
-
-
 
 
 ////////////////////first auto
@@ -477,27 +472,27 @@ void autonomous() {
 
       //move forward to far (first) roller
       INTAKE.move(0);
-        LF.move(60);
-        LM.move(60);
-        LB.move(60);
-        RF.move(60);
-        RM.move(60);
-        RB.move(60);
-        delay(450);
+      LF.move(60);
+      LM.move(60);
+      LB.move(60);
+      RF.move(60);
+      RM.move(60);
+      RB.move(60);
+      delay(450);
 
-        //less voltage toward roller to prevent too much friction
-        LF.move(10);
-        LM.move(10);
-        LB.move(10);
-        RF.move(10);
-        RM.move(10);
-        RB.move(10);
+      //less voltage toward roller to prevent too much friction
+      LF.move(10);
+      LM.move(10);
+      LB.move(10);
+      RF.move(10);
+      RM.move(10);
+      RB.move(10);
 
-        //spin the intake a certain amount
-        // INTAKE.move(127);
-        INTAKE.move_relative(1100, 600);
-        delay(800);
-        INTAKE.move(127);
+      //spin the intake a certain amount
+      // INTAKE.move(127);
+      INTAKE.move_relative(1100, 600);
+      delay(800);
+      INTAKE.move(127);
         
       //back out from roller
       driveStraight(-820);
@@ -510,111 +505,103 @@ void autonomous() {
       
       //move forward to second roller
       INTAKE.move(0);
-        LF.move(60);
-        LM.move(60);
-        LB.move(60);
-        RF.move(60);
-        RM.move(60);
-        RB.move(60);
-        delay(450);
-      
-        LF.move(10);
-        LM.move(10);
-        LB.move(10);
-        RF.move(10);
-        RM.move(10);
-        RB.move(10);
+      LF.move(60);
+      LM.move(60);
+      LB.move(60);
+      RF.move(60);
+      RM.move(60);
+      RB.move(60);
+      delay(450);
+    
+      LF.move(10);
+      LM.move(10);
+      LB.move(10);
+      RF.move(10);
+      RM.move(10);
+      RB.move(10);
 
-        //spin the intake a certain amount for second roller
-        INTAKE.move_relative(1100, 600);
-        delay(800);
+      //spin the intake a certain amount for second roller
+      INTAKE.move_relative(1100, 600);
+      delay(800);
 
-
-         driveStraight(-700);
+      driveStraight(-700);
 
       //turn right to position for expansion
       driveTurn(-15);
       driveStraight(-1800);
       driveTurn(21);
       
+      CATA.move(-127);
+      delay(190);
 
-        CATA.move(-127);
-        delay(190);
+      ////////////////////
+    
 
+      // while(catalim.get_value() == false) {
+      //     CATA.move(-127);
+      // }
+      // CATA.move(0);
+      driveTurn(-12);
 
-         /// ////////////////
-      
+      driveStraight(950);
+      driveTurn(-125);
+      INTAKE.move(127);
+      driveSlow(2000);
+      driveTurn(83);
+      // driveSmall(-200);
+      CATA.move(-127);
+      delay(190);
 
-        // while(catalim.get_value() == false) {
-        //     CATA.move(-127);
-        // }
-        // CATA.move(0);
-        driveTurn(-12);
+      while(catalim.get_value() == false) {
+          CATA.move(-127);
+      }
+      CATA.move(0);
 
-        driveStraight(950);
-        driveTurn(-125);
-        INTAKE.move(127);
-        driveSlow(2000);
-        driveTurn(83);
-        // driveSmall(-200);
-         CATA.move(-127);
-        delay(190);
+      // driveSmall(150);
 
-        while(catalim.get_value() == false) {
-            CATA.move(-127);
-        }
-        CATA.move(0);
-
-        // driveSmall(150);
-
-        driveTurn(-86);
+      driveTurn(-86);
       angler.set_value(true);
       driveStraight(900); //1670
       angler.set_value(false);
       delay(600);
-        driveTurn(86);
-        driveStraight(-500);
-        driveTurn(-25);
-        CATA.move(-127);
-        delay(190);
+      driveTurn(86);
+      driveStraight(-500);
+      driveTurn(-25);
+      CATA.move(-127);
+      delay(190);
 
-
-        
-
-
-
-        // while(catalim.get_value() == false) {
-        //     CATA.move(-127);
-        // }
-        // CATA.move(0);
+  // while(catalim.get_value() == false) {
+  //     CATA.move(-127);
+  // }
+  // CATA.move(0);
 
         
-        driveTurn(-25);
-        driveStraight(1600);
-        driveTurn(-86);
-        driveStraight(500);
-        INTAKE.move(0);
-        LF.move(60);
-        LM.move(60);
-        LB.move(60);
-        RF.move(60);
-        RM.move(60);
-        RB.move(60);
-        delay(450);
+      driveTurn(-25);
+      driveStraight(1600);
+      driveTurn(-86);
+      driveStraight(500);
+      INTAKE.move(0);
+      LF.move(60);
+      LM.move(60);
+      LB.move(60);
+      RF.move(60);
+      RM.move(60);
+      RB.move(60);
+      delay(450);
 
-        //less voltage toward roller to prevent too much friction
-        LF.move(10);
-        LM.move(10);
-        LB.move(10);
-        RF.move(10);
-        RM.move(10);
-        RB.move(10);
+      //less voltage toward roller to prevent too much friction
+      LF.move(10);
+      LM.move(10);
+      LB.move(10);
+      RF.move(10);
+      RM.move(10);
+      RB.move(10);
 
-        //spin the intake a certain amount
-        // INTAKE.move(127);
-        INTAKE.move_relative(1100, 600);
-        delay(800);
-        INTAKE.move(127);
+      //spin the intake a certain amount
+      // INTAKE.move(127);
+      INTAKE.move_relative(1100, 600);
+      delay(800);
+      INTAKE.move(127);
         
       //back out from roller
       driveStraight(-820);
@@ -627,37 +614,28 @@ void autonomous() {
       
       //move forward to second roller
       INTAKE.move(0);
-        LF.move(60);
-        LM.move(60);
-        LB.move(60);
-        RF.move(60);
-        RM.move(60);
-        RB.move(60);
-        delay(450);
-      
-        LF.move(10);
-        LM.move(10);
-        LB.move(10);
-        RF.move(10);
-        RM.move(10);
-        RB.move(10);
+      LF.move(60);
+      LM.move(60);
+      LB.move(60);
+      RF.move(60);
+      RM.move(60);
+      RB.move(60);
+      delay(450);
+    
+      LF.move(10);
+      LM.move(10);
+      LB.move(10);
+      RF.move(10);
+      RM.move(10);
+      RB.move(10);
 
-        //spin the intake a certain amount for second roller
-        INTAKE.move_relative(1100, 600);
-        delay(800);
+      //spin the intake a certain amount for second roller
+      INTAKE.move_relative(1100, 600);
+      delay(800);
 
-        driveStraight(-700);
-        driveTurn(-45);
-        driveStraight(300);
-
-
-
-
-        //Gerald was here Brandon is being weird to me right now
-     
-
-        
-      
+      driveStraight(-700);
+      driveTurn(-45);
+      driveStraight(500);
 
       //expansion
       expand.set_value(true);

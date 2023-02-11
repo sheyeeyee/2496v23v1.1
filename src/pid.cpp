@@ -120,17 +120,10 @@ void driveStraight(int target) {
     
 
     while(true) {
-        if (catalim.get_value() == false) {
-			CATA.move(-127);
-		} else {
-      CATA.move(0);
-    }
+        // temp cata reset
+        if (catalim.get_value() == false) CATA.move(-127);
+        else CATA.move(0);
 
-
-
-        if (target < 1000) { 
-             
-        }
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
         viewvol = voltage;
@@ -157,8 +150,7 @@ void driveStraight(int target) {
         if (abs(target - encoderAvg) <= 5) count++;
         if (count >= 20 || time > timeout){
             CATA.move(0);
-        break;
-        
+            break;
         } 
 
         delay(10);
