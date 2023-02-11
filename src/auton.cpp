@@ -633,8 +633,8 @@ void autonomous() {
       INTAKE.move_relative(1100, 600);
       delay(800);
 
-      driveStraight(-700);
-      driveTurn(-45);
+      driveStraight(-760);
+      driveTurn(-44);
       driveStraight(500);
 
       //expansion

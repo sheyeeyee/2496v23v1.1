@@ -137,7 +137,7 @@ void opcontrol() {
 	while (true) {
     //printing stuff
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
-		double chasstempF = chasstempC *(9/5) + 32;
+		double chasstempF = chasstempC *(9.0/5) + 32;
 		
     if (time % 100 == 0) con.clear();
 		
@@ -229,15 +229,15 @@ void opcontrol() {
       // driveStraight(1500);
 			driveTurn(-86);
     }
+
     // angler
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {
 			if (anglerToggle == false) {
 				angler.set_value(false);
 				anglerToggle = true;
-			}
-      else {
-				angler.set_value(true);
-				anglerToggle = false;
+			} else {
+        angler.set_value(true);
+        anglerToggle = false;
 			}
 		}
 

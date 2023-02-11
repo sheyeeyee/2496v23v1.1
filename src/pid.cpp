@@ -60,16 +60,14 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
     
     if(std::abs(error) < integralKi) {
         integral += error;
-    }
-    else {
+    } else {
         integral = 0;
     }
 
     if(integral >= 0) {
         integral = std::min(integral, maxIntegral); //min means take whichever value is smaller btwn integral and maxI
         //integral = integral until integral is greater than maxI (to keep integral limited to maxI)
-    }
-    else {
+    } else {
         integral = std::max(integral, -maxIntegral); //same thing but negative max
     }
     
@@ -92,18 +90,17 @@ void driveStraight(int target) {
     int timeout = 3500;
     if (target < 850){
         int timeout = 1800;
-    }
-    else{
+    } else{
     int timeout = 3500;
     }
     //  double start_head = 0; 
     // double end_head = 0;
     if (target < 0){
          setConstants(55, 0.5, 878); //0.4
-    }
-    else{
+    } else{
          setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     }
+
     float voltage;
     float encoderAvg;
     int count = 0;
@@ -114,7 +111,6 @@ void driveStraight(int target) {
     
     con.clear();
     // double error_range_time = 0;
-    
 
     resetEncoders();
     
@@ -158,8 +154,7 @@ void driveStraight(int target) {
         // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
         // con.print(2, 0, "%2f", voltage);
 
-        if (time % 100 == 0) con.clear();
-		else if (time % 50 == 0) {
+        if (time % 100 == 0) con.clear(); else if (time % 50 == 0) {
 			cycle++;
             if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
             if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
@@ -168,12 +163,12 @@ void driveStraight(int target) {
         time += 10;
     }
     // chasMove(0, 0, 0, 0);
-    motor_brake (1);
-    motor_brake (8);
-    motor_brake (9);
-    motor_brake (10);
-    motor_brake (11);
-    motor_brake (12);
+    LF.brake();
+    LM.brake();
+    LB.brake();
+    RF.brake();
+    RM.brake();
+    RB.brake();
 }
 
 void driveTurn(int target) { //target is inputted in autons
@@ -197,13 +192,12 @@ void driveTurn(int target) { //target is inputted in autons
     int count = 0;
     
     while(true) {
-         if (catalim.get_value() == false) {
-			CATA.move(-127);
-		} else {
-      CATA.move(0);
-    }
+        // temp cata reset
+        if (catalim.get_value() == false) CATA.move(-127);
+        else CATA.move(0);
+
         position = imu.get_heading(); //this is where the units are set to be degrees
-        if(position > 180) {
+        if (position > 180) {
             position = ((360 - position) * -1);
         }
 
@@ -218,9 +212,9 @@ void driveTurn(int target) { //target is inputted in autons
             break;
         }
         con.print(0, 0, "%2f", target-position);
-        delay(10);
+
         time += 10;
-        // con.print(0, 0, "%2f", target);
+        delay(10);
     }
 
     chasMove(0, 0, 0, 0, 0, 0);
@@ -254,14 +248,10 @@ void driveSlow(int target) {
     
 
     while(true) {
-         if (catalim.get_value() == false) {
-			CATA.move(-127);
-		} else {
-      CATA.move(0);
-    }
-        if (target < 1000) { 
-             
-        }
+        // temp cata rest
+        if (catalim.get_value() == false) CATA.move(-127); 
+        else CATA.move(0);
+
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
         viewvol = voltage;
@@ -288,27 +278,23 @@ void driveSlow(int target) {
         if (abs(target - encoderAvg) <= 5) count++;
          if (count >= 20 || time > timeout) break;
 
-        delay(10);
-        
-        // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
-        // con.print(2, 0, "%2f", voltage);
-
-        if (time % 100 == 0) con.clear();
-		else if (time % 50 == 0) {
+        if (time % 100 == 0) con.clear(); else if (time % 50 == 0) {
 			cycle++;
             if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
             if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
             // if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
+
         time += 10;
+        delay(10);
     }
     // chasMove(0, 0, 0, 0);
-    motor_brake (1);
-    motor_brake (8);
-    motor_brake (9);
-    motor_brake (10);
-    motor_brake (11);
-    motor_brake (12);
+    LF.brake();
+    LM.brake();
+    LB.brake();
+    RF.brake();
+    RM.brake();
+    RB.brake();
 }
 
 void driveSmall(int target) {
@@ -327,19 +313,13 @@ void driveSmall(int target) {
     int time = 0;
     
     con.clear();
-    // double error_range_time = 0;
-    
-
     resetEncoders();
     
-
     while(true) {
-        if (target < 1000) { 
-             
-        }
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
         viewvol = voltage;
+
         if(init_heading > 180) {
             init_heading = (360 - init_heading);
         }
@@ -364,25 +344,20 @@ void driveSmall(int target) {
          if (count >= 20 || time > timeout) break;
 
         delay(10);
-        
-        // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
-        // con.print(2, 0, "%2f", voltage);
 
-        if (time % 100 == 0) con.clear();
-		else if (time % 50 == 0) {
+        if (time % 100 == 0) con.clear(); else if (time % 50 == 0) {
 			cycle++;
             if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
             if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
             // if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
         time += 10;
-        
     }
     // chasMove(0, 0, 0, 0);
-    motor_brake (1);
-    motor_brake (8);
-    motor_brake (9);
-    motor_brake (10);
-    motor_brake (11);
-    motor_brake (12);
+    LF.brake();
+    LM.brake();
+    LB.brake();
+    RF.brake();
+    RM.brake();
+    RB.brake();
 }
