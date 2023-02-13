@@ -454,7 +454,6 @@ void autonomous() {
       CATA.move(0);
 
 
-////////////////////first auto
       //reposition by going backwards for enough space to turn towards next spot
       driveStraight(-600);
       driveTurn(36);
@@ -495,7 +494,7 @@ void autonomous() {
       INTAKE.move(127);
         
       //back out from roller
-      driveStraight(-820);
+      driveStraight(-780); // -820
 
       //turn toward other roller
       driveTurn(-88);
