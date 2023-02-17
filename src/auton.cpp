@@ -435,6 +435,77 @@ void autonomous() {
 
   //SKILLS
 //   else if(atn == 6){
+
+  ///////////////START HALF AWP////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      delay(180);
+      INTAKE.move(0);
+      LF.move(20);
+      LM.move(20);
+      LB.move(20);
+      RF.move(20);
+      RM.move(20);
+      RB.move(20);
+      delay(450);
+
+
+      //spin the intake a certain amount
+      // INTAKE.move(127);
+
+      INTAKE.move_relative(-500, -600);
+      delay(800);
+        
+      //back out from roller
+      driveStraight(-400);
+      driveTurn(50);
+      driveStraight(-2100);
+      driveTurn(-95);
+      CATA.move(-127);
+      delay(200);
+      while(catalim.get_value() == false) CATA.move(-127);
+      CATA.move(0);
+      INTAKE.move(127);
+      delay(600);
+      CATA.move(-127);
+      delay(200);
+      while(catalim.get_value() == false) CATA.move(-127);
+      CATA.move(0);
+      extender.set_value(true);
+      delay(180);
+      extender.set_value(false);
+
+      delay(99999999);
+
+
+      //////END HALF AWP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      // driveTurn(-85);
+      // driveStraight(2100);
+      // driveTurn(50);
+      // driveStraight(400);
+      // INTAKE.move(0);
+
+      // LF.move(20);
+      // LM.move(20);
+      // LB.move(20);
+      // RF.move(20);
+      // RM.move(20);
+      // RB.move(20);
+      // delay(450);
+
+
+      //spin the intake a certain amount
+      // INTAKE.move(127);
+
+      // INTAKE.move_relative(-500, -600);
+      // delay(800);
+
+
+
+//////start skills//////
+
+
+
     //run intake to ensure discs fall into the right place
       INTAKE.move(127);
       delay(300);
@@ -529,7 +600,7 @@ void autonomous() {
       //turn right to position for expansion
       driveTurn(-15);
       driveStraight(-1800);
-      driveTurn(21);
+      driveTurn(19);
       
       CATA.move(-127);
       delay(190);
@@ -541,13 +612,13 @@ void autonomous() {
       //     CATA.move(-127);
       // }
       // CATA.move(0);
-      driveTurn(-12);
+      driveTurn(-14);
 
-      driveStraight(950);
-      driveTurn(-125);
+      driveStraight(1000);//950
+      driveTurn(-124);
       INTAKE.move(127);
       driveSlow(2000);
-      driveTurn(83);
+      driveTurn(85);
       // driveSmall(-200);
       CATA.move(-127);
       delay(190);
@@ -559,9 +630,9 @@ void autonomous() {
 
       // driveSmall(150);
 
-      driveTurn(-86);
+      driveTurn(-87); //86
       angler.set_value(true);
-      driveStraight(900); //1670
+      driveStraight(950); //1670
       angler.set_value(false);
       delay(600);
       driveTurn(86);
@@ -579,7 +650,7 @@ void autonomous() {
       driveTurn(-25);
       driveStraight(1600);
       driveTurn(-86);
-      driveStraight(500);
+      driveStraight(380);
       INTAKE.move(0);
       LF.move(60);
       LM.move(60);

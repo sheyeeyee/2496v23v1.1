@@ -179,6 +179,8 @@ void opcontrol() {
     }
 
 
+
+
     //auton selector
     if(selec.get_value() == true){ // brain was here
       atn ++;
@@ -226,8 +228,9 @@ void opcontrol() {
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       // driveSlow(2000);
-      // driveStraight(1500);
-			driveTurn(-86);
+      // driveStraight(1670);
+			driveTurn(-87);
+      // driveShoot(-800);
     }
 
     // angler
@@ -247,9 +250,17 @@ void opcontrol() {
 		}
 
       //extender
-    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-			extender.set_value(!extenderToggle);
+    if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+      	if (extenderToggle == false) {
+				extender.set_value(false);
+				extenderToggle = true;
+			} else {
+        extender.set_value(true);
+        extenderToggle = false;
+			}
 		}
+
+		
 
     //reset all motor encoders
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
@@ -259,4 +270,4 @@ void opcontrol() {
 		time += 10;
 		pros::delay(10);
 	}
-}
+  }

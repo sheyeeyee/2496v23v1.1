@@ -206,7 +206,7 @@ void driveTurn(int target) { //target is inputted in autons
         
         chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
-        if (abs(target - position) <= 0.68) count++; 
+        if (abs(target - position) <= 0.35) count++; 
         if (count >= 20 || time > timeout) {
             imu.tare_heading();
             break;
@@ -344,6 +344,95 @@ void driveSmall(int target) {
          if (count >= 20 || time > timeout) break;
 
         delay(10);
+
+        if (time % 100 == 0) con.clear(); else if (time % 50 == 0) {
+			cycle++;
+            if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", encoderAvg); 
+            if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %2f", voltage); //autstr //%s
+            // if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		}
+        time += 10;
+    }
+    // chasMove(0, 0, 0, 0);
+    LF.brake();
+    LM.brake();
+    LB.brake();
+    RF.brake();
+    RM.brake();
+    RB.brake();
+}
+
+//drive shoot
+void driveShoot(int target) {
+    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    int timeout = 3500;
+    if (target < 850){
+        int timeout = 1800;
+    } else{
+    int timeout = 3500;
+    }
+    //  double start_head = 0; 
+    // double end_head = 0;
+    if (target < 0){
+         setConstants(55, 0.5, 878); //0.4
+    } else{
+         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    }
+
+    float voltage;
+    float encoderAvg;
+    int count = 0;
+    double init_heading = imu.get_heading();
+    double heading_error = 0;
+    int cycle = 0; // Controller Display Cycle
+    int time = 0;
+    
+    con.clear();
+    // double error_range_time = 0;
+
+    resetEncoders();
+    
+
+    while(true) {
+        // temp cata reset
+        if((220 < time) || (catalim.get_value() == false)){
+            CATA.move(-127);
+        }
+        else CATA.move(0);
+
+        encoderAvg = (LB.get_position() + RB.get_position()) / 2;
+        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
+        viewvol = voltage;
+        if(init_heading > 180) {
+            init_heading = (360 - init_heading);
+        }
+
+        if(imu.get_heading() < 180) {
+            heading_error = init_heading - imu.get_heading();
+        }
+        else {
+            heading_error = ((360 - imu.get_heading()) - init_heading);
+        }
+        
+        heading_error = heading_error * 160;//70
+        h = 1 / error;
+        if (h > 100){
+           h = 30;
+        }
+
+        h = h * 0000; ////-20000
+
+        chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
+        if (abs(target - encoderAvg) <= 5) count++;
+        if (count >= 20 || time > timeout){
+            CATA.move(0);
+            break;
+        } 
+
+        delay(10);
+        
+        // con.print(0, 0, "%2f", encoderAvg); //encoderAvg
+        // con.print(2, 0, "%2f", voltage);
 
         if (time % 100 == 0) con.clear(); else if (time % 50 == 0) {
 			cycle++;
