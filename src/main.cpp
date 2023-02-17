@@ -249,7 +249,7 @@ void opcontrol() {
 			expand.set_value(true);
 		}
 
-      //extender
+    //extender
     if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
       	if (extenderToggle == false) {
 				extender.set_value(false);
@@ -266,8 +266,7 @@ void opcontrol() {
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
 			resetEncoders();
 		}
-
-		time += 10;
-		pros::delay(10);
-	}
+	  	time += 10;
+		  pros::delay(10);
+	  }
   }
