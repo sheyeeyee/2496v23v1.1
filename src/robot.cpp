@@ -30,7 +30,7 @@ pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
 //intake
 pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);
 
-//flywheel
+//cata
 pros::Motor CATA (CATA_PORT, pros::E_MOTOR_GEARSET_06);
 
 //angler for intake
@@ -40,7 +40,6 @@ pros::ADIDigitalOut angler ('B', false);
 pros::ADIDigitalIn catalim ('H');
 
 //expansion
-// pros::ADIDigitalOut expand ({{3, 8}});
 pros::ADIDigitalOut expand ('G');
 
 // extender

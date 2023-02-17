@@ -75,31 +75,30 @@ void competition_initialize() {
       }
     
       if (atn == 1){
-        autstr = "Red Non-Roller";
+        autstr = "Roller";
         con.print(0, 0, "Aut 1: %s", autstr);
       }
       else if(atn == 2){
-        autstr = "Blue Non-Roller";
+        autstr = "Non-Roller";
         con.print(0, 0, "Aut 2: %s", autstr);
       }
       else if(atn == 3){
-        autstr = "Red Roller";
+        autstr = "Skills";
         con.print(0, 0, "Aut 3: %s", autstr);
       }
-      else if(atn == 4){
-        autstr = "Blue Roller";
-        con.print(0, 0, "Aut 4: %s", autstr);
-      }
-      else if(atn == 5){
-        autstr = "AWP";
-        con.print(0, 0, "Aut 5: %s", autstr);
-      }
-      else if(atn == 6){
-        autstr = "Skills";
-        con.print(0, 0, "Aut 6: %s", autstr);
-      }
+      // else if(atn == 4){
+      //   autstr = "Blue Roller";
+      //   con.print(0, 0, "Aut 4: %s", autstr);
+      // }
+      // else if(atn == 5){
+      //   autstr = "AWP";
+      //   con.print(0, 0, "Aut 5: %s", autstr);
+      // }
+      // else if(atn == 6){
+      //   autstr = "Skills";
+      //   con.print(0, 0, "Aut 6: %s", autstr);
+      // }
       con.clear();
-      // con.print(0, 0, "Aut: %s", autstr);
     }
 }
 
@@ -145,7 +144,7 @@ void opcontrol() {
 			cycle++;
       // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
       if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); 
-      if ((cycle+2) % 3 == 0) con.print(1, 0, "Volatge: %f", viewvol); //autstr //%s
+      if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %f", viewvol); //autstr //%s
 		  if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
 		}
 
@@ -178,9 +177,6 @@ void opcontrol() {
       RB.move(right);
     }
 
-
-
-
     //auton selector
     if(selec.get_value() == true){ // brain was here
       atn ++;
@@ -188,23 +184,23 @@ void opcontrol() {
     }
 
     if (atn == 1){
-      autstr = "Red Non-Roller";
+      autstr = "Roller";
     }
     else if(atn == 2){
-      autstr = "Blue Non-Roller";
+      autstr = "Non-Roller";
     }
     else if(atn == 3){
-      autstr = "Red Roller";
-    }
-    else if(atn == 4){
-      autstr = "Blue Roller";
-    }
-    else if(atn == 5){
-      autstr = "Skip";
-    }
-    else if(atn == 6){
       autstr = "Skills";
     }
+    // else if(atn == 4){
+    //   autstr = "Blue Roller";
+    // }
+    // else if(atn == 5){
+    //   autstr = "Skip";
+    // }
+    // else if(atn == 6){
+    //   autstr = "Skills";
+    // }
 
     //intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)) {
@@ -233,7 +229,7 @@ void opcontrol() {
       // driveShoot(-800);
     }
 
-    // angler
+    //angler
 		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {
 			if (anglerToggle == false) {
 				angler.set_value(false);

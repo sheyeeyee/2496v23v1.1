@@ -17,34 +17,33 @@
  */
 void autonomous() {
   //INDEX
-    //AUTON 1: RED NON-ROLLER
-    //AUTON 2: BLUE NON-ROLLER
-    //AUTON 3: RED ROLLER
-    //AUTON 4: BLUE ROLLER
-    //AUTON 5: FULL AWP
-    //AUTON 6: SKILLS
+    //AUTON 1: ROLLER
+    //AUTON 2: NON-ROLLER
+    //AUTON 3: SKILLS
+    //AUTON 4: 
+    //AUTON 5: 
+    //AUTON 6: 
 
 // //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 
-//   //RED NON-ROLLER
+//   //ROLLER
 //   if (atn == 1){
 //   }
 
 // //22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
-//   //BLUE NON-ROLLER
+//   //NON-ROLLER
 //   else if(atn == 2){
 //   }
 
 //   //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
   
-//   //RED ROLLER
+//   //SKILLS
 //   else if(atn == 3){
 //   }
 
-// //444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+// //44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
 
-//   //BLUE ROLLER
 //   else if(atn == 4){
 //   }
 
@@ -55,10 +54,9 @@ void autonomous() {
 
 // //666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
 
-  //SKILLS + HALF AWP
-//   else if(atn == 6){
+//   else if(atn == 6) {
 
-  ///////////////START HALF AWP/////////////////////////////////////////////////////////////////////////////////////
+  ///////////////START HALF AWP ROLLER/////////////////////////////////////////////////////////////////////////////////////
 
       delay(180);
       INTAKE.move(0);
@@ -76,51 +74,86 @@ void autonomous() {
       //back out from roller
       driveStraight(-400);
       driveTurn(50);
+
+      //back toward center field
       driveStraight(-2100);
       driveTurn(-95);
+
+      //shoot 1st disc
       CATA.move(-127);
       delay(200);
       while(catalim.get_value() == false) CATA.move(-127);
       CATA.move(0);
+
+      //intake 2nd disc
       INTAKE.move(127);
       delay(600);
+
+      //shoot 2nd disc
       CATA.move(-127);
       delay(200);
       while(catalim.get_value() == false) CATA.move(-127);
       CATA.move(0);
+
+      //release bands
       extender.set_value(true);
       delay(180);
       extender.set_value(false);
 
       delay(99999999);
 
+//////END HALF AWP ROLLER///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      //////END HALF AWP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////START HALF AWP NON-ROLLER (YET TO TEST)/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //back toward center field
+      driveStraight(-2000);
+      driveTurn(-45);
 
-      // driveTurn(-85);
-      // driveStraight(2100);
-      // driveTurn(50);
-      // driveStraight(400);
-      // INTAKE.move(0);
+      //outtake-ish 2nd disc
+      INTAKE.move_relative(-500, -600);
+      
+      //shoot 1st disc
+      CATA.move(-127);
+      delay(200);
+      while(catalim.get_value() == false) CATA.move(-127);
+      CATA.move(0);
 
-      // LF.move(20);
-      // LM.move(20);
-      // LB.move(20);
-      // RF.move(20);
-      // RM.move(20);
-      // RB.move(20);
-      // delay(450);
+      //intake 2nd disc
+      INTAKE.move(127);
+      delay(600);
+
+      //shoot 2nd disc
+      CATA.move(-127);
+      delay(200);
+      while(catalim.get_value() == false) CATA.move(-127);
+      CATA.move(0);
+
+      //turn toward 2 discs and intake
+      driveTurn(-90);
+      driveStraight(2100);
+
+      //toward roller
+      driveTurn(45);
+      driveStraight(500);
+
+      //spin roller
+      delay(180);
+      INTAKE.move(0);
+      LF.move(20);
+      LM.move(20);
+      LB.move(20);
+      RF.move(20);
+      RM.move(20);
+      RB.move(20);
+      delay(450);
+
+      INTAKE.move_relative(-500, -600);
+      delay(800);
+
+//////END HALF AWP NON-ROLLER///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-      //spin the intake a certain amount
-      // INTAKE.move(127);
-
-      // INTAKE.move_relative(-500, -600);
-      // delay(800);
-
-
-
-//////start skills////////////////////////////////////////////////////////////////////////////
+//////START SKILLS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //run intake to ensure discs fall into the right place
       INTAKE.move(127);
       delay(300);
@@ -323,12 +356,12 @@ void autonomous() {
 
       //expansion
       expand.set_value(true);
+      
+////////////////////////////////////END SKILLS////////////////////////////////////////////////////////////////////////////////////////////////
   // }
 
-
-
-  ////////////////////////////////////end//////
-      
+//////////////////////////////ARCHIVE/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//OLD SKILLS (TRIED TO GET TO OTHER MATCH LOADER)
 //       //back out from second roller
 //       driveStraight(-1250);
 
@@ -459,5 +492,4 @@ void autonomous() {
 
 //       //expansion
 //       expand.set_value(true);
-//   // }
 }

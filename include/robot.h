@@ -8,6 +8,10 @@
 #ifndef ROBOTH
 #define ROBOTH
 
+//controller
+extern pros::Controller con;
+
+//chassis motors
 extern pros::Motor LF;
 extern pros::Motor LB;
 extern pros::Motor RF;
@@ -15,17 +19,11 @@ extern pros::Motor RB;
 extern pros::Motor RM;
 extern pros::Motor LM;
 
-
 //intake
 extern pros::Motor INTAKE;
 
-//flywheel
+//cata
 extern pros::Motor CATA;
-
-
-//controller
-extern pros::Controller con;
-
 
 //sensors
 extern pros::ADIEncoder encLeft;
@@ -56,4 +54,7 @@ extern pros::ADIDigitalOut extender;
 
 //optical
 extern pros::Optical optical;
+
+//auton selector
+extern pros::ADIDigitalIn selec;
 #endif
