@@ -46,7 +46,7 @@ pros::ADIDigitalOut expand ('G');
 pros::ADIDigitalOut extender ('F');
 
 //auton selector
-pros::ADIDigitalIn selec ({{3, 7}});
+pros::ADIDigitalIn selec ('A');
 
 //sensors
 pros::ADIEncoder encLeft ({{1, 1, 2}, false});

@@ -46,15 +46,17 @@ extern pros::c::gps_status_s_t gpsData;
 
 //expansion
 extern pros::ADIDigitalOut expand;
+
+//auton selector
 extern pros::ADIDigitalIn selec;
+
+//cata limit switch
 extern pros::ADIDigitalIn catalim;
 
-// extender
+//extender
 extern pros::ADIDigitalOut extender;
 
 //optical
 extern pros::Optical optical;
 
-//auton selector
-extern pros::ADIDigitalIn selec;
 #endif
