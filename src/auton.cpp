@@ -76,12 +76,12 @@ void autonomous() {
   //NON-ROLLER
   else if (atn == 2) {
     //back toward center field
-    driveStraight(-1850);
+    driveStraight(-2000);
     
     //outtake-ish 2nd disc
     INTAKE.move_relative(-500, -600);
 
-    driveTurn(45);
+    driveTurn(44);
     
     //shoot 1st disc
     CATA.move(-127);
@@ -105,12 +105,12 @@ void autonomous() {
     extender.set_value(false);
 
     //turn toward 2 discs and intake
-    driveTurn(-90);
-    driveStraight(2400);
+    driveTurn(-91);
+    driveStraight(2500);
 
     //toward roller
     driveTurn(45);
-    driveStraight(100);
+    driveStraight(150);
 
     //spin roller
     delay(180);
@@ -121,10 +121,10 @@ void autonomous() {
     RF.move(20);
     RM.move(20);
     RB.move(20);
-    delay(450);
+    delay(800);
 
     INTAKE.move_relative(-500, -600);
-    delay(800);
+    delay(1000);
 
     driveStraight(-200);
   }
