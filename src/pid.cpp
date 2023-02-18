@@ -96,7 +96,7 @@ void driveStraight(int target) {
     //  double start_head = 0; 
     // double end_head = 0;
     if (target < 0){
-         setConstants(55, 0.5, 878); //0.4
+         setConstants(53, 0.4, 878); //0.4
     } else{
          setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     }

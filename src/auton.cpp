@@ -132,7 +132,7 @@ void autonomous() {
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
   
   //SKILLS
-  else if (atn == 3) {
+  else if (atn == 0) {
     //run intake to ensure discs fall into the right place
     INTAKE.move(127);
     delay(300);
@@ -153,7 +153,7 @@ void autonomous() {
 
 
     //reposition by going backwards for enough space to turn towards next spot
-    driveStraight(-600);
+    driveStraight(-603);
     driveTurn(36);
     //intake up for 3-stack
     angler.set_value(true);
@@ -186,7 +186,7 @@ void autonomous() {
 
     //spin the intake a certain amount
     // INTAKE.move(127);
-    INTAKE.move_relative(1100, 600);
+    INTAKE.move_relative(1000, 600);
     delay(800);
     INTAKE.move(127);
       
@@ -214,23 +214,24 @@ void autonomous() {
     RM.move(10);
     RB.move(10);
     //spin the intake a certain amount for second roller
-    INTAKE.move_relative(1100, 600);
+    INTAKE.move_relative(1000, 600);
     delay(800);
     driveStraight(-700);
     //turn right to position for expansion
     driveTurn(-15);
     driveStraight(-1800);
-    driveTurn(19);
+    driveTurn(17);//19
       
     CATA.move(-127);
     delay(190);
-    driveTurn(-14);
+    driveTurn(-16); //14
 
-    driveStraight(1000);//950
+
+    driveStraight(1075);//950//1000
     driveTurn(-124);
     INTAKE.move(127);
     driveSlow(2000);
-    driveTurn(85);
+    driveTurn(87); //85
     // driveSmall(-200);
     CATA.move(-127);
     delay(190);
@@ -242,14 +243,15 @@ void autonomous() {
 
     // driveSmall(150);
 
-    driveTurn(-87); //86
+    driveTurn(-84); //86
     angler.set_value(true);
-    driveStraight(950); //1670
+    driveStraight(850); //1670 //950
     angler.set_value(false);
-    delay(600);
+    delay(800);
     driveTurn(86);
-    driveStraight(-500);
-    driveTurn(-25);
+    delay(350);
+    driveStraight(-550); //500
+    driveTurn(-28); //25
     CATA.move(-127);
     delay(190);
 
@@ -259,10 +261,10 @@ void autonomous() {
   // CATA.move(0);
 
         
-    driveTurn(-25);
+    driveTurn(-22);//25
     driveStraight(1600);
-    driveTurn(-86);
-    driveStraight(380);
+    driveTurn(-85); //-86
+    driveStraight(320);
     INTAKE.move(0);
     LF.move(60);
     LM.move(60);
@@ -282,7 +284,7 @@ void autonomous() {
 
     //spin the intake a certain amount
     // INTAKE.move(127);
-    INTAKE.move_relative(1100, 600);
+    INTAKE.move_relative(1000, 600);
     delay(800);
     INTAKE.move(127);
         
@@ -313,7 +315,7 @@ void autonomous() {
     RB.move(10);
   
     //spin the intake a certain amount for second roller
-    INTAKE.move_relative(1100, 600);
+    INTAKE.move_relative(1000, 600);
     delay(800);
 
     driveStraight(-760);

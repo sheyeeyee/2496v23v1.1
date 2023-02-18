@@ -23,7 +23,7 @@ extern float viewvol;
 
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-#define STRAIGHT_KP 63.5 //80 9.5 77 15 // 1519 70 71 70 //////20 ///// 70 20 working val: 220 nval 110 good:61 //////63.5
+#define STRAIGHT_KP 63.25 //80 9.5 77 15 // 1519 70 71 70 //////20 ///// 70 20 working val: 220 nval 110 good:61 //////63.5
 #define STRAIGHT_KI 0.63//0.2 0.2 0.25 0.4 // 0.8 0.5 0.5 0.9 ////0.7 //// 0.5 0.7//3 working val: 0.2 nval 0.2 nnval: 0.48 good: 0.6
 #define STRAIGHT_KD 950//1488 25 50 57////800 1000 working val: 1000 nval 1100
 
@@ -34,7 +34,7 @@ extern float viewvol;
 
 //tune turnt constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);
 #define TURN_KP 1200 //150 //110 //90 gval:800 wth: 1800 REALLYGOOD: 1800 // 1640 ehh 1400
-#define TURN_KI 0.45 // 80 //200 gval:20 wth: 20 REALLYGOOD:0.5 ehh 0.2
+#define TURN_KI 0.425 // 80 //200 gval:20 wth: 20 REALLYGOOD:0.5 ehh 0.2 //0.45
 #define TURN_KD 10000 //850 gval:850 wth: 15000 REALLYGOOD:15000 ehh 17000
 
 //tune turn integral-specific here: voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
