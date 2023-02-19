@@ -17,8 +17,10 @@ using namespace std;
 float vKp;
 float vKi;
 float vKd;
+float slew;
 float error; //amount from target
 float viewvol;
+bool slewOn = true;
 
 float prevError; //how is this specified/calculated??
 float h;
@@ -27,101 +29,29 @@ int integral;
 int derivative;
 
 float power; //voltage provided to motors at any given time to reach the target
+float prevPower;
 
-
-void setConstants(float kp, float ki, float kd) {
-    vKp = kp;
-    vKi = ki;
-    vKd = kd;
-}
-
-void resetEncoders() { //reset the chassis motors every time a target is reached
-    LF.tare_position(); //or set_zero_position(0) or set_zero_position(LF.get_position()); (sets current encoder position to 0)
-    LB.tare_position();
-	RF.tare_position();
-	RB.tare_position();
-    RM.tare_position();
-	LM.tare_position();
-}
-
-//setting method for driving straight or turning (pos neg voltages change directions)
-void chasMove(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int voltageRB, int voltageRM) { //voltage to each chassis motor
-    LF.move_voltage(voltageLF);
-    LM.move_voltage(voltageLB);
-    LB.move_voltage(voltageLB);
-    RF.move_voltage(voltageRF);
-    RM.move_voltage(voltageRF);
-    RB.move_voltage(voltageRB);
-}
-
-float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
-    prevError = error;
-    error = target - input;
-    
-    if(std::abs(error) < integralKi) {
-        integral += error;
-    } else {
-        integral = 0;
-    }
-
-    if(integral >= 0) {
-        integral = std::min(integral, maxIntegral); //min means take whichever value is smaller btwn integral and maxI
-        //integral = integral until integral is greater than maxI (to keep integral limited to maxI)
-    } else {
-        integral = std::max(integral, -maxIntegral); //same thing but negative max
-    }
-    
-    derivative = std::abs(error - prevError);
-
-    if (target < 0){
-        derivative *= -1;
-    }
-
-    power = (vKp * error) + (vKi * integral) - (vKd * derivative); //+ (vKd * derivative);
-
-    // con.print(0, 0, "%2f", (integral * 0.035));
-
-    return power;
-}
 
 //driving straight
-void driveStraight(int target) {
-    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-    int timeout = 3500;
-    if (target < 850){
-        int timeout = 1800;
-    } else{
-    int timeout = 3500;
-    }
-    //  double start_head = 0; 
-    // double end_head = 0;
-    if (target < 0){
-         setConstants(55, 0.5, 878); //0.4
-    } else{
-         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-    }
+void driveStraight(int target, float kp, float ki, float kd, float timeout) {
 
     float voltage;
-    float encoderAvg;
     int count = 0;
     double init_heading = imu.get_heading();
     double heading_error = 0;
     int cycle = 0; // Controller Display Cycle
     int time = 0;
     
+    setConstants(kp, ki, kd);
     con.clear();
-    // double error_range_time = 0;
-
     resetEncoders();
-    
 
     while(true) {
-        // temp cata reset
-        if (catalim.get_value() == false) CATA.move(-127);
-        else CATA.move(0);
+        // TODO move to thread | temp cata reset
+        // if (catalim.get_value() == false) CATA.move(-127);
+        // else CATA.move(0);
 
-        encoderAvg = (LB.get_position() + RB.get_position()) / 2;
-        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
+        voltage = calcPID(target, encoderAvg(), STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
         viewvol = voltage;
         if(init_heading > 180) {
             init_heading = (360 - init_heading);
@@ -143,7 +73,7 @@ void driveStraight(int target) {
         h = h * 0000; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
-        if (abs(target - encoderAvg) <= 5) count++;
+        if (abs(target - encoderAvg()) <= 5) count++;
         if (count >= 20 || time > timeout){
             CATA.move(0);
             break;
