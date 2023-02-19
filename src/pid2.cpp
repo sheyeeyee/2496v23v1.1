@@ -83,7 +83,7 @@ class controllerDisplay
     private:
         int cycle;
     public:
-        void pid(int target, double pidVoltage, double headingError)
+        void pidStraight(int target, double pidVoltage, double headingError)
         {
             if (cycle % 10 == 0) con.clear(); 
             else if (cycle % 5 == 0) {
@@ -113,9 +113,31 @@ void driveStraight(int target, double timeout, double minTarget, double vKp, dou
         if (abs(target - encoderAvg()) <= minTarget) breakoutCount++;
         if (breakoutCount >= 20 || time > timeout) break;
 
-        pidDisplay.pid(target, pidVoltage, headingError);
+        pidDisplay.pidStraight(target, pidVoltage, headingError);
 
         time += 10;
         delay(10);
+    }
+}
+
+// Todo Change to absolute rotation
+void driveTurn(int target, double timeout, double minTarget, double vKp, double vKi, double vKd)
+{
+    // PID & Heading Control Objects
+    pid turnPid(vKp, vKi, vKd, STRAIGHT_MAX_INTEGRAL, STRAIGHT_INTEGRAL_KI);
+    controllerDisplay pidDisplay; // Move to parent loop
+
+    int breakoutCount, time, cycle;
+
+    while(true)
+    {
+        // TODO Needs to be replaced with agolorithm to decide whether to turn left or right based on absolute rotation
+        double heading = imu.get_heading();
+        // if (imu.get_heading() > 180) heading = ((360 - heading) * -1); // Converts 0-360 Degrees to -180-180
+        double pidVoltage = turnPid.calcPID(target, heading);
+
+        chasMove((pidVoltage ), (-pidVoltage));
+        if (abs(target - imu.get_heading()) <= minTarget) breakoutCount++;
+        if (breakoutCount >= 20 || time > timeout) break;
     }
 }
