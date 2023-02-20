@@ -134,13 +134,13 @@ void driveStraight(int target) {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
         
-        heading_error = heading_error * 160;//70
+        heading_error = heading_error * 0;//70 //160
         h = 1 / error;
         if (h > 100){
            h = 30;
         }
 
-        h = h * 0000; ////-20000
+        h = h * 160; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
@@ -176,6 +176,25 @@ void driveTurn(int target) { //target is inputted in autons
     int timeout = 2100;
     imu.tare_heading();
     int time = 0;
+
+    if (abs(target) < 28){
+         setConstants(1200, 0.425, 10000); //0.4
+    } 
+    else if (abs(target) < 45){
+         setConstants(1800, 0.425, 18000);
+    }
+    else if (abs(target) < 75){
+        setConstants(2000, 0.05, 18000);
+    }
+    else if (abs(target) < 100){
+        setConstants(1800, 0.425, 15000);
+    }
+    else {
+        setConstants(1800, 0.01, 18000);
+    }
+
+
+    
     //over // 200 150 0
     //under 82 190 0
     //kd profile one// 200 190 100
@@ -206,7 +225,7 @@ void driveTurn(int target) { //target is inputted in autons
         
         chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
-        if (abs(target - position) <= 0.35) count++; 
+        if (abs(target - position) <= 0.3) count++; //0.35
         if (count >= 20 || time > timeout) {
             imu.tare_heading();
             break;

@@ -137,19 +137,19 @@ void autonomous() {
     INTAKE.move(127);
     delay(300);
       
-    //shoot three cycles
-    int i = 0;
-    while (i <= 2) {
-      while(catalim.get_value() == false) CATA.move(-127);
-      CATA.move(0);
-      delay(1500);
-      CATA.move(-127);
-      delay(400);
+    // //shoot three cycles
+    // int i = 0;
+    // while (i <= 2) {
+    //   while(catalim.get_value() == false) CATA.move(-127);
+    //   CATA.move(0);
+    //   delay(1500);
+    //   CATA.move(-127);
+    //   delay(400);
       
-      CATA.move(0);
-      i++;
-    }
-    CATA.move(0);
+    //   CATA.move(0);
+    //   i++;
+    // }
+    // CATA.move(0);
 
 
     //reposition by going backwards for enough space to turn towards next spot
@@ -218,6 +218,53 @@ void autonomous() {
     delay(800);
     driveStraight(-700);
     //turn right to position for expansion
+
+     ////////end origin
+    driveTurn(-19);
+    driveStraight(-2015);
+    driveTurn(23);//19
+      
+    CATA.move(-127);
+    delay(190);
+    driveTurn(-8);
+
+    driveStraight(-1500); //1575
+    driveTurn(-95);
+    driveStraight(2075);
+
+    int i = 0;
+    while (i <= 1) {
+      while(catalim.get_value() == false) CATA.move(-127);
+      CATA.move(0);
+      delay(1500);
+      CATA.move(-127);
+      delay(400);
+      
+      CATA.move(0);
+      i++;
+    }
+    CATA.move(0);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+delay(99999);
+
+/////begin origin 
+
     driveTurn(-15);
     driveStraight(-1800);
     driveTurn(17);//19
@@ -225,8 +272,6 @@ void autonomous() {
     CATA.move(-127);
     delay(190);
     driveTurn(-16); //14
-
-
     driveStraight(1075);//950//1000
     driveTurn(-124);
     INTAKE.move(127);
