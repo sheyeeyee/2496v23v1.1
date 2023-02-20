@@ -26,22 +26,6 @@ pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor RF (RF_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RM (RM_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
-void resetEncoders() { //reset the chassis motors every time a target is reached
-    LF.tare_position(); //or set_zero_position(0) or set_zero_position(LF.get_position()); (sets current encoder position to 0)
-    LB.tare_position();
-	RF.tare_position();
-	RB.tare_position();
-    RM.tare_position();
-	LM.tare_position();
-}
-float encoderAvg() { return (LB.get_position() + RB.get_position()) / 2; }
-void chasMove(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int voltageRB, int voltageRM) {
-    LM.move_voltage(voltageLB);
-    LB.move_voltage(voltageLB);
-    RF.move_voltage(voltageRF);
-    RM.move_voltage(voltageRF);
-    RB.move_voltage(voltageRB);
-}
 
 //intake
 pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);
