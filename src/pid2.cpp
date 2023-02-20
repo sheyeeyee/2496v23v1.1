@@ -93,6 +93,16 @@ class controllerDisplay
                 if ((cycle+3) % 3 == 0) con.print(2, 0, "HeadingError: %f", headingError);
             }
         }
+        void pidTurn(int target, double pidVoltage)
+        {
+            if (cycle % 10 == 0) con.clear(); 
+            else if (cycle % 5 == 0) {
+                cycle++;
+                if ((cycle+1) % 3 == 0) con.print(0, 0, "Error: %2f", target-imu.get_heading()); 
+                if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %2f", pidVoltage);
+                // if ((cycle+3) % 3 == 0) con.print(2, 0, "HeadingError: %f", headingError);
+            }
+        }
 };
 
 void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd)
@@ -102,7 +112,7 @@ void driveStraight(int target, double timeout, double minTarget, double vKp, dou
     headingControl straightHeading(imu.get_heading(), 160);
     controllerDisplay pidDisplay; // Move to parent loop
 
-    int breakoutCount, time, cycle;
+    int breakoutCount, time;
 
     while(true)
     {
@@ -127,17 +137,22 @@ void driveTurn(int target, double timeout, double minTarget, double vKp, double 
     pid turnPid(vKp, vKi, vKd, STRAIGHT_MAX_INTEGRAL, STRAIGHT_INTEGRAL_KI);
     controllerDisplay pidDisplay; // Move to parent loop
 
-    int breakoutCount, time, cycle;
+    int breakoutCount, time;
 
     while(true)
     {
         // TODO Needs to be replaced with agolorithm to decide whether to turn left or right based on absolute rotation
         double heading = imu.get_heading();
-        // if (imu.get_heading() > 180) heading = ((360 - heading) * -1); // Converts 0-360 Degrees to -180-180
+        if (imu.get_heading() > 180) heading = ((360 - heading) * -1); // Converts 0-360 Degrees to -180-180
         double pidVoltage = turnPid.calcPID(target, heading);
 
         chasMove((pidVoltage ), (-pidVoltage));
         if (abs(target - imu.get_heading()) <= minTarget) breakoutCount++;
         if (breakoutCount >= 20 || time > timeout) break;
+
+        pidDisplay.pidTurn(target, pidVoltage);
+
+        time += 10;
+        delay(10);
     }
 }
