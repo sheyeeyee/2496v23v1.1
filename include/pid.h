@@ -12,14 +12,8 @@ extern void resetEncoders();
 // extern void chasMove(int voltageLF, int voltageLB, int voltageRF, int voltageRB);
 // extern float calcPID(int target, float input, int integralKi, int maxI);
 
-extern void driveStraight(int target);
-extern void driveTurn(int target);
-extern void driveAim(int target);
-extern void driveSlow(int target);
-extern void driveSmall(int target);
-extern void driveShoot(int target);
-extern float error;
-extern float viewvol;
+extern void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd);
+extern void driveTurn(int target, double timeout, double minTarget, double vKp, double vKi, double vKd);
 
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);

@@ -25,7 +25,7 @@ pros::Motor LM (LM_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor LB (LB_PORT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor RF (RF_PORT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor RM (RM_PORT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor RB (RB_PORT, pros::E_MOTOR_GEARSET_06, false); 
 
 //intake
 pros::Motor INTAKE (INTAKE_PORT, pros::E_MOTOR_GEARSET_18, true);

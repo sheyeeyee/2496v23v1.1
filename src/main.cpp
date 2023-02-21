@@ -222,10 +222,8 @@ void opcontrol() {
     
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      // driveSlow(2000);
-      // driveStraight(1670);
-			driveTurn(-87);
-      // driveShoot(-800);
+        driveStraight(2000,3500, 5, 63.25, 0.63, 950);
+        // driveTurn(-87);
     }
 
     //angler
