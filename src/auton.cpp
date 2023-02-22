@@ -138,18 +138,18 @@ void autonomous() {
     delay(300);
       
     // //shoot three cycles
-    // int i = 0;
-    // while (i <= 2) {
-    //   while(catalim.get_value() == false) CATA.move(-127);
-    //   CATA.move(0);
-    //   delay(1500);
-    //   CATA.move(-127);
-    //   delay(400);
+    int i = 0;
+    while (i <= 2) {
+      while(catalim.get_value() == false) CATA.move(-127);
+      CATA.move(0);
+      delay(1500);
+      CATA.move(-127);
+      delay(400);
       
-    //   CATA.move(0);
-    //   i++;
-    // }
-    // CATA.move(0);
+      CATA.move(0);
+      i++;
+    }
+    CATA.move(0);
 
 
     //reposition by going backwards for enough space to turn towards next spot
@@ -219,31 +219,31 @@ void autonomous() {
     driveStraight(-700);
     //turn right to position for expansion
 
-     ////////end origin
-    driveTurn(-19);
-    driveStraight(-2015);
-    driveTurn(23);//19
+    //  ////////end origin
+    // driveTurn(-15);
+    // driveStraight(-1975);
+    // driveTurn(23);//19
       
-    CATA.move(-127);
-    delay(190);
-    driveTurn(-8);
+    // CATA.move(-127);
+    // delay(190);
+    // driveTurn(-5);
 
-    driveStraight(-1500); //1575
-    driveTurn(-95);
-    driveStraight(2075);
+    // driveStraight(-1500); //1575
+    // driveTurn(-95);
+    // driveStraight(2075);
 
-    int i = 0;
-    while (i <= 1) {
-      while(catalim.get_value() == false) CATA.move(-127);
-      CATA.move(0);
-      delay(1500);
-      CATA.move(-127);
-      delay(400);
+    // int i = 0;
+    // while (i <= 1) {
+    //   while(catalim.get_value() == false) CATA.move(-127);
+    //   CATA.move(0);
+    //   delay(1500);
+    //   CATA.move(-127);
+    //   delay(400);
       
-      CATA.move(0);
-      i++;
-    }
-    CATA.move(0);
+    //   CATA.move(0);
+    //   i++;
+    // }
+    // CATA.move(0);
     
 
 
@@ -261,7 +261,7 @@ void autonomous() {
 
 
 
-delay(99999);
+// delay(99999);
 
 /////begin origin 
 
@@ -276,7 +276,7 @@ delay(99999);
     driveTurn(-124);
     INTAKE.move(127);
     driveSlow(2000);
-    driveTurn(87); //85
+    driveTurn(90); //85
     // driveSmall(-200);
     CATA.move(-127);
     delay(190);
@@ -288,7 +288,7 @@ delay(99999);
 
     // driveSmall(150);
 
-    driveTurn(-84); //86
+    driveTurn(-82); //86
     angler.set_value(true);
     driveStraight(850); //1670 //950
     angler.set_value(false);

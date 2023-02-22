@@ -95,11 +95,21 @@ void driveStraight(int target) {
     }
     //  double start_head = 0; 
     // double end_head = 0;
-    if (target < 0){
-         setConstants(53, 0.4, 878); //0.4
-    } else{
-         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    if (abs(target) > 1500){
+         setConstants(63.5, 0.63, 950); //0.4
+    } else if(abs(target) > 1050){
+         setConstants(44, 0.25, 475); //0.4
+    } else if (abs(target) > 900){
+         setConstants(44, 0.25, 485); //0.4
+    } else {
+        setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     }
+
+    // if (target < 0){
+    //      setConstants(53, 0.4, 878); //0.4
+    // } else{
+    //      setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    // }
 
     float voltage;
     float encoderAvg;
@@ -143,7 +153,7 @@ void driveStraight(int target) {
         h = h * 160; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
-        if (abs(target - encoderAvg) <= 5) count++;
+        if (abs(target - encoderAvg) <= 2.5) count++;
         if (count >= 20 || time > timeout){
             CATA.move(0);
             break;
@@ -177,21 +187,25 @@ void driveTurn(int target) { //target is inputted in autons
     imu.tare_heading();
     int time = 0;
 
-    if (abs(target) < 28){
-         setConstants(1200, 0.425, 10000); //0.4
-    } 
-    else if (abs(target) < 45){
-         setConstants(1800, 0.425, 18000);
-    }
-    else if (abs(target) < 75){
-        setConstants(2000, 0.05, 18000);
-    }
-    else if (abs(target) < 100){
-        setConstants(1800, 0.425, 15000);
-    }
-    else {
-        setConstants(1800, 0.01, 18000);
-    }
+    // if ((target == -16) || (target == -8)){
+    //     setConstants(1200, 0.425, 10000);
+    // }
+
+    // if (abs(target) <= 20){
+    //      setConstants(1200, 0.425, 10000); //0.4
+    // } 
+    // else if (abs(target) < 45){
+    //      setConstants(1800, 0.425, 18000);
+    // }
+    // else if (abs(target) < 75){
+    //     setConstants(2000, 0.05, 19000);
+    // }
+    // else if (abs(target) < 100){
+    //     setConstants(1800, 0.425, 19000);
+    // }
+    // else {
+    //     setConstants(1800, 0.01, 18000);
+    // }
 
 
     
