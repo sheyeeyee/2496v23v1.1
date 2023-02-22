@@ -82,7 +82,7 @@ void competition_initialize() {
         autstr = "Non-Roller";
         con.print(0, 0, "Aut 2: %s", autstr);
       }
-      else if (atn == 3) {
+      else if (atn == 0) {
         autstr = "Skills";
         con.print(0, 0, "Aut 3: %s", autstr);
       }
@@ -177,7 +177,7 @@ void opcontrol() {
     }
 
     //auton selector
-    if(selec.get_value() == true) { // brain was here
+    if (selec.get_value() == true) { // brain was here
       atn ++;
       delay(350);
     }
@@ -188,7 +188,7 @@ void opcontrol() {
     else if (atn == 2) {
       autstr = "Non-Roller";
     }
-    else if (atn == 3) {
+    else if (atn == 0) {
       autstr = "Skills";
     }
     else if (atn == 4) {
