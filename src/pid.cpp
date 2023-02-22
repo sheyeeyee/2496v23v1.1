@@ -95,15 +95,15 @@ void driveStraight(int target) {
     }
     //  double start_head = 0; 
     // double end_head = 0;
-    if (abs(target) > 1500){
-         setConstants(63.5, 0.63, 950); //0.4
-    } else if(abs(target) > 1050){
-         setConstants(44, 0.25, 475); //0.4
-    } else if (abs(target) > 900){
-         setConstants(44, 0.25, 485); //0.4
-    } else {
-        setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-    }
+    // if (abs(target) > 1500){
+    //      setConstants(63.5, 0.63, 950); //0.4
+    // } else if(abs(target) > 1050){
+    //      setConstants(44, 0.25, 475); //0.4
+    // } else if (abs(target) > 900){
+    //      setConstants(44, 0.25, 485); //0.4
+    // } else {
+    //     setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    // } ///hi
 
     // if (target < 0){
     //      setConstants(53, 0.4, 878); //0.4
