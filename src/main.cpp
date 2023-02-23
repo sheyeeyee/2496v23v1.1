@@ -86,17 +86,11 @@ void competition_initialize() {
         autstr = "Skills";
         con.print(0, 0, "Aut 3: %s", autstr);
       }
-      else if (atn == 4) {
+      else if (atn == 3) {
         atn = 0;
       }
-      // else if(atn == 5){
-      //   autstr = "AWP";
-      //   con.print(0, 0, "Aut 5: %s", autstr);
-      // }
-      // else if(atn == 6){
-      //   autstr = "Skills";
-      //   con.print(0, 0, "Aut 6: %s", autstr); // gerald was here 
-      // }// hi 
+      // gerald was here 
+      // hi 
       con.clear();
     }
 }
@@ -191,15 +185,9 @@ void opcontrol() {
     else if (atn == 0) {
       autstr = "Skills";
     }
-    else if (atn == 4) {
+    else if (atn == 3) {
       atn = 0;
     }
-    // else if(atn == 5){
-    //   autstr = "Skip";
-    // }
-    // else if(atn == 6){
-    //   autstr = "Skills";
-    // }
 
     //intake
 		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)) {
