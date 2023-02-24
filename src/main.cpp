@@ -223,8 +223,9 @@ void opcontrol() {
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       // driveSlow(2000);
-      driveStraight(1670);
-			// driveTurn(124);
+      // driveStraight(1670);
+      driveStraight(1000);
+			// driveTurn(90);
       // driveShoot(-800);
     }
 
@@ -243,6 +244,8 @@ void opcontrol() {
     if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT) && con.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			expand.set_value(true);
 		}
+
+    
 
     //extender
     if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
