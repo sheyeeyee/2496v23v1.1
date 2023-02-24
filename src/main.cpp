@@ -222,7 +222,8 @@ void opcontrol() {
     
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-        driveStraight(2000,3500, 5, 63.25, 0.63, 950);
+        // driveStraight(2000,3500, 5, 63.25, 0.63, 950);
+        driveStraight(200,10000, 1, 10, 0, 0); // test PID
         // driveTurn(-87);
     }
 
