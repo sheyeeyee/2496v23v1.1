@@ -14,22 +14,25 @@ using namespace c;
 using namespace std;
 
 //constants used for calculating power/voltage
-float vKp;
-float vKi;
-float vKd;
+double vKp;
+double vKi;
+double vKd;
 float error; //amount from target
 float viewvol;
+bool t_slew_on = true;
+double prevPower;
+double currentPower; // temp
 
-float prevError; //how is this specified/calculated??
-float h;
+double prevError; //how is this specified/calculated??
+double h;
 
 int integral;
 int derivative;
 
-float power; //voltage provided to motors at any given time to reach the target
+double power; //voltage provided to motors at any given time to reach the target
 
 
-void setConstants(float kp, float ki, float kd) {
+void setConstants(double kp, double ki, double kd) {
     vKp = kp;
     vKi = ki;
     vKd = kd;
@@ -53,10 +56,20 @@ void chasMove(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int vo
     RM.move_voltage(voltageRF);
     RB.move_voltage(voltageRB);
 }
+void chasMove2(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int voltageRB, int voltageRM) { //voltage to each chassis motor
+    LF.move(voltageLF);
+    LM.move(voltageLB);
+    LB.move(voltageLB);
+    RF.move(voltageRF);
+    RM.move(voltageRF);
+    RB.move(voltageRB);
+}
 
-float calcPID(int target, float input, int integralKi, int maxIntegral) { //basically tuning i here
+// double slew = 0.1; // temp hard code CHANGE THIS 0_0
+double calcPID(int target, double input, int integralKi, int maxIntegral) { //basically tuning i here
     prevError = error;
     error = target - input;
+    prevPower = currentPower;
     
     if(std::abs(error) < integralKi) {
         integral += error;
@@ -71,22 +84,33 @@ float calcPID(int target, float input, int integralKi, int maxIntegral) { //basi
         integral = std::max(integral, -maxIntegral); //same thing but negative max
     }
     
-    derivative = std::abs(error - prevError);
+    derivative = error - prevError;
 
     if (target < 0){
         derivative *= -1;
     }
 
-    power = (vKp * error) + (vKi * integral) - (vKd * derivative); //+ (vKd * derivative);
-
+    power = (vKp * error) + (vKi * integral) + (vKd * derivative); //+ (vKd * derivative);
+    currentPower = power;
     // con.print(0, 0, "%2f", (integral * 0.035));
+
+    // if(t_slew_on)
+    // {
+    //     if (std::abs(power) <= std::abs(prevPower) + std::abs(slew)){
+    //         t_slew_on = false;
+    //     }
+    //     else{
+    //         power = prevPower + slew;
+    //     }
+    // }
+    
 
     return power;
 }
 
 //driving straight
 void driveStraight(int target) {
-    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+
     int timeout = 3500;
     if (target < 850){
         int timeout = 1800;
@@ -111,21 +135,32 @@ void driveStraight(int target) {
     //      setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     // }
 
-    float voltage;
-    float encoderAvg;
+    double voltage;
+    double encoderAvg;
     int count = 0;
     double init_heading = imu.get_heading();
     double heading_error = 0;
     int cycle = 0; // Controller Display Cycle
     int time = 0;
+    int l = 0;
     
     con.clear();
     // double error_range_time = 0;
 
     resetEncoders();
-    
+    if (target > 0){
+            l = 0;
+        } else {
+          l = 1;
+        }
 
+    
+    int maxPower = 10;
     while(true) {
+
+
+    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    
         // temp cata reset
         if (catalim.get_value() == false) CATA.move(-127);
         else CATA.move(0);
@@ -133,6 +168,27 @@ void driveStraight(int target) {
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
         voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
         viewvol = voltage;
+
+        
+        if (l == 0){
+            if (voltage < 0){
+                count ++;
+                l = 1;
+            }
+        } else {
+            if (voltage > 0){
+                count ++;
+                l = 2;
+            }
+        }
+
+
+
+
+        // if ((abs(error) <= 50)){
+        // setConstants(0.05, 0, 0);
+        // }
+        
         if(init_heading > 180) {
             init_heading = (360 - init_heading);
         }
@@ -150,10 +206,10 @@ void driveStraight(int target) {
            h = 30;
         }
 
-        h = h * 160; ////-20000
+        h = h * 0; ////-20000
 
-        chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
-        if (abs(target - encoderAvg) <= 2.5) count++;
+        chasMove2( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
+        if (abs(target - encoderAvg) <= 5) count++;
         if (count >= 20 || time > timeout){
             CATA.move(0);
             break;
@@ -172,7 +228,6 @@ void driveStraight(int target) {
 		}
         time += 10;
     }
-    // chasMove(0, 0, 0, 0);
     LF.brake();
     LM.brake();
     LB.brake();
@@ -220,8 +275,8 @@ void driveTurn(int target) { //target is inputted in autons
     //1000 120 939
     // cout << target << endl;
 
-    float voltage;
-    float position;
+    double voltage;
+    double position;
     int count = 0;
     
     while(true) {
@@ -237,7 +292,7 @@ void driveTurn(int target) { //target is inputted in autons
         voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
         // con.print(1, 0, "%2f", voltage);
         
-        chasMove(voltage, voltage, voltage, -voltage, -voltage, -voltage);
+        chasMove2(voltage, voltage, voltage, -voltage, -voltage, -voltage);
         
         if (abs(target - position) <= 0.3) count++; //0.35
         if (count >= 20 || time > timeout) {
@@ -265,8 +320,8 @@ void driveSlow(int target) {
     //  double start_head = 0; 
     // double end_head = 0;
 
-    float voltage;
-    float encoderAvg;
+    double voltage;
+    double encoderAvg;
     int count = 0;
     double init_heading = imu.get_heading();
     double heading_error = 0;
@@ -337,8 +392,8 @@ void driveSmall(int target) {
     //  double start_head = 0; 
     // double end_head = 0;
 
-    float voltage;
-    float encoderAvg;
+    double voltage;
+    double encoderAvg;
     int count = 0;
     double init_heading = imu.get_heading();
     double heading_error = 0;
@@ -412,8 +467,8 @@ void driveShoot(int target) {
          setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
     }
 
-    float voltage;
-    float encoderAvg;
+    double voltage;
+    double encoderAvg;
     int count = 0;
     double init_heading = imu.get_heading();
     double heading_error = 0;
