@@ -91,7 +91,7 @@ double calcPID(int target, double input, int integralKi, int maxIntegral) { //ba
     }
 
     power = (vKp * error) + (vKi * integral) + (vKd * derivative); //+ (vKd * derivative);
-    currentPower = power;
+    // currentPower = power;
     // con.print(0, 0, "%2f", (integral * 0.035));
 
     // if(t_slew_on)
@@ -111,12 +111,12 @@ double calcPID(int target, double input, int integralKi, int maxIntegral) { //ba
 //driving straight
 void driveStraight(int target) {
 
-    int timeout = 3500;
-    if (target < 850){
-        int timeout = 1800;
-    } else{
-    int timeout = 3500;
-    }
+    int timeout = 35000; //3500
+    // if (target < 850){
+    //     int timeout = 1800;
+    // } else{
+    // int timeout = 3500;
+    // }
     //  double start_head = 0; 
     // double end_head = 0;
     // if (abs(target) > 1500){
@@ -142,17 +142,17 @@ void driveStraight(int target) {
     double heading_error = 0;
     int cycle = 0; // Controller Display Cycle
     int time = 0;
-    int l = 0;
+    // int l = 0;
     
     con.clear();
     // double error_range_time = 0;
 
     resetEncoders();
-    if (target > 0){
-            l = 0;
-        } else {
-          l = 1;
-        }
+    // if (target > 0){
+    //         l = 0;
+    //     } else {
+    //       l = 1;
+    //     }
 
     
     int maxPower = 10;
@@ -170,17 +170,17 @@ void driveStraight(int target) {
         viewvol = voltage;
 
         
-        if (l == 0){
-            if (voltage < 0){
-                count ++;
-                l = 1;
-            }
-        } else {
-            if (voltage > 0){
-                count ++;
-                l = 2;
-            }
-        }
+        // if (l == 0){
+        //     if (voltage < 0){
+        //         count ++;
+        //         l = 1;
+        //     }
+        // } else {
+        //     if (voltage > 0){
+        //         count ++;
+        //         l = 2;
+        //     }
+        // }
 
 
 
@@ -209,7 +209,7 @@ void driveStraight(int target) {
         h = h * 0; ////-20000
 
         chasMove2( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
-        if (abs(target - encoderAvg) <= 5) count++;
+        if (abs(target - encoderAvg) <= 3) count++;
         if (count >= 20 || time > timeout){
             CATA.move(0);
             break;
