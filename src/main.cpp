@@ -191,7 +191,9 @@ void opcontrol() {
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
         // driveStraight(2000,3500, 5, 63.25, 0.63, 950);
         tarePos();
-        driveStraight(1000,10000, 1, 0.28, 1, 0.05, 5); // test PID
+        driveStraight(800, 10000, 5, 0.28, 1, 0.05, 5, 14.5, 55); // test PID
+        tarePos();
+        // driveStraight(500, 10000, 5, 0.28, 1, 0.05, 5, 14.5, 55); // Works for 700 under
         // driveTurn(-87);
     }
 	  	time += 10;

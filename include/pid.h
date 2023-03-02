@@ -9,7 +9,7 @@
 
 extern void resetEncoders();
 extern void tarePos();
-extern void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew);
+extern void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew, double maxIntegral, double integralStart);
 extern void driveTurn(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew);
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
@@ -19,7 +19,7 @@ extern void driveTurn(int target, double timeout, double minTarget, double vKp, 
 
 //tune straight integral-specific here: voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
 #define STRAIGHT_INTEGRAL_KI 55
-#define STRAIGHT_MAX_INTEGRAL 12.4
+#define STRAIGHT_MAX_INTEGRAL 14.4
 
 
 //tune turnt constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);

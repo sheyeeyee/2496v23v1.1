@@ -46,7 +46,7 @@ class pid
         double slewRate;
 
     public:
-        pid(double vKp, double vKi, double vKd, double maxIntegral, double integralStart, double slew, double maxVoltage)
+        pid(double vKp, double vKi, double vKd, double maxIntegral, double integralStart, double slew)
         {
             this->vKp = vKp;
             this->vKi = vKi;
@@ -135,10 +135,10 @@ class controllerDisplay
         }
 };
 
-void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew)
+void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew, double maxIntegral, double integralStart)
 {
     // PID & Heading Control Objects
-    pid straightPid(vKp, vKi, vKd, STRAIGHT_MAX_INTEGRAL, STRAIGHT_INTEGRAL_KI, slew);
+    pid straightPid(vKp, vKi, vKd, maxIntegral, integralStart, slew);
     headingControl straightHeading(imu.get_heading(), 0);
     controllerDisplay pidDisplay; // Move to parent loop
 
