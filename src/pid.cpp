@@ -170,17 +170,17 @@ void driveStraight(int target) {
         viewvol = voltage;
 
         
-        if (l == 0){
-            if (voltage < 0){
-                count ++;
-                l = 1;
-            }
-        } else {
-            if (voltage > 0){
-                count ++;
-                l = 2;
-            }
-        }
+        // if (l == 0){
+        //     if (voltage < 0){
+        //         count ++;
+        //         l = 1;
+        //     }
+        // } else {
+        //     if (voltage > 0){
+        //         count ++;
+        //         l = 2;
+        //     }
+        // }
 
 
 
@@ -199,8 +199,13 @@ void driveStraight(int target) {
         else {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
+        if (error < 7) // Heading Control Min
+        {
+            heading_error *= 0;
+        }
+
         
-        heading_error = heading_error * 0;//70 //160
+        heading_error = heading_error * 5;//70 //160
         h = 1 / error;
         if (h > 100){
            h = 30;
@@ -360,7 +365,7 @@ void driveSlow(int target) {
            h = 30;
         }
 
-        h = h * 0000; ////-20000
+        h = h * 10; ////-20000
 
         chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 5) count++;
