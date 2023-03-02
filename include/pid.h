@@ -21,7 +21,6 @@ extern void driveShoot(int target);
 extern float error;
 extern float viewvol;
 
-
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
 #define STRAIGHT_KP 0.72 // 0.7
 #define STRAIGHT_KI 0.1 // 0.17 0.1
