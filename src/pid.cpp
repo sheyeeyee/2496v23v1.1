@@ -69,7 +69,7 @@ void chasMove2(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int v
 double calcPID(int target, double input, int integralKi, int maxIntegral) { //basically tuning i here
     prevError = error;
     error = target - input;
-    prevPower = currentPower;
+    // prevPower = currentPower;
     
     if(std::abs(error) < integralKi) {
         integral += error;
@@ -205,7 +205,7 @@ void driveStraight(int target) {
         }
 
         
-        heading_error = heading_error * 5;//70 //160
+        heading_error = heading_error * 0;//5
         h = 1 / error;
         if (h > 100){
            h = 30;
