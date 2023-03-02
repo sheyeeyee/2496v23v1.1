@@ -28,6 +28,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #else /* (not) __cplusplus */
 #include <errno.h>
 #include <math.h>
