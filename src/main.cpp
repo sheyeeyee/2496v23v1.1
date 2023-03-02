@@ -4,6 +4,7 @@
 #include "api.h"
 #include "auton.h"
 #include "pid.h"
+#include "pros/misc.h"
 #include "robot.h"
 
 using namespace pros;
@@ -137,15 +138,15 @@ void opcontrol() {
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		double chasstempF = chasstempC *(9.0/5) + 32;
 		
-    if (time % 100 == 0) con.clear();
+    // if (time % 100 == 0) con.clear();
 		
-    else if (time % 50 == 0) {
-			cycle++;
-      // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
-      if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); 
-      if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %f", viewvol); //autstr //%s
-		  if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
-		}
+    // else if (time % 50 == 0) {
+		// 	cycle++;
+    //   // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
+    //   if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); 
+    //   if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %f", viewvol); //autstr //%s
+		//   if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
+		// }
 
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
@@ -181,85 +182,18 @@ void opcontrol() {
       atn ++;
       delay(350);
     }
+    if (atn == 1) { autstr = "Roller"; }
+    else if (atn == 2) { autstr = "Non-Roller"; }
+    else if (atn == 3) { autstr = "Skills"; }
+    else if (atn == 4) { atn = 0; }
 
-    if (atn == 1) {
-      autstr = "Roller";
-    }
-    else if (atn == 2) {
-      autstr = "Non-Roller";
-    }
-    else if (atn == 3) {
-      autstr = "Skills";
-    }
-    else if (atn == 4) {
-      atn = 0;
-    }
-    // else if(atn == 5){
-    //   autstr = "Skip";
-    // }
-    // else if(atn == 6){
-    //   autstr = "Skills";
-    // }
-
-    //intake
-		if (con.get_digital(E_CONTROLLER_DIGITAL_R1)) {
-			INTAKE.move(127);
-		}
-		else if (con.get_digital(E_CONTROLLER_DIGITAL_R2)) {
-			INTAKE.move(-127);
-		}
-		else {
-			INTAKE.move(0);
-		}
-
-    //cata
-    if ((con.get_digital(E_CONTROLLER_DIGITAL_L1) == true) || (catalim.get_value() == false)) {
-			CATA.move(-127);
-		}
-    else {
-      CATA.move(0);
-    }
-    
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
         // driveStraight(2000,3500, 5, 63.25, 0.63, 950);
-        driveStraight(200,10000, 1, 10, 0, 0); // test PID
+        tarePos();
+        driveStraight(1000,10000, 1, 0.28, 1, 0.05, 5); // test PID
         // driveTurn(-87);
     }
-
-    //angler
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_L2)) {
-			if (anglerToggle == false) {
-				angler.set_value(false);
-				anglerToggle = true;
-			} else {
-        angler.set_value(true);
-        anglerToggle = false;
-			}
-		}
-
-    //expansion
-    if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT) && con.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-			expand.set_value(true);
-		}
-
-    //extender
-    if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-      	if (extenderToggle == false) {
-				extender.set_value(false);
-				extenderToggle = true;
-			} else {
-        extender.set_value(true);
-        extenderToggle = false;
-			}
-		}
-
-		
-
-    //reset all motor encoders
-		if (con.get_digital_new_press(E_CONTROLLER_DIGITAL_DOWN)) {
-			resetEncoders();
-		}
 	  	time += 10;
 		  pros::delay(10);
 	  }
