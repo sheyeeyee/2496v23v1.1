@@ -212,8 +212,8 @@ void opcontrol() {
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       // driveSlow(2000);
       // driveStraight(1670);
-      driveStraight(-1000);
-			// driveTurn(90);
+      // driveStraight(1000);
+			driveTurn(15);
       // driveShoot(-800);
     }
 
