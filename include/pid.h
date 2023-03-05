@@ -23,7 +23,7 @@ extern float viewvol;
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
 #define STRAIGHT_KP 0.68 * 1 // 0.7 0.18
-#define STRAIGHT_KI 0.4// 0.17 0.1 0
+#define STRAIGHT_KI 0.4 // 0.17 0.1 0
 #define STRAIGHT_KD 9 * 1// 10 8 0.4
 
 //tune straight integral-specific here: voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
