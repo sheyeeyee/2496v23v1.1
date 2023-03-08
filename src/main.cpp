@@ -208,13 +208,13 @@ void opcontrol() {
       CATA.move(0);
     }
     
-    //pid helper
+    //pid tester
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      driveSlow(1800);
+      // driveSlow(-1800);
       // driveStraight(1670);
       // driveStraight(1000);
-			// driveTurn(27);
-      // driveShoot(-800);
+			driveTurn(-15);
+      // driveStraight(2000);
     }
 
     //angler

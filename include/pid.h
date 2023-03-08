@@ -18,13 +18,14 @@ extern void driveAim(int target);
 extern void driveSlow(int target);
 extern void driveSmall(int target);
 extern void driveShoot(int target);
+extern void chasMove2(int voltageLF, int voltageLB, int voltageLM, int voltageRF, int voltageRB, int voltageRM);
 extern float error;
 extern float viewvol;
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-#define STRAIGHT_KP 0.68 * 1 // 0.7 0.18
-#define STRAIGHT_KI 0.4 // 0.17 0.1 0
-#define STRAIGHT_KD 9 * 1 // 10 8 0.4
+#define STRAIGHT_KP 0.55 * 1 // 0.7 0.18
+#define STRAIGHT_KI 0.28 // 0.17 0.1 0
+#define STRAIGHT_KD 7.5 * 1 // 10 8 0.4
 
 //tune straight integral-specific here: voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL);
 #define STRAIGHT_INTEGRAL_KI 40

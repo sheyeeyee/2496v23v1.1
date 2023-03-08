@@ -87,9 +87,9 @@ double calcPID(double target, double input, int integralKi, int maxIntegral, boo
     
     derivative = error - prevError;
 
-    if (target < 0){
-        derivative *= -1;
-    }
+    // if (target < 0) {
+    //     derivative *= -1;
+    // }
 
     power = (vKp * error) + (integral) + (vKd * derivative); //+ (vKd * derivative);
     currentPower = power;
@@ -99,7 +99,6 @@ double calcPID(double target, double input, int integralKi, int maxIntegral, boo
         power = prevPower - slew;
     }
     
-
     return power;
 }
 
@@ -107,6 +106,8 @@ double calcPID(double target, double input, int integralKi, int maxIntegral, boo
 void driveStraight(int target) {
 
     int timeout = 35000; //3500
+
+
     // if (target < 850){
     //     int timeout = 1800;
     // } else{
@@ -152,9 +153,10 @@ void driveStraight(int target) {
     
     int maxPower = 10;
     while(true) {
-
-
-    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+        setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+        //      if (abs(target) < 810 ){
+        //      setConstants(0, 0, 0); //0.4
+        // } 
     
         // temp cata reset
         if (catalim.get_value() == false) CATA.move(-127);
@@ -176,8 +178,6 @@ void driveStraight(int target) {
         //         l = 2;
         //     }
         // }
-
-
 
 
         // if ((abs(error) <= 50)){
@@ -238,7 +238,7 @@ void driveStraight(int target) {
 
 void driveTurn(int target) { //target is inputted in autons
     setConstants(TURN_KP, TURN_KI, TURN_KD);
-    int timeout = 21000;
+    int timeout = 2100;
     imu.tare_heading();
     int time = 0;
     int cycle = 0;
@@ -247,9 +247,11 @@ void driveTurn(int target) { //target is inputted in autons
     //     setConstants(1200, 0.425, 10000);
     // }
 
-    if (abs(target) <40 ){
-         setConstants(12, 0.01, 50); //0.4
-    } 
+    if (abs(target) < 40 ){
+         setConstants(10, 0.015, 50); //0.4
+    } else if (abs(target) > 120){
+        setConstants(7, 0.015, 50);
+    }
     // else if (abs(target) < 45){
     //      setConstants(1800, 0.425, 18000);
     // }
@@ -321,7 +323,7 @@ void driveTurn(int target) { //target is inputted in autons
 
 //////////////////////////////////////////////
 void driveSlow(int target) {
-    setConstants(20, 0.5, 800);
+    setConstants(15, 0.5, 700);
     int timeout = 4000;
     // 10 .5 400
     //  double start_head = 0; 

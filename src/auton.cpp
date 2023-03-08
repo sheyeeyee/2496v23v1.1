@@ -217,6 +217,7 @@ void autonomous() {
     INTAKE.move_relative(1000, 600);
     delay(800);
     driveStraight(-700);
+
     //turn right to position for expansion
 
     //  ////////end origin
@@ -244,38 +245,36 @@ void autonomous() {
     //   i++;
     // }
     // CATA.move(0);
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // delay(99999);
 
 /////begin origin 
 
+    //turn toward low goal shot
     driveTurn(-15);
+
+    //back to low goal shot
     driveStraight(-1800);
-    driveTurn(17);//19
-      
+
+    //turn to aim
+    driveTurn(17); //19
+    
+    //shoot
     CATA.move(-127);
     delay(190);
+
+    //turn to go forward away from low goal
     driveTurn(-16); //14
-    driveStraight(1075);//950//1000
+
+    //forward out of low goal shot position
+    driveStraight(1075); //950 //1000
+
+    //turn to face 3 discs in row
     driveTurn(-124);
     INTAKE.move(127);
     driveSlow(2000);
+
+    //turn to shoot at low goal corner
     driveTurn(90); //85
     // driveSmall(-200);
     CATA.move(-127);
@@ -288,25 +287,25 @@ void autonomous() {
 
     // driveSmall(150);
 
+    //turn to 3-stack
     driveTurn(-82); //86
     angler.set_value(true);
     driveStraight(850); //1670 //950
     angler.set_value(false);
     delay(800);
+
+    //turn to aim second low goal shot
     driveTurn(86);
     delay(350);
     driveStraight(-550); //500
     driveTurn(-28); //25
     CATA.move(-127);
     delay(190);
-
-  // while(catalim.get_value() == false) {
-  //     CATA.move(-127);
-  // }
-  // CATA.move(0);
-
         
-    driveTurn(-22);//25
+    //turn away from second low goal shot
+    driveTurn(-22); //25
+
+    //drive to roller
     driveStraight(1600);
     driveTurn(-85); //-86
     driveStraight(320);
@@ -328,7 +327,6 @@ void autonomous() {
     RB.move(10);
 
     //spin the intake a certain amount
-    // INTAKE.move(127);
     INTAKE.move_relative(1000, 600);
     delay(800);
     INTAKE.move(127);
