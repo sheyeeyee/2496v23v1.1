@@ -210,10 +210,10 @@ void opcontrol() {
     
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      // driveSlow(2000);
+      driveSlow(1800);
       // driveStraight(1670);
       // driveStraight(1000);
-			driveTurn(15);
+			// driveTurn(27);
       // driveShoot(-800);
     }
 

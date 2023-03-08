@@ -247,8 +247,8 @@ void driveTurn(int target) { //target is inputted in autons
     //     setConstants(1200, 0.425, 10000);
     // }
 
-    if (abs(target) < 30){
-         setConstants(15, 0.01, 1); //0.4
+    if (abs(target) <40 ){
+         setConstants(12, 0.01, 50); //0.4
     } 
     // else if (abs(target) < 45){
     //      setConstants(1800, 0.425, 18000);
