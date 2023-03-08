@@ -105,7 +105,7 @@ double calcPID(double target, double input, int integralKi, int maxIntegral, boo
 //driving straight
 void driveStraight(int target) {
 
-    int timeout = 35000; //3500
+    int timeout = 3500; //3500
 
 
     // if (target < 850){
@@ -154,9 +154,9 @@ void driveStraight(int target) {
     int maxPower = 10;
     while(true) {
         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-        //      if (abs(target) < 810 ){
-        //      setConstants(0, 0, 0); //0.4
-        // } 
+             if (abs(target) < 350 ){
+             setConstants(0.85, 0.1, 9); //0.4
+        } 
     
         // temp cata reset
         if (catalim.get_value() == false) CATA.move(-127);
@@ -250,7 +250,7 @@ void driveTurn(int target) { //target is inputted in autons
     if (abs(target) < 40 ){
          setConstants(10, 0.015, 50); //0.4
     } else if (abs(target) > 120){
-        setConstants(7, 0.015, 50);
+        setConstants(9, 0.007, 55);
     }
     // else if (abs(target) < 45){
     //      setConstants(1800, 0.425, 18000);
