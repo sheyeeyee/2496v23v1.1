@@ -16,14 +16,12 @@ extern pros::Motor LF;
 extern pros::Motor LB;
 extern pros::Motor RF;
 extern pros::Motor RB;
-extern pros::Motor RM;
-extern pros::Motor LM;
 
-//intake
-extern pros::Motor INTAKE;
+// //intake
+// extern pros::Motor INTAKE;
 
-//cata
-extern pros::Motor CATA;
+// //cata
+// extern pros::Motor CATA;
 
 //sensors
 extern pros::ADIEncoder encLeft;
@@ -33,30 +31,30 @@ extern pros::ADIEncoder encMid;
 //imu
 extern pros::Imu imu;
 
-//indexer
-extern pros::Motor INDEXER;
+// //indexer
+// extern pros::Motor INDEXER;
 
-//angler
-extern pros::ADIDigitalOut angler;
+// //angler
+// extern pros::ADIDigitalOut angler;
 
 
-//gps
-extern pros::Gps gps1;
-extern pros::c::gps_status_s_t gpsData;
+// //gps
+// extern pros::Gps gps1;
+// extern pros::c::gps_status_s_t gpsData;
 
-//expansion
-extern pros::ADIDigitalOut expand;
+// //expansion
+// extern pros::ADIDigitalOut expand;
 
-//auton selector
-extern pros::ADIDigitalIn selec;
+// //auton selector
+// extern pros::ADIDigitalIn selec;
 
-//cata limit switch
-extern pros::ADIDigitalIn catalim;
+// //cata limit switch
+// extern pros::ADIDigitalIn catalim;
 
-//extender
-extern pros::ADIDigitalOut extender;
+// //extender
+// extern pros::ADIDigitalOut extender;
 
-//optical
-extern pros::Optical optical;
+// //optical
+// extern pros::Optical optical;
 
 #endif

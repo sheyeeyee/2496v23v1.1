@@ -45,7 +45,7 @@ void initialize() {
   pros::lcd::set_text(1, "Hello PROS User!");
 
   pros::lcd::register_btn1_cb(on_center_button);
-  optical.set_led_pwm(100);
+  // optical.set_led_pwm(100);
 }
 
 /**
@@ -70,26 +70,26 @@ string autstr;
 
 void competition_initialize() {
     while(true){
-      if(selec.get_value() == true){
-        atn ++;
-        delay(350);
-      }
+      // if(selec.get_value() == true){
+      //   atn ++;
+      //   delay(350);
+      // }
     
-      if (atn == 1) {
-        autstr = "Roller";
-        con.print(0, 0, "Aut 1: %s", autstr);
-      }
-      else if (atn == 2) {
-        autstr = "Non-Roller";
-        con.print(0, 0, "Aut 2: %s", autstr);
-      }
-      else if (atn == 3) {
-        autstr = "Skills";
-        con.print(0, 0, "Aut 3: %s", autstr);
-      }
-      else if (atn == 4) {
-        atn = 0;
-      }
+      // if (atn == 1) {
+      //   autstr = "Roller";
+      //   con.print(0, 0, "Aut 1: %s", autstr);
+      // }
+      // else if (atn == 2) {
+      //   autstr = "Non-Roller";
+      //   con.print(0, 0, "Aut 2: %s", autstr);
+      // }
+      // else if (atn == 3) {
+      //   autstr = "Skills";
+      //   con.print(0, 0, "Aut 3: %s", autstr);
+      // }
+      // else if (atn == 4) {
+      //   atn = 0;
+      // }
       // else if(atn == 5){
       //   autstr = "AWP";
       //   con.print(0, 0, "Aut 5: %s", autstr);
@@ -162,38 +162,24 @@ void opcontrol() {
     }
     if (tankToggle) {
       LF.move(con.get_analog(ANALOG_LEFT_Y));
-      LM.move(con.get_analog(ANALOG_LEFT_Y));
       LB.move(con.get_analog(ANALOG_LEFT_Y));
       RF.move(con.get_analog(ANALOG_RIGHT_Y));
-      RM.move(con.get_analog(ANALOG_RIGHT_Y));
       RB.move(con.get_analog(ANALOG_RIGHT_Y));
     }
     if (arcToggle) {
       LF.move(left);
-      LM.move(left);
       LB.move(left);
       RF.move(right);
-      RM.move(right);
       RB.move(right);
     }
-
-    //auton selector
-    if(selec.get_value() == true) { // brain was here
-      atn ++;
-      delay(350);
-    }
-    if (atn == 1) { autstr = "Roller"; }
-    else if (atn == 2) { autstr = "Non-Roller"; }
-    else if (atn == 3) { autstr = "Skills"; }
-    else if (atn == 4) { atn = 0; }
 
     //pid helper
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
         // driveStraight(2000,3500, 5, 63.25, 0.63, 950);
         tarePos();
-        driveStraight(800, 10000, 5, 0.28, 1, 0.05, 5, 14.5, 55); // test PID
-        tarePos();
-        // driveStraight(500, 10000, 5, 0.28, 1, 0.05, 5, 14.5, 55); // Works for 700 under
+        // driveStraight(1000, 10000, 5, 0.535, 0.28, 7.6, 5, 14.5, 40); // test PID
+        driveStraight(1000, 10000, 10, 0.2, 0.2, 0.1, 5, 14.5, 40); // test PID
+        // driveStraight(500, 10000, 5, 0.28, 0.4, 0.05, 5, 14.5, 55); // Works for 700 under
         // driveTurn(-87);
     }
 	  	time += 10;

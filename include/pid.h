@@ -9,7 +9,7 @@
 
 extern void resetEncoders();
 extern void tarePos();
-extern void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew, double maxIntegral, double integralStart);
+void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew, double maxIntegral, double integralStart);
 extern void driveTurn(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew);
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
