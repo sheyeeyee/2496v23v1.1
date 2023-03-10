@@ -195,10 +195,10 @@ void autonomous() {
   else if (atn == 4) {
     //drive toward center field
     INTAKE.move(127);
-    driveStraight(2000);
+    driveStraight(1600);
 
     //huge turn toward high goal
-    driveTurn(-134);
+    driveTurn(-137);
     
     //shoot 3 discs
     CATA.move(-127);
@@ -207,13 +207,14 @@ void autonomous() {
     CATA.move(0);
 
     //release bands
-    extender.set_value(true);
-    delay(180);
-    extender.set_value(false);
+    // extender.set_value(true);
+    // delay(180);
+    // extender.set_value(false);
+    delay(500);
 
     //turn toward 2 discs and intake
-    driveTurn(-91);
-    driveStraight(2500);
+    driveTurn(-87);
+    driveStraight(2300);
 
     //toward roller
     driveTurn(45);

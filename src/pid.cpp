@@ -255,6 +255,8 @@ void driveTurn(int target) { //target is inputted in autons
          setConstants(10, 0.015, 50); //0.4
     } else if (abs(target) > 120){
         setConstants(9, 0.007, 55);
+    } else if (abs(target) == 87){
+        setConstants(9, 0.007, 55);
     }
     // else if (abs(target) < 45){
     //      setConstants(1800, 0.425, 18000);
