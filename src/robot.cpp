@@ -42,7 +42,7 @@ pros::ADIDigitalIn catalim ('H');
 //expansion
 pros::ADIDigitalOut expand ('G');
 
-// extender
+//extender
 pros::ADIDigitalOut extender ('F');
 
 //auton selector

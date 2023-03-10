@@ -68,13 +68,17 @@ int atn;
 string autstr;
 
 void competition_initialize() {
-    while(true){
-      if(selec.get_value() == true){
+    while(true) {
+      if(selec.get_value() == true) {
         atn ++;
         delay(350);
       }
-    
-      if (atn == 1) {
+      
+      if (atn == 0) {
+        autstr = "Skills";
+        con.print(0, 0, "Aut 3: %s", autstr);
+      }
+      else if (atn == 1) {
         autstr = "Roller";
         con.print(0, 0, "Aut 1: %s", autstr);
       }
@@ -82,12 +86,20 @@ void competition_initialize() {
         autstr = "Non-Roller";
         con.print(0, 0, "Aut 2: %s", autstr);
       }
-      else if (atn == 0) {
-        autstr = "Skills";
+      else if (atn == 3) {
+       autstr = "ERoller";
         con.print(0, 0, "Aut 3: %s", autstr);
       }
       else if (atn == 4) {
-       autstr = "Exp";
+       autstr = "ENon-Roller";
+        con.print(0, 0, "Aut 3: %s", autstr);
+      }
+      else if (atn == 5) {
+       autstr = "solo awp faster better strw";
+        con.print(0, 0, "Aut 3: %s", autstr);
+      }
+      else if (atn == 6) {
+       autstr = "lol";
         con.print(0, 0, "Aut 3: %s", autstr);
       }
       // gerald was here 
@@ -173,20 +185,32 @@ void opcontrol() {
 
     //auton selector
     if (selec.get_value() == true) { // brain was here
-      atn ++;
+      atn++;
       delay(350);
     }
-
+    
+    if (atn == 0) {
+      autstr = "Skills";
+    }
     if (atn == 1) {
       autstr = "Roller";
     }
     else if (atn == 2) {
       autstr = "Non-Roller";
     }
-    else if (atn == 0) {
-      autstr = "Skills";
-    }
     else if (atn == 3) {
+      autstr = "ERoller";
+    }
+    else if (atn == 4) {
+      autstr = "ENon-Roller";
+    }
+    else if (atn == 5) {
+      autstr = "solo awp faster better strw";
+    }
+    else if (atn == 6) {
+      autstr = "lol";
+    }
+    else if (atn == 7) {
       atn = 0;
     }
 
