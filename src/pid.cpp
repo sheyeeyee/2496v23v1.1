@@ -201,6 +201,10 @@ void driveStraight(int target) {
 
         
         heading_error = heading_error * 5;//5
+
+
+
+        
         h = 1 / error;
         if (h > 100){
            h = 30;
@@ -323,11 +327,15 @@ void driveTurn(int target) { //target is inputted in autons
 
 //////////////////////////////////////////////
 void driveSlow(int target) {
-    setConstants(15, 0.5, 700);
+    setConstants(14, 0.5, 700);
     int timeout = 4000;
+     if (abs(target) < 1500 ){
+         setConstants(21, 10, 700); //0.4
+    } 
     // 10 .5 400
     //  double start_head = 0; 
     // double end_head = 0;
+    
 
     double voltage;
     double encoderAvg;
@@ -461,20 +469,35 @@ void driveSmall(int target) {
 
 //drive shoot
 void driveShoot(int target) {
-    setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-    int timeout = 3500;
-    if (target < 850){
-        int timeout = 1800;
-    } else{
-    int timeout = 3500;
-    }
+
+    
+   
+        
+    int timeout = 3500; //3500
+
+
+    // if (target < 850){
+    //     int timeout = 1800;
+    // } else{
+    // int timeout = 3500;
+    // }
     //  double start_head = 0; 
     // double end_head = 0;
-    if (target < 0){
-         setConstants(55, 0.5, 878); //0.4
-    } else{
-         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-    }
+    // if (abs(target) > 1500){
+    //      setConstants(63.5, 0.63, 950); //0.4
+    // } else if(abs(target) > 1050){
+    //      setConstants(44, 0.25, 475); //0.4
+    // } else if (abs(target) > 900){
+    //      setConstants(44, 0.25, 485); //0.4
+    // } else {
+    //     setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    // } ///hi
+
+    // if (target < 0){
+    //      setConstants(53, 0.4, 878); //0.4
+    // } else{
+    //      setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+    // }
 
     double voltage;
     double encoderAvg;
@@ -483,23 +506,60 @@ void driveShoot(int target) {
     double heading_error = 0;
     int cycle = 0; // Controller Display Cycle
     int time = 0;
+    // int l = 0;
     
     con.clear();
     // double error_range_time = 0;
 
     resetEncoders();
-    
+    // if (target > 0){
+    //         l = 0;
+    //     } else {
+    //       l = 1;
+    //     }
 
+    
+    int maxPower = 10;
     while(true) {
         // temp cata reset
-        if((220 < time) || (catalim.get_value() == false)){
+        if((150 < time) || (catalim.get_value() == false)){
             CATA.move(-127);
         }
         else CATA.move(0);
 
+
+
+
+        setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+             if (abs(target) < 350 ){
+             setConstants(0.85, 0.1, 9); //0.4
+        } 
+    
+        // temp cata reset
+
+
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
-        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL, false);
+        voltage = calcPID(target, encoderAvg, STRAIGHT_INTEGRAL_KI, STRAIGHT_MAX_INTEGRAL, true);
         viewvol = voltage;
+
+        
+        // if (l == 0){
+        //     if (voltage < 0){
+        //         count ++;
+        //         l = 1;
+        //     }
+        // } else {
+        //     if (voltage > 0){
+        //         count ++;
+        //         l = 2;
+        //     }
+        // }
+
+
+        // if ((abs(error) <= 50)){
+        // setConstants(0.05, 0, 0);
+        // }
+        
         if(init_heading > 180) {
             init_heading = (360 - init_heading);
         }
@@ -510,17 +570,22 @@ void driveShoot(int target) {
         else {
             heading_error = ((360 - imu.get_heading()) - init_heading);
         }
+        if (error < 10) // Heading Control Min
+        {
+            heading_error *= 0;
+        }
+
         
-        heading_error = heading_error * 160;//70
+        heading_error = heading_error * 5;//5
         h = 1 / error;
         if (h > 100){
            h = 30;
         }
 
-        h = h * 0000; ////-20000
+        h = h * 0; ////-20000
 
-        chasMove( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
-        if (abs(target - encoderAvg) <= 5) count++;
+        chasMove2( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
+        if (abs(target - encoderAvg) <= 3) count++;
         if (count >= 20 || time > timeout){
             CATA.move(0);
             break;
@@ -539,7 +604,6 @@ void driveShoot(int target) {
 		}
         time += 10;
     }
-    // chasMove(0, 0, 0, 0);
     LF.brake();
     LM.brake();
     LB.brake();

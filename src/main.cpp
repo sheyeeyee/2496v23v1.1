@@ -86,8 +86,9 @@ void competition_initialize() {
         autstr = "Skills";
         con.print(0, 0, "Aut 3: %s", autstr);
       }
-      else if (atn == 3) {
-        atn = 0;
+      else if (atn == 4) {
+       autstr = "Exp";
+        con.print(0, 0, "Aut 3: %s", autstr);
       }
       // gerald was here 
       // hi 
@@ -211,10 +212,11 @@ void opcontrol() {
     //pid tester
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       // driveSlow(-1800);
-      driveStraight(1000);
+      // driveStraight(1000);
       // driveStraight(1000);
 			// driveTurn(-15);
       // driveStraight(2000);
+      driveShoot(-700);
     }
 
     //angler

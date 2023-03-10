@@ -129,6 +129,39 @@ void autonomous() {
     driveStraight(-200);
   }
 
+  else if (atn == 4){
+    INTAKE.move(127);
+    driveSlow(1000);
+    angler.set_value(true);
+    driveStraight(500); //1670 //950 //850
+    driveTurn(133);
+    
+    driveStraight(-300);
+    CATA.move(-127);
+      delay(400);
+    driveStraight(375);
+    driveTurn(94);
+    angler.set_value(false);
+    driveStraight(2490);
+    driveTurn(-45);
+     INTAKE.move(0);
+    LF.move(20);
+    LM.move(20);
+    LB.move(20);
+    RF.move(20);
+    RM.move(20);
+    RB.move(20);
+    delay(800);
+
+    INTAKE.move_relative(-500, -600);
+    delay(1000);
+
+    driveStraight(-200);
+
+    
+
+  }
+
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
   
   //SKILLS
@@ -257,20 +290,20 @@ void autonomous() {
     driveStraight(-1800);
 
     //turn to aim
-    driveTurn(17); //19
+    driveTurn(18); //19 //17
     
     //shoot
     CATA.move(-127);
     delay(190);
 
     //turn to go forward away from low goal
-    driveTurn(-16); //14
+    driveTurn(-15); //14 //16
 
     //forward out of low goal shot position
     driveStraight(1075); //950 //1000
 
     //turn to face 3 discs in row
-    driveTurn(-124);
+    driveTurn(-123); //124
     INTAKE.move(127);
     driveSlow(2000);
 
@@ -288,25 +321,25 @@ void autonomous() {
     // driveSmall(150);
 
     //turn to 3-stack
-    driveTurn(-82); //86
+    driveTurn(-84); //86 //-82 //83
     angler.set_value(true);
-    driveStraight(850); //1670 //950
+    driveStraight(1000); //1670 //950 //850
     angler.set_value(false);
     delay(800);
 
     //turn to aim second low goal shot
     driveTurn(86);
     delay(350);
-    driveStraight(-550); //500
-    driveTurn(-28); //25
+    driveStraight(-570); //500
+    driveTurn(-32); //25 //28
     CATA.move(-127);
     delay(190);
         
     //turn away from second low goal shot
-    driveTurn(-22); //25
+    driveTurn(-21); //25 //-22
 
     //drive to roller
-    driveStraight(1600);
+    driveStraight(1500);//1600
     driveTurn(-85); //-86
     driveStraight(320);
     INTAKE.move(0);
