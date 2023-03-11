@@ -198,7 +198,8 @@ void autonomous() {
     driveStraight(1600);
 
     //huge turn toward high goal
-    driveTurn(-137);
+    driveTurn(-138);
+    delay(300);
     
     //shoot 3 discs
     CATA.move(-127);
@@ -213,26 +214,35 @@ void autonomous() {
     delay(500);
 
     //turn toward 2 discs and intake
-    driveTurn(-87);
-    driveStraight(2300);
+    driveTurn(-89);
+    driveStraight(2400);
 
     //toward roller
     driveTurn(45);
-    driveStraight(150);
-
-    //spin roller
-    delay(180);
+    // driveStraight(150);
     INTAKE.move(0);
-    LF.move(20);
-    LM.move(20);
-    LB.move(20);
-    RF.move(20);
-    RM.move(20);
-    RB.move(20);
+    LF.move(50);
+    LM.move(50);
+    LB.move(50);
+    RF.move(50);
+    RM.move(50);
+    RB.move(50);
+    //spin roller
+    delay(100);
+    INTAKE.move(0);
+    LF.move(10);
+    LM.move(10);
+    LB.move(10);
+    RF.move(10);
+    RM.move(10);
+    RB.move(10);
     delay(800);
 
-    INTAKE.move_relative(-500, -600);
+    INTAKE.move_relative(-800, -600);
     delay(1000);
+    // driveShoot(-150);
+    driveStraight(-150);
+    // driveTurn(10);
   }
 
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -351,6 +361,7 @@ void autonomous() {
     //turn to shoot at low goal corner
     driveTurn(90); //85
     // driveSmall(-200);
+    delay(200);
     CATA.move(-127);
     delay(190);
 
@@ -372,12 +383,12 @@ void autonomous() {
     driveTurn(86);
     delay(350);
     driveStraight(-570); //500
-    driveTurn(-32); //25 //28
+    driveTurn(-34); //25 //28 //32
     CATA.move(-127);
     delay(190);
         
     //turn away from second low goal shot
-    driveTurn(-21); //25 //-22
+    driveTurn(-19); //25 //-22 //-21
 
     //drive to roller
     driveStraight(1500);//1600

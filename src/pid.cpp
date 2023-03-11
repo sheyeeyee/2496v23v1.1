@@ -104,9 +104,12 @@ double calcPID(double target, double input, int integralKi, int maxIntegral, boo
 
 //driving straight
 void driveStraight(int target) {
-
-    int timeout = 3500; //3500
-
+    int timeout = 3500;
+    if (abs(target) < 800) {
+        timeout = 2700;
+    } else {
+        timeout = 3500;
+    }
 
     // if (target < 850){
     //     int timeout = 1800;
@@ -199,11 +202,7 @@ void driveStraight(int target) {
             heading_error *= 0;
         }
 
-        
         heading_error = heading_error * 5;//5
-
-
-
         
         h = 1 / error;
         if (h > 100){
@@ -239,10 +238,17 @@ void driveStraight(int target) {
     RM.brake();
     RB.brake();
 }
-
 void driveTurn(int target) { //target is inputted in autons
     setConstants(TURN_KP, TURN_KI, TURN_KD);
+    
     int timeout = 2100;
+
+    if (abs(target) < 30) {
+        timeout = 1900;
+    } else {
+        timeout = 2100;
+    }
+    
     imu.tare_heading();
     int time = 0;
     int cycle = 0;
@@ -251,11 +257,11 @@ void driveTurn(int target) { //target is inputted in autons
     //     setConstants(1200, 0.425, 10000);
     // }
 
-    if (abs(target) < 40 ){
+    if (abs(target) < 40) {
          setConstants(10, 0.015, 50); //0.4
-    } else if (abs(target) > 120){
+    } else if (abs(target) > 120) {
         setConstants(9, 0.007, 55);
-    } else if (abs(target) == 87){
+    } else if (abs(target) == 87) {
         setConstants(9, 0.007, 55);
     }
     // else if (abs(target) < 45){
@@ -270,8 +276,6 @@ void driveTurn(int target) { //target is inputted in autons
     // else {
     //     setConstants(1800, 0.01, 18000);
     // }
-
-
     
     //over // 200 150 0
     //under 82 190 0

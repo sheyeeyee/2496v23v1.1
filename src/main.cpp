@@ -259,8 +259,6 @@ void opcontrol() {
 			expand.set_value(true);
 		}
 
-    
-
     //extender
     if (con.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
       	if (extenderToggle == false) {
