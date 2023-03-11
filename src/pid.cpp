@@ -328,15 +328,12 @@ void driveTurn(int target) { //target is inputted in autons
 }
 
 
-
-
-
 //////////////////////////////////////////////
 void driveSlow(int target) {
     setConstants(14, 0.5, 700);
     int timeout = 4000;
      if (abs(target) < 1500 ){
-         setConstants(21, 10, 700); //0.4
+         setConstants(35, 20, 700); //0.4
     } 
     // 10 .5 400
     //  double start_head = 0; 

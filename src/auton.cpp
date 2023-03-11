@@ -121,6 +121,7 @@ void autonomous() {
     CATA.move(-127);
     delay(200);
     while(catalim.get_value() == false) CATA.move(-127);
+
     CATA.move(0);
 
     //release bands
@@ -154,7 +155,7 @@ void autonomous() {
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 
   //ELIMS ROLLER (starts next to low goal)
-  else if (atn == 3) {
+  else if (atn == 0) {
     INTAKE.move(127);
     
     driveSlow(1000);
@@ -163,10 +164,21 @@ void autonomous() {
     
     driveStraight(500); //1670 //950 //850
     driveTurn(133);
-    
+
     driveStraight(-300);
+    
     CATA.move(-127);
-    delay(400);
+    delay(250);
+    CATA.move(0);
+
+    //release bands
+    extender.set_value(true);
+    delay(500);
+    extender.set_value(false);
+    delay(500);
+
+    while(catalim.get_value() == false) CATA.move(-127);
+    CATA.move(0);
     
     driveStraight(375);
     driveTurn(94);
@@ -195,7 +207,7 @@ void autonomous() {
   else if (atn == 4) {
     //drive toward center field
     INTAKE.move(127);
-    driveStraight(1600);
+    driveStraight(1675); //1600
 
     //huge turn toward high goal
     driveTurn(-138);
@@ -228,7 +240,7 @@ void autonomous() {
     RM.move(50);
     RB.move(50);
     //spin roller
-    delay(100);
+    delay(200);
     INTAKE.move(0);
     LF.move(10);
     LM.move(10);
@@ -248,12 +260,12 @@ void autonomous() {
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   
   //SKILLS
-  else if (atn == 0) {
+  else if (atn == 3) {
     //run intake to ensure discs fall into the right place
     INTAKE.move(127);
     delay(300);
       
-    // //shoot three cycles
+    //shoot three cycles
     int i = 0;
     while (i <= 2) {
       while(catalim.get_value() == false) CATA.move(-127);

@@ -143,6 +143,7 @@ void opcontrol() {
     //printing stuff
 		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
 		double chasstempF = chasstempC *(9.0/5) + 32;
+    double catatempC = CATA.get_temperature();
 		
     if (time % 100 == 0) con.clear();
 		
@@ -152,7 +153,7 @@ void opcontrol() {
       if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); 
       if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %f", viewvol); //autstr //%s
 		  if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
-		}
+	  }
 
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
