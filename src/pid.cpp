@@ -13,56 +13,68 @@ double encoderAvg() { return ((LB.get_position() + RB.get_position()) / 2.0); }
 void chasMove(int voltageL, int voltageR) 
 {
     LF.move(voltageL);
+    LM.move(voltageL);
     LB.move(voltageL);
     RF.move(voltageR);
+    RM.move(voltageR);
     RB.move(voltageR);
 }
 void tarePos()
 {
     LF.tare_position();
+    LM.tare_position();
     LB.tare_position();
     RF.tare_position();
+    RM.tare_position();
     RB.tare_position();
 }
 
-double integral;
+struct pidParams
+{
+    double vKp, vKi, vKd;
+    double maxIntegral, integralStart;
+    bool slewOn; 
+    double slewRate;
+    double target;
+    int timeout;
+    double tolerance;
+    int toleranceCount;
+};
 
 class pid
 {
     private:
-        double vKp, vKi, vKd;
-        double derivative;
+        pidParams params;
         double error, prevError;
-        double maxIntegral, integralStart;
         double voltage, prevVoltage;
-        bool slewOn = true; 
-        double slewRate;
+        double derivative;
+        double integral;
 
     public:
-        pid(double vKp, double vKi, double vKd, double maxIntegral, double integralStart, double slew)
+        pid(pidParams inputParams)
         {
-            this->vKp = vKp;
-            this->vKi = vKi;
-            this->vKd = vKd;
-            this->maxIntegral = maxIntegral;
-            this->integralStart = integralStart;
-            this->slewRate = slew;
+            params.vKp = inputParams.vKp;
+            params.vKi = inputParams.vKi;
+            params.vKd = inputParams.vKd;
+            params.maxIntegral = inputParams.maxIntegral;
+            params.integralStart = inputParams.integralStart;
+            params.slewRate = inputParams.slewRate;
         }
-        double calcPID(double target, double input)
+        double calcPID(double input)
         {
             prevError = error;
-            error = target - input;
+            error = params.target - input;
             derivative = error - prevError;
 
             // Max error that can add to integral
-            if (std::abs(error) <= integralStart) integral += error * vKi;
+            if (std::abs(error) <= params.integralStart) integral += error * params.vKi;
             else integral = 0;
             // Max total integral
-            if (integral >= 0) integral = std::min(integral, maxIntegral); 
-            else integral = std::max(integral, -maxIntegral);
+            if (integral >= 0) integral = std::min(integral, params.maxIntegral); 
+            else integral = std::max(integral, -params.maxIntegral);
             
             prevVoltage = voltage;
-            voltage = (vKp * error) + (integral) - (vKd * derivative);
+            voltage = (params.vKp * error) + (integral) - (params.vKd * derivative);
 
             // // Deceleration Slew
             // if (slewOn && abs(target) < 25 && voltage >= abs(prevVoltage) - abs(slewRate))
@@ -72,16 +84,10 @@ class pid
         }
         // Getters
         double getError() { return error; }
-        double getIntegral() { return integral; }
-        double getDerivative() { return derivative; }
         double getVoltage() { return voltage; }
-        double getvKp() { return vKp; }
-        double getvKi() { return vKi; }
-        double getvKd() { return vKd; }
-        double getMaxIntegral() { return maxIntegral; }
-        double getIntegralStart() { return integralStart; }
-        double getSlewRate() { return slewRate; }
-        bool getSlewOn() { return slewOn; }
+        double getDerivative() { return derivative; }
+        double getIntegral() { return integral; }
+        pidParams getParams() { return params; }
 
 
 };
@@ -99,13 +105,13 @@ class headingControl // Rework to PID style
             this->initialHeading = initialHeading; 
             this->sensitivity = sensitivity;
         }
-        int calcHeading(double target, double input)
+        int calcHeading(double input)
         {
             if (initialHeading > 180.0) initialHeading = (360.0 - initialHeading); // Converts 360 Degrees to 180
             if (imu.get_heading() < 180.0) headingError = initialHeading - imu.get_heading(); // Turns Heading Negative for Oposite Direction
             else headingError = ((360.0 - imu.get_heading()) - initialHeading);
             
-            if (abs(target-input) <= 15) sensitivity = 0; // Stops Heading Error when close to target
+            if (abs(initialHeading-input) <= 15) sensitivity = 0; // Stops Heading Error when close to target
             return headingError * sensitivity;
         }
         void setSensitivity(double sensitivity) { this->sensitivity = sensitivity; }
@@ -120,28 +126,29 @@ class controllerDisplay
         controllerDisplay(int timeL)
         {
             this->timeL = timeL;
+            
         }
-        void pidStraight(int target, double pidVoltage, double headingError, int timeL)
-        {
-            this->timeL = timeL;
-            if (timeL % 100 == 0) con.clear(); 
-            else if (timeL % 50 == 0) 
-            {
-			cycle++;
-            if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", target-encoderAvg()); 
-            if ((cycle+2) % 3 == 0) con.print(1, 0, "Integral: %2f", integral); //autstr //%s
-            if ((cycle+3) % 3 == 0) con.print(2, 0, "TimeL: %i", timeL);
-		    }
-        }
-        void pidTurn(int target, double pidVoltage, int timeL)
+        void pidStraight(pid pidInput, int timeL)
         {
             this->timeL = timeL;
             if (timeL % 100 == 0) con.clear(); 
             else if (timeL % 50 == 0) 
             {
                 cycle++;
-                if ((cycle+1) % 3 == 0) con.print(0, 0, "Error: %2f", target-imu.get_heading()); 
-                if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %2f", pidVoltage);
+                if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %2f", pidInput.getParams().target-encoderAvg()); 
+                if ((cycle+2) % 3 == 0) con.print(1, 0, "Integral: %2f", pidInput.getIntegral());
+                if ((cycle+3) % 3 == 0) con.print(2, 0, "Heading: %f", imu.get_heading());
+		    }
+        }
+        void pidTurn(pid pidInput, int timeL)
+        {
+            this->timeL = timeL;
+            if (timeL % 100 == 0) con.clear(); 
+            else if (timeL % 50 == 0) 
+            {
+                cycle++;
+                if ((cycle+1) % 3 == 0) con.print(0, 0, "Error: %2f", pidInput.getParams().target-imu.get_heading()); 
+                if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %2f", pidInput.getVoltage());
                 // if ((cycle+3) % 3 == 0) con.print(2, 0, "HeadingError: %f", headingError);
             }
         }
@@ -150,23 +157,14 @@ class controllerDisplay
 class pidData
 {
     private:
-        int timeout;
-        double vKp, vKi, vKd;
-        double maxIntegral, integralStart;
-        double slewRate;
+        pidParams params;
         vector<double> error, integral, derivative, voltage, encoder;
         vector<bool> slewOn;
         vector<int> timeL;
     public:
-        pidData(pid pidInput, int timeout) // TODO pidInput should be part of private
+        pidData(pid pidInput) // TODO pidInput should be part of private
         {
-            this->vKp = pidInput.getvKp();
-            this->vKi = pidInput.getvKi();
-            this->vKd = pidInput.getvKd();
-            this->maxIntegral = pidInput.getMaxIntegral();
-            this->integralStart = pidInput.getIntegralStart();
-            this->slewRate = pidInput.getSlewRate();
-            this->timeout = timeout;
+            params = pidInput.getParams();
         }
         void addData(pid pidInput, int time)
         {
@@ -174,20 +172,20 @@ class pidData
             integral.push_back(pidInput.getIntegral());
             derivative.push_back(pidInput.getDerivative());
             voltage.push_back(pidInput.getVoltage());
-            slewOn.push_back(pidInput.getSlewOn());
+            slewOn.push_back(params.slewOn);
             encoder.push_back(encoderAvg());
             timeL.push_back(time);
         }
         void printDataPID()
         {
             printf("PID Values  |  Time Elapsed: %i\n", timeL[timeL.size()-1]);
-            printf("vKp: %f\n", vKp);
-            printf("vKi: %f\n", vKi);
-            printf("vKd: %f\n", vKd);
-            printf("Max Integral: %f\n", maxIntegral);
-            printf("Integral Start: %f\n", integralStart);
-            printf("Slew Rate: %f\n", slewRate);
-            printf("Timeout: %i  |  TError: %i\n", timeout, timeout-timeL[timeL.size()-1]);
+            printf("vKp: %f\n", params.vKp);
+            printf("vKi: %f\n", params.vKi);
+            printf("vKd: %f\n", params.vKd);
+            printf("Max Integral: %f\n", params.maxIntegral);
+            printf("Integral Start: %f\n", params.integralStart);
+            printf("Slew Rate: %f\n", params.slewRate);
+            printf("Timeout: %i  |  TError: %i\n", params.timeout, params.timeout-timeL[timeL.size()-1]);
             printf("\n ---------- \n");
         }
         void printDataError()
@@ -236,34 +234,34 @@ class pidData
         }
 };
 
-void driveStraight(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew, double maxIntegral, double integralStart)
+void driveStraight(pidParams params)
 {
     int breakoutCount; 
     int timeL = 0;
 
-    // PID & Heading Control Objects
-    pid straightPid(vKp, vKi, vKd, maxIntegral, integralStart, slew);
-    pidData straightPidData(straightPid, timeout);
-    pid headingPid(0,0,0,0,0,0); // These values should not be changed
+    // Control Objects
+    // pid headingPid(headingParams); // PID Based Heading Control // pidParams headingParams;
     headingControl straightHeading(imu.get_heading(), 0);
+    pid straightPid(params);
+    pidData straightPidData(straightPid);
     controllerDisplay pidDisplay(timeL); // Move to parent loop
     
     while(true)
     {
-        double pidVoltage = straightPid.calcPID(target, encoderAvg()); // Heading Control
-        double headingError = straightHeading.calcHeading(target, encoderAvg()); // Heading Control
-        headingError = headingPid.calcPID(0, headingError); // Heading Control
+        double pidVoltage = straightPid.calcPID(encoderAvg()); // Heading Control
+        double headingError = straightHeading.calcHeading(imu.get_heading()); // Heading Control
+        // headingError = headingPid.calcPID(0, headingError); // Heading Control
 
         chasMove((pidVoltage + headingError), (pidVoltage - headingError));
-        if (abs(target - encoderAvg()) <= minTarget) breakoutCount++;
-        if (breakoutCount >= 20 || timeL > timeout)
+        if (abs(params.target - encoderAvg()) <= params.tolerance) breakoutCount++;
+        if (breakoutCount >= params.toleranceCount || timeL > params.timeout)
         {
             straightPidData.printDataPID();
             straightPidData.printDataDesmos();
             break;
         }
 
-        pidDisplay.pidStraight(target, pidVoltage, headingError, timeL);
+        pidDisplay.pidStraight(straightPid, timeL);
 
         timeL += 10;
         if (timeL % 20 == 0) straightPidData.addData(straightPid, timeL); // 0.05s
@@ -273,13 +271,13 @@ void driveStraight(int target, double timeout, double minTarget, double vKp, dou
 }
 
 // Todo Change to absolute rotation
-void driveTurn(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew)
+void driveTurn(pidParams params)
 {
     int breakoutCount;
     int timeL;
 
     // PID & Heading Control Objects
-    pid turnPid(vKp, vKi, vKd, STRAIGHT_MAX_INTEGRAL, STRAIGHT_INTEGRAL_KI, slew);
+    pid turnPid(params);
     controllerDisplay pidDisplay(timeL); // Move to parent loop
 
     while(true)
@@ -287,16 +285,44 @@ void driveTurn(int target, double timeout, double minTarget, double vKp, double 
         // TODO Needs to be replaced with agolorithm to decide whether to turn left or right based on absolute rotation
         double heading = imu.get_heading();
         if (imu.get_heading() > 180) heading = ((360 - heading) * -1); // Converts 0-360 Degrees to -180-180
-        double pidVoltage = turnPid.calcPID(target, heading);
+        double pidVoltage = turnPid.calcPID(heading);
 
         chasMove((pidVoltage ), (-pidVoltage));
-        if (abs(target - imu.get_heading()) <= minTarget) breakoutCount++;
-        if (breakoutCount >= 20 || timeL > timeout) break;
+        if (abs(params.target - imu.get_heading()) <= params.tolerance) breakoutCount++;
+        if (breakoutCount >= 20 || timeL > params.timeout) break;
 
-        pidDisplay.pidTurn(target, pidVoltage, timeL);
+        pidDisplay.pidTurn(turnPid, timeL); //hello, this is a test to see if this works or not, Hi i'm tyler
 
         timeL += 10;
         delay(10);
     }
     chasMove(0, 0);
 }
+
+class pidTranslation // Trnaslation Layer to allow for current autons to work on this platform
+{
+    private:
+        pidParams params;
+    
+    public:
+        void straight(int target)
+        {
+            params.target = target;
+            params.tolerance = 3;
+            params.toleranceCount = 20;
+            params.timeout = 3500;
+            if (abs(params.target) < 350) {
+                params.vKp = 0.85;
+                params.vKi = 0.1;
+                params.vKp = 9;
+            } else {
+                params.vKp = 0.535;
+                params.vKi = 0.28;
+                params.vKp = 7.6;
+            }
+            params.integralStart = 40;
+            params.maxIntegral = 14.5;
+
+            driveStraight(params);
+        }
+};
