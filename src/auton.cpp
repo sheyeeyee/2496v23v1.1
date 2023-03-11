@@ -163,7 +163,7 @@ void autonomous() {
   else if (atn == 0) {
     INTAKE.move(127);
     
-    driveStraight(1900); //1670 //950 //850
+    driveStraight(1600); //1670 //950 //850
     driveTurn(133);
 
     driveStraight(-75);
@@ -178,25 +178,25 @@ void autonomous() {
     extender.set_value(false);
     delay(500);
 
-    while(catalim.get_value() == false) CATA.move(-127);
-    CATA.move(0);
+    // while(catalim.get_value() == false) CATA.move(-127);
+    // CATA.move(0);
     
     driveStraight(375);
     driveTurn(94);
     
-    driveStraight(2490);
+    driveStraight(2500);
     driveTurn(-45);
     
     INTAKE.move(0);
-    LF.move(20);
-    LM.move(20);
-    LB.move(20);
-    RF.move(20);
-    RM.move(20);
-    RB.move(20);
+    LF.move(22);
+    LM.move(22);
+    LB.move(22);
+    RF.move(22);
+    RM.move(22);
+    RB.move(22);
     delay(800);
 
-    INTAKE.move_relative(-500, -600);
+    INTAKE.move_relative(-800, -600);
     delay(1000);
   }
 
