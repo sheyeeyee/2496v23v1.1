@@ -61,14 +61,17 @@ void autonomous() {
 
     //shoot 2nd disc
     CATA.move(-127);
-    delay(200);
-    while(catalim.get_value() == false) CATA.move(-127);
+    delay(250);
     CATA.move(0);
 
     //release bands
     extender.set_value(true);
-    delay(180);
+    delay(500);
     extender.set_value(false);
+    delay(500);
+
+    while(catalim.get_value() == false) CATA.move(-127);
+    CATA.move(0);
 
 
     /* below is testing for solo AWP */
@@ -119,15 +122,17 @@ void autonomous() {
 
     //shoot 2nd disc
     CATA.move(-127);
-    delay(200);
-    while(catalim.get_value() == false) CATA.move(-127);
-
+    delay(250);
     CATA.move(0);
 
     //release bands
     extender.set_value(true);
-    delay(180);
+    delay(500);
     extender.set_value(false);
+    delay(500);
+
+    while(catalim.get_value() == false) CATA.move(-127);
+    CATA.move(0);
 
     //turn toward 2 discs and intake
     driveTurn(-91);
@@ -158,14 +163,10 @@ void autonomous() {
   else if (atn == 0) {
     INTAKE.move(127);
     
-    driveSlow(1000);
-    
-    angler.set_value(true);
-    
-    driveStraight(500); //1670 //950 //850
+    driveStraight(1900); //1670 //950 //850
     driveTurn(133);
 
-    driveStraight(-300);
+    driveStraight(-75);
     
     CATA.move(-127);
     delay(250);
@@ -182,8 +183,6 @@ void autonomous() {
     
     driveStraight(375);
     driveTurn(94);
-    
-    angler.set_value(false);
     
     driveStraight(2490);
     driveTurn(-45);
@@ -215,15 +214,17 @@ void autonomous() {
     
     //shoot 3 discs
     CATA.move(-127);
-    delay(200);
-    while(catalim.get_value() == false) CATA.move(-127);
+    delay(250);
     CATA.move(0);
 
     //release bands
-    // extender.set_value(true);
-    // delay(180);
-    // extender.set_value(false);
+    extender.set_value(true);
     delay(500);
+    extender.set_value(false);
+    delay(500);
+
+    while(catalim.get_value() == false) CATA.move(-127);
+    CATA.move(0);
 
     //turn toward 2 discs and intake
     driveTurn(-89);
