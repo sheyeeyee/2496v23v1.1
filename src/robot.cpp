@@ -69,3 +69,7 @@ pros::c::gps_status_s_t gpsData;
 
 //optical
 pros::Optical optical(OPTICAL_PORT);
+
+//
+double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
+double chasstempF = chasstempC *(9.0/5) + 32;

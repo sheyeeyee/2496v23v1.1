@@ -59,4 +59,7 @@ extern pros::ADIDigitalOut extender;
 //optical
 extern pros::Optical optical;
 
+extern double chasstempC;
+extern double chasstempF;
+
 #endif

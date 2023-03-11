@@ -127,20 +127,6 @@ void opcontrol() {
   bool tankToggle = true;
 
 	while (true) {
-    //printing stuff
-		double chasstempC = ((RF.get_temperature() + RB.get_temperature() + LF.get_temperature() + LB.get_temperature())/4);
-		double chasstempF = chasstempC *(9.0/5) + 32;
-		
-    if (time % 100 == 0) con.clear();
-		
-    else if (time % 50 == 0) {
-			cycle++;
-      // if (cycle % 3 == 0) con.print(0, 0, "Aut: %s", ); //autstr //%s
-      if ((cycle+1) % 3 == 0) con.print(0, 0, "ERROR: %f", error); 
-      if ((cycle+2) % 3 == 0) con.print(1, 0, "Voltage: %f", viewvol); //autstr //%s
-		  if ((cycle+3) % 3 == 0) con.print(2, 0, "Temp: %f", chasstempC);
-		}
-
 		//chassis arcade drive
 		int power = con.get_analog(ANALOG_LEFT_Y); //power is defined as forward or backward
 		int RX = con.get_analog(ANALOG_RIGHT_X); //turn is defined as left (positive) or right (negative)
@@ -210,7 +196,7 @@ void opcontrol() {
     
     //pid tester
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
-      driveStraight(1000, 10000, 5, 0.535, 0.28, 7.6, 5, 14.5, 40);
+      straight(1000);
     }
 
     //angler

@@ -9,8 +9,22 @@
 
 extern void resetEncoders();
 extern void tarePos();
-// extern void driveStraight(pidParams params);
+
+struct pidParams
+{
+    double vKp, vKi, vKd;
+    double maxIntegral, integralStart;
+    bool slewOn; 
+    double slewRate;
+    double target;
+    int timeout;
+    double tolerance;
+    int toleranceCount;
+};
+extern void driveStraight(pidParams params);
 extern void driveTurn(int target, double timeout, double minTarget, double vKp, double vKi, double vKd, double slew);
+
+void straight(int target);
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
 #define STRAIGHT_KP 0

@@ -29,17 +29,17 @@ void tarePos()
     RB.tare_position();
 }
 
-struct pidParams
-{
-    double vKp, vKi, vKd;
-    double maxIntegral, integralStart;
-    bool slewOn; 
-    double slewRate;
-    double target;
-    int timeout;
-    double tolerance;
-    int toleranceCount;
-};
+// struct pidParams
+// {
+//     double vKp, vKi, vKd;
+//     double maxIntegral, integralStart;
+//     bool slewOn; 
+//     double slewRate;
+//     double target;
+//     int timeout;
+//     double tolerance;
+//     int toleranceCount;
+// };
 
 class pid
 {
@@ -241,11 +241,12 @@ void driveStraight(pidParams params)
 
     // Control Objects
     // pid headingPid(headingParams); // PID Based Heading Control // pidParams headingParams;
-    headingControl straightHeading(imu.get_heading(), 0);
+    headingControl straightHeading(imu.get_heading(), 5);
     pid straightPid(params);
     pidData straightPidData(straightPid);
     controllerDisplay pidDisplay(timeL); // Move to parent loop
-    
+
+    straightPidData.addData(straightPid, timeL); // 0s Initial Data
     while(true)
     {
         double pidVoltage = straightPid.calcPID(encoderAvg()); // Heading Control
@@ -299,14 +300,15 @@ void driveTurn(pidParams params)
     chasMove(0, 0);
 }
 
-class pidTranslation // Trnaslation Layer to allow for current autons to work on this platform
-{
-    private:
-        pidParams params;
+// class pidTranslation // Trnaslation Layer to allow for current autons to work on this platform
+// {
+//     private:
+//         pidParams params;
     
-    public:
+//     public:
         void straight(int target)
         {
+            pidParams params;
             params.target = target;
             params.tolerance = 3;
             params.toleranceCount = 20;
@@ -325,4 +327,4 @@ class pidTranslation // Trnaslation Layer to allow for current autons to work on
 
             driveStraight(params);
         }
-};
+// };
