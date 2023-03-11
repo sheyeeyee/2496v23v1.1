@@ -160,10 +160,10 @@ void autonomous() {
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 
   //ELIMS ROLLER (starts next to low goal)
-  else if (atn == 0) {
+  else if (atn == 3) {
     INTAKE.move(127);
     
-    driveStraight(1900); //1670 //950 //850
+    driveStraight(1600); //1670 //950 //850
     driveTurn(133);
 
     driveStraight(-75);
@@ -184,7 +184,7 @@ void autonomous() {
     driveStraight(375);
     driveTurn(94);
     
-    driveStraight(2490);
+    driveStraight(2500);
     driveTurn(-45);
     
     INTAKE.move(0);
@@ -261,7 +261,7 @@ void autonomous() {
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   
   //SKILLS
-  else if (atn == 3) {
+  else if (atn == 0) {
     //run intake to ensure discs fall into the right place
     INTAKE.move(127);
     delay(300);
