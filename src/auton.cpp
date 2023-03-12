@@ -209,10 +209,10 @@ void autonomous() {
     driveStraight(1675); //1600
 
     //huge turn toward high goal
-    driveTurn(-138);
+    driveTurn(-136);//138
     delay(300);
     
-    //shoot 3 discs
+    //shoot 2-3 discs
     CATA.move(-127);
     delay(250);
     CATA.move(0);
@@ -227,7 +227,7 @@ void autonomous() {
     CATA.move(0);
 
     //turn toward 2 discs and intake
-    driveTurn(-89);
+    driveTurn(-91);//89
     driveStraight(2400);
 
     //toward roller
@@ -241,7 +241,7 @@ void autonomous() {
     RM.move(50);
     RB.move(50);
     //spin roller
-    delay(200);
+    delay(280);
     INTAKE.move(0);
     LF.move(10);
     LM.move(10);

@@ -76,7 +76,7 @@ void competition_initialize() {
       
       if (atn == 0) {
         autstr = "Skills";
-        con.print(0, 0, "Aut 3: %s", autstr);
+        con.print(0, 0, "Aut 0: %s", autstr);
       }
       else if (atn == 1) {
         autstr = "Roller";
@@ -92,15 +92,11 @@ void competition_initialize() {
       }
       else if (atn == 4) {
        autstr = "ENon-Roller";
-        con.print(0, 0, "Aut 3: %s", autstr);
+        con.print(0, 0, "Aut 4: %s", autstr);
       }
       else if (atn == 5) {
        autstr = "solo awp faster better strw";
-        con.print(0, 0, "Aut 3: %s", autstr);
-      }
-      else if (atn == 6) {
-       autstr = "lol";
-        con.print(0, 0, "Aut 3: %s", autstr);
+        con.print(0, 0, "Aut 5: %s", autstr);
       }
       // gerald was here 
       // hi 
@@ -209,9 +205,6 @@ void opcontrol() {
       autstr = "solo awp faster better strw";
     }
     else if (atn == 6) {
-      autstr = "lol";
-    }
-    else if (atn == 7) {
       atn = 0;
     }
 
