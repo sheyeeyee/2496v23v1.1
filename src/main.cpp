@@ -225,14 +225,34 @@ void opcontrol() {
 		else {
 			INTAKE.move(0);
 		}
+bool cataPressed;
+bool cataPrimed;
 
     //cata
-    if ((con.get_digital(E_CONTROLLER_DIGITAL_L1) == true) || (catalim.get_value() == false)) {
-			CATA.move(-127);
-		}
+    cataPrimed = catalim.get_value();
+
+    printf("Catalim %i", cataPrimed);
+    if (con.get_digital(E_CONTROLLER_DIGITAL_L1)) {
+      cataPressed = true;
+    }
+    if(cataPrimed == false){
+      CATA.move(-127);
+      cataPressed = false;
+    }
+    else if (cataPressed == true && cataPrimed == true) {
+      CATA.move(-127);
+    }
     else {
       CATA.move(0);
     }
+    
+    // else
+    // if ((con.get_digital(E_CONTROLLER_DIGITAL_L1) == true) || (catalim.get_value() == false)) {
+		// 	CATA.move(-127);
+		// }
+    // else {
+    //   CATA.move(0);
+    // }
     
     //pid tester
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
