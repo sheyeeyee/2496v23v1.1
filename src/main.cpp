@@ -69,6 +69,7 @@ string autstr;
 
 void competition_initialize() {
     while(true) {
+      
       if(selec.get_value() == true) {
         atn ++;
         delay(350);
@@ -226,22 +227,37 @@ void opcontrol() {
 			INTAKE.move(0);
 		}
 
+bool cataPressed;
+bool cataPrimed;
+
     //cata
-    if ((con.get_digital(E_CONTROLLER_DIGITAL_L1) == true) || (catalim.get_value() == false)) {
-			CATA.move(-127);
-		}
+    cataPrimed = catalim.get_value();
+
+    printf("Catalim %i", cataPrimed);
+    if (con.get_digital(E_CONTROLLER_DIGITAL_L1)) {
+      cataPressed = true;
+    }
+    if(cataPrimed == false){
+      CATA.move(-127);
+      cataPressed = false;
+    }
+    else if (cataPressed == true && cataPrimed == true) {
+      CATA.move(-127);
+    }
     else {
       CATA.move(0);
     }
     
+    
     //pid tester
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
       // driveSlow(-1800);
-      // driveStraight(1000);
+      driveStraight(-170);
       // driveStraight(1000);
 			// driveTurn(-15);
       // driveStraight(2000);
-      driveShoot(-700);
+      // driveTurn(106);
+      // driveShoot(-700);
     }
 
     //angler

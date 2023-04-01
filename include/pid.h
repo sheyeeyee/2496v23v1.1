@@ -23,7 +23,7 @@ extern float error;
 extern float viewvol;
 
 //tune straight constants here: setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-#define STRAIGHT_KP 0.535 * 1 // 0.7 0.18
+#define STRAIGHT_KP 0.58 * 1 // 0.7 0.18 pis 0.535
 #define STRAIGHT_KI 0.28 // 0.17 0.1 0
 #define STRAIGHT_KD 7.6 * 1 // 10 8 0.4
 
@@ -33,9 +33,9 @@ extern float viewvol;
 
 
 //tune turn constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);
-#define TURN_KP 21.5 * 0.68 //12 23
-#define TURN_KI 0.3 //0,05 0.07 // 0.34
-#define TURN_KD 197 * 0.65 //80
+#define TURN_KP 12 * 0.68 //12 23 //21.5
+#define TURN_KI 0.1 //0,05 0.07 // 0.34
+#define TURN_KD 100 * 0.65 //80 //197
 
 //tune turn integral-specific here: voltage = calcPID(target, position, TURN_INTEGRAL_KI, TURN_MAX_INTEGRAL);
 #define TURN_INTEGRAL_KI 15

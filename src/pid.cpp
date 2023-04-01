@@ -158,7 +158,7 @@ void driveStraight(int target) {
     while(true) {
         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
              if (abs(target) < 350 ){
-             setConstants(0.85, 0.1, 9); //0.4
+             setConstants(1, 0.01, 9); //0.4 //0.85
         } 
     
         // temp cata reset
@@ -211,6 +211,12 @@ void driveStraight(int target) {
 
         h = h * 0; ////-20000
 
+        if(voltage > 127){
+            voltage = 127;
+        } else if (voltage < -127){
+            voltage = -127;
+        }
+
         chasMove2( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 3) count++;
         if (count >= 20 || time > timeout){
@@ -260,7 +266,7 @@ void driveTurn(int target) { //target is inputted in autons
     if (abs(target) < 40) {
          setConstants(10, 0.015, 50); //0.4
     } else if (abs(target) > 120) {
-        setConstants(9, 0.007, 55);
+        setConstants(9, 0.007, 55); //9
     } else if (abs(target) == 87) {
         setConstants(9, 0.007, 55);
     }
@@ -524,8 +530,9 @@ void driveShoot(int target) {
     
     int maxPower = 10;
     while(true) {
-        // temp cata reset
-        if((150 < time) || (catalim.get_value() == false)){
+        int safe;
+        // temp cata reset //(150 < time)
+        if((abs(error) < 200) || (catalim.get_value() == false)){
             CATA.move(-127);
         }
         else CATA.move(0);

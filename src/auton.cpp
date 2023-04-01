@@ -27,7 +27,7 @@ void autonomous() {
 //111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 
   //ROLLER (MIGHT BE SOLO AWP, SHOOTS TWICE)
-  if (atn == 1) {
+  if (atn == 0) {
     delay(180);
     INTAKE.move(0);
     LF.move(20);
@@ -41,11 +41,73 @@ void autonomous() {
     INTAKE.move_relative(-500, -600);
     delay(800);
         
-    //back out from roller
-    driveStraight(-400);
-    driveTurn(50);
+    driveStraight(-170);
+    driveTurn(-126);
+    INTAKE.move(127);
+    // driveStraight(900);
+    // driveStraight(500);
+    // driveStraight(600);
+    
 
+    angler.set_value(true);
+    driveStraight(1115); 
+    delay(180);
+    angler.set_value(false);
+    delay(800);
+    driveTurn(106);
+    driveShoot(-210);
+    driveStraight(150);
+    driveTurn(-110);
+    driveStraight(3750);
+     INTAKE.move(0);
+    LF.move(20);
+    LM.move(20);
+    LB.move(20);
+    RF.move(20);
+    RM.move(20);
+    RB.move(20);
+    delay(800);
+
+    INTAKE.move_relative(-700, -600);
+    delay(800);
+
+
+
+    // driveStraight(1150);
+   
+    // driveStraight(900);
+    // driveTurn(97);
+    // driveShoot(-200);
+
+
+
+
+
+    delay(99999);
+////SAVE 2SHOT
+    driveShoot(-400);
+    driveStraight(200);
+    driveTurn(-121); //-110
+
+    // INTAKE.move(127);
+   
+    // delay(250);
+    
+
+    //save
+    INTAKE.move(0);
+    // angler.set_value(true);
+    driveStraight(900); 
+    INTAKE.move(127);
+    driveStraight(970);//1670
+    // angler.set_value(false);
     //back toward center field
+    //save
+
+    driveTurn(100);
+    driveShoot(-200);
+
+    delay(19000);
     driveStraight(-2150);
     driveTurn(-95);
 
@@ -160,7 +222,7 @@ void autonomous() {
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 
   //ELIMS ROLLER (starts next to low goal)
-  else if (atn == 0) {
+  else if (atn == 1) {
     INTAKE.move(127);
     
     driveStraight(1600); //1670 //950 //850
