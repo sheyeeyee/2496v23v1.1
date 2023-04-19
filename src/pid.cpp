@@ -201,7 +201,9 @@ void driveStraight(int target) {
         {
             heading_error *= 0;
         }
-
+        if(target == -170){
+             heading_error = heading_error * 15;
+        }
         heading_error = heading_error * 5;//5
         
         h = 1 / error;
@@ -542,7 +544,7 @@ void driveShoot(int target) {
 
         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
              if (abs(target) < 350 ){
-             setConstants(0.85, 0.1, 9); //0.4
+             setConstants(0.87, 0.1, 9); //0.4 //0.85
         } 
     
         // temp cata reset

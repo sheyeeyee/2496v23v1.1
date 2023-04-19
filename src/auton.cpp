@@ -50,15 +50,16 @@ void autonomous() {
     
 
     angler.set_value(true);
-    driveStraight(1115); 
+    driveStraight(1000); //1115
     delay(180);
     angler.set_value(false);
-    delay(800);
-    driveTurn(106);
-    driveShoot(-210);
-    driveStraight(150);
-    driveTurn(-110);
-    driveStraight(3750);
+    delay(700); //800
+    driveTurn(108); //107
+    driveStraight(170);//150
+    driveShoot(-290);
+    driveStraight(150); //150
+    driveTurn(-114); //113
+    driveStraight(3850);//3750
      INTAKE.move(0);
     LF.move(20);
     LM.move(20);
@@ -162,50 +163,53 @@ void autonomous() {
 
 //22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
-  //NON-ROLLER
+  //NON-ROLLER Hnonroller
   else if (atn == 2) {
     //back toward center field
-    driveStraight(-2000);
-    
-    //outtake-ish 2nd disc
-    INTAKE.move_relative(-500, -600);
-
-    driveTurn(44);
-    
-    //shoot 1st disc
-    CATA.move(-127);
-    delay(200);
-    while(catalim.get_value() == false) CATA.move(-127);
-    CATA.move(0);
-
-    //intake 2nd disc
     INTAKE.move(127);
-    delay(600);
-
-    //shoot 2nd disc
+    driveStraight(1500);
+    driveTurn(-137); //135
+    // driveStraight(30);
+    driveShoot(-120);
+    // CATA.move(-127);
+    // delay(250);
+    // extender.set_value(true);
+    driveStraight(140);
+    driveTurn(-86); //88
+    driveStraight(1300);
+    driveTurn(68);
     CATA.move(-127);
     delay(250);
-    CATA.move(0);
+    // driveShoot(150);
+    driveTurn(-67); //72 
+    driveStraight(970);   //960
+     INTAKE.move(0);
+    LF.move(20);
+    LM.move(20);
+    LB.move(20);
+    RF.move(20);
+    RM.move(20);
+    RB.move(20);
+    delay(800);
 
-    //release bands
-    extender.set_value(true);
-    delay(500);
-    extender.set_value(false);
-    delay(500);
+    INTAKE.move_relative(-700, -600);
+    delay(800);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    // CATA.move(-127);
+    // delay(250);
+    // CATA.move(0);
 
-    while(catalim.get_value() == false) CATA.move(-127);
-    CATA.move(0);
 
-    //turn toward 2 discs and intake
-    driveTurn(-91);
-    driveStraight(2500);
+delay(9000000);
 
-    //toward roller
-    driveTurn(45);
-    driveStraight(150);
-
-    //spin roller
-    delay(180);
+    //////save 3 shot good w roller 
+    INTAKE.move(127);
+    driveStraight(1500);
+    driveTurn(-135);
+    driveStraight(80);
+    CATA.move(-127);
+    delay(250);
+    driveTurn(-88);
+    driveStraight(2400);
     INTAKE.move(0);
     LF.move(20);
     LM.move(20);
@@ -215,51 +219,79 @@ void autonomous() {
     RB.move(20);
     delay(800);
 
-    INTAKE.move_relative(-500, -600);
-    delay(1000);
+    INTAKE.move_relative(-700, -600);
+    delay(800);
+
+
   }
 
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 
-  //ELIMS ROLLER (starts next to low goal)
-  else if (atn == 1) {
-    INTAKE.move(127);
-    
-    driveStraight(1600); //1670 //950 //850
-    driveTurn(133);
+  //ELIMS ROLLER (starts next to low goal) //9 Hroller
+  else if (atn == 9) {
 
-    driveStraight(-75);
-    
-    CATA.move(-127);
-    delay(250);
-    CATA.move(0);
-
-    //release bands
-    extender.set_value(true);
-    delay(500);
-    extender.set_value(false);
-    delay(500);
-
-    // while(catalim.get_value() == false) CATA.move(-127);
-    // CATA.move(0);
-    
-    driveStraight(375);
-    driveTurn(94);
-    
-    driveStraight(2500);
-    driveTurn(-45);
-    
-    INTAKE.move(0);
-    LF.move(22);
-    LM.move(22);
-    LB.move(22);
-    RF.move(22);
-    RM.move(22);
-    RB.move(22);
+    LF.move(10);
+    LM.move(10);
+    LB.move(10);
+    RF.move(20);
+    RM.move(20);
+    RB.move(20);
     delay(800);
 
-    INTAKE.move_relative(-800, -600);
-    delay(1000);
+    INTAKE.move_relative(-700, -600);
+    delay(600);
+    driveStraight(-130);
+    driveTurn(-9);
+    driveShoot(-140);
+    INTAKE.move(127);
+    driveTurn(-122);
+    angler.set_value(true);
+    driveStraight(770); //700
+    angler.set_value(false);
+    delay(1600);
+    driveTurn(113);
+    driveShoot(-150);
+
+
+
+
+    // INTAKE.move(127);
+    
+    // driveStraight(1600); //1670 //950 //850
+    // driveTurn(133);
+
+    // driveStraight(-75);
+    
+    // CATA.move(-127);
+    // delay(250);
+    // CATA.move(0);
+
+    // //release bands
+    // extender.set_value(true);
+    // delay(500);
+    // extender.set_value(false);
+    // delay(500);
+
+    // // while(catalim.get_value() == false) CATA.move(-127);
+    // // CATA.move(0);
+    
+    // driveStraight(375);
+    // driveTurn(94);
+    
+    // driveStraight(2500);
+    // driveTurn(-45);
+    
+    // INTAKE.move(0);
+    // LF.move(22);
+    // LM.move(22);
+    // LB.move(22);
+    // RF.move(22);
+    // RM.move(22);
+    // RB.move(22);
+    // delay(800);
+
+    // INTAKE.move_relative(-800, -600);
+    // delay(1000);
   }
 
 //44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
