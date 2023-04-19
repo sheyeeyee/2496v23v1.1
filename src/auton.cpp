@@ -303,10 +303,10 @@ delay(9000000);
     driveStraight(1675); //1600
 
     //huge turn toward high goal
-    driveTurn(-138);
+    driveTurn(-136);//138
     delay(300);
     
-    //shoot 3 discs
+    //shoot 2-3 discs
     CATA.move(-127);
     delay(250);
     CATA.move(0);
@@ -321,7 +321,7 @@ delay(9000000);
     CATA.move(0);
 
     //turn toward 2 discs and intake
-    driveTurn(-89);
+    driveTurn(-91);//89
     driveStraight(2400);
 
     //toward roller
@@ -335,7 +335,7 @@ delay(9000000);
     RM.move(50);
     RB.move(50);
     //spin roller
-    delay(200);
+    delay(280);
     INTAKE.move(0);
     LF.move(10);
     LM.move(10);
@@ -355,7 +355,7 @@ delay(9000000);
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   
   //SKILLS
-  else if (atn == 3) {
+  else if (atn == 0) {
     //run intake to ensure discs fall into the right place
     INTAKE.move(127);
     delay(300);
