@@ -539,13 +539,21 @@ void driveShoot(int target) {
         }
         else CATA.move(0);
 
+        if(catalim.get_value() == 0){
+            CATA.move(0);
+        }
+
 
 
 
         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
              if (abs(target) < 350 ){
-             setConstants(0.87, 0.1, 9); //0.4 //0.85
-        } 
+             setConstants(0.95, 0.1, 9); //0.4 //0.85 //0.87
+        }
+        
+         if (abs(target) == 140){
+             setConstants(1.5, 0.1, 9); //0.4 //0.85
+        }
     
         // temp cata reset
 
@@ -599,8 +607,10 @@ void driveShoot(int target) {
         chasMove2( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 3) count++;
         if (count >= 20 || time > timeout){
+            if(catalim.get_value() == 0){
             CATA.move(0);
             break;
+            }
         } 
 
         delay(10);

@@ -58,5 +58,7 @@ extern pros::ADIDigitalOut extender;
 
 //optical
 extern pros::Optical optical;
+extern pros::Vision vision;
+
 
 #endif

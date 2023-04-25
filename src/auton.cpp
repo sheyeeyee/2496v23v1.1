@@ -27,7 +27,7 @@ void autonomous() {
 //111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 
   //ROLLER (MIGHT BE SOLO AWP, SHOOTS TWICE)
-  if (atn == 0) {
+  if (atn == 1) {
     delay(180);
     INTAKE.move(0);
     LF.move(20);
@@ -55,10 +55,10 @@ void autonomous() {
     angler.set_value(false);
     delay(700); //800
     driveTurn(108); //107
-    driveStraight(170);//150
-    driveShoot(-290);
-    driveStraight(150); //150
-    driveTurn(-114); //113
+    // driveStraight(170);//150
+    driveShoot(-120); //-290
+    // driveStraight(150); //150
+    driveTurn(-114); //113 //-114
     driveStraight(3850);//3750
      INTAKE.move(0);
     LF.move(20);
@@ -67,7 +67,7 @@ void autonomous() {
     RF.move(20);
     RM.move(20);
     RB.move(20);
-    delay(800);
+    delay(900);
 
     INTAKE.move_relative(-700, -600);
     delay(800);
@@ -86,79 +86,79 @@ void autonomous() {
 
     delay(99999);
 ////SAVE 2SHOT
-    driveShoot(-400);
-    driveStraight(200);
-    driveTurn(-121); //-110
+    // driveShoot(-400);
+    // driveStraight(200);
+    // driveTurn(-121); //-110
 
-    // INTAKE.move(127);
+    // // INTAKE.move(127);
    
-    // delay(250);
+    // // delay(250);
     
 
-    //save
-    INTAKE.move(0);
-    // angler.set_value(true);
-    driveStraight(900); 
-    INTAKE.move(127);
-    driveStraight(970);//1670
-    // angler.set_value(false);
-    //back toward center field
-    //save
+    // //save
+    // INTAKE.move(0);
+    // // angler.set_value(true);
+    // driveStraight(900); 
+    // INTAKE.move(127);
+    // driveStraight(970);//1670
+    // // angler.set_value(false);
+    // //back toward center field
+    // //save
 
-    driveTurn(100);
-    driveShoot(-200);
+    // driveTurn(100);
+    // driveShoot(-200);
 
-    delay(19000);
-    driveStraight(-2150);
-    driveTurn(-95);
+    // delay(19000);
+    // driveStraight(-2150);
+    // driveTurn(-95);
 
-    //shoot 1st disc
-    CATA.move(-127);
-    delay(200);
-    while(catalim.get_value() == false) CATA.move(-127);
-    CATA.move(0);
+    // //shoot 1st disc
+    // CATA.move(-127);
+    // delay(200);
+    // while(catalim.get_value() == false) CATA.move(-127);
+    // CATA.move(0);
 
-    //intake 2nd disc
-    INTAKE.move(127);
-    delay(800);
+    // //intake 2nd disc
+    // INTAKE.move(127);
+    // delay(800);
 
-    //shoot 2nd disc
-    CATA.move(-127);
-    delay(250);
-    CATA.move(0);
+    // //shoot 2nd disc
+    // CATA.move(-127);
+    // delay(250);
+    // CATA.move(0);
 
-    //release bands
-    extender.set_value(true);
-    delay(500);
-    extender.set_value(false);
-    delay(500);
+    // //release bands
+    // extender.set_value(true);
+    // delay(500);
+    // extender.set_value(false);
+    // delay(500);
 
-    while(catalim.get_value() == false) CATA.move(-127);
-    CATA.move(0);
+    // while(catalim.get_value() == false) CATA.move(-127);
+    // CATA.move(0);
 
 
     /* below is testing for solo AWP */
 
-    //turn to other roller
-    driveTurn(-90);
+  //   //turn to other roller
+  //   driveTurn(-90);
 
-    //drive toward roller
-    driveStraight(2150);
-    driveTurn(45);
+  //   //drive toward roller
+  //   driveStraight(2150);
+  //   driveTurn(45);
 
-    //spin 2nd roller
-    delay(180);
-    INTAKE.move(0);
-    LF.move(20);
-    LM.move(20);
-    LB.move(20);
-    RF.move(20);
-    RM.move(20);
-    RB.move(20);
-    delay(450);
+  //   //spin 2nd roller
+  //   delay(180);
+  //   INTAKE.move(0);
+  //   LF.move(20);
+  //   LM.move(20);
+  //   LB.move(20);
+  //   RF.move(20);
+  //   RM.move(20);
+  //   RB.move(20);
+  //   delay(450);
 
-    INTAKE.move_relative(-500, -600);
-    delay(800);
+  //   INTAKE.move_relative(-500, -600);
+  //   delay(800);
   }
 
 //22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
@@ -170,7 +170,7 @@ void autonomous() {
     driveStraight(1500);
     driveTurn(-137); //135
     // driveStraight(30);
-    driveShoot(-120);
+    driveShoot(-120); //-120 //save
     // CATA.move(-127);
     // delay(250);
     // extender.set_value(true);
@@ -181,9 +181,9 @@ void autonomous() {
     CATA.move(-127);
     delay(250);
     // driveShoot(150);
-    driveTurn(-67); //72 
+    driveTurn(-70); //72 //67
+    INTAKE.move(0);
     driveStraight(970);   //960
-     INTAKE.move(0);
     LF.move(20);
     LM.move(20);
     LB.move(20);
@@ -202,25 +202,25 @@ void autonomous() {
 delay(9000000);
 
     //////save 3 shot good w roller 
-    INTAKE.move(127);
-    driveStraight(1500);
-    driveTurn(-135);
-    driveStraight(80);
-    CATA.move(-127);
-    delay(250);
-    driveTurn(-88);
-    driveStraight(2400);
-    INTAKE.move(0);
-    LF.move(20);
-    LM.move(20);
-    LB.move(20);
-    RF.move(20);
-    RM.move(20);
-    RB.move(20);
-    delay(800);
+    // INTAKE.move(127);
+    // driveStraight(1500);
+    // driveTurn(-135);
+    // driveStraight(80);
+    // CATA.move(-127);
+    // delay(250);
+    // driveTurn(-88);
+    // driveStraight(2400);
+    // INTAKE.move(0);
+    // LF.move(20);
+    // LM.move(20);
+    // LB.move(20);
+    // RF.move(20);
+    // RM.move(20);
+    // RB.move(20);
+    // delay(800);
 
-    INTAKE.move_relative(-700, -600);
-    delay(800);
+    // INTAKE.move_relative(-700, -600);
+    // delay(800);
 
 
   }
@@ -228,7 +228,7 @@ delay(9000000);
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 
   //ELIMS ROLLER (starts next to low goal) //9 Hroller
-  else if (atn == 9) {
+  else if (atn == 3) {
 
     LF.move(10);
     LM.move(10);
@@ -242,15 +242,22 @@ delay(9000000);
     delay(600);
     driveStraight(-130);
     driveTurn(-9);
-    driveShoot(-140);
+    // CATA.move(-127);
+    // delay(250);
+    driveShoot(-50); //140
     INTAKE.move(127);
-    driveTurn(-122);
+    driveTurn(-124); //122
     angler.set_value(true);
-    driveStraight(770); //700
+    driveStraight(790); //700 //770
     angler.set_value(false);
     delay(1600);
-    driveTurn(113);
+    driveTurn(114); //113 //111
     driveShoot(-150);
+
+    //awppppppppppppp
+
+    // driveTurn(-112);
+    // driveStraight(4000);
 
 
 
@@ -355,7 +362,7 @@ delay(9000000);
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   
   //SKILLS
-  else if (atn == 0) {
+  else if (atn == 5) {
     //run intake to ensure discs fall into the right place
     INTAKE.move(127);
     delay(300);
@@ -564,7 +571,7 @@ delay(9000000);
 //55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
 
   //SOLO AWP (ONLY SHOOTS ONCE)
-  else if(atn == 5) {
+  else if(atn == 6) {
     delay(180);
     INTAKE.move(0);
     LF.move(20);

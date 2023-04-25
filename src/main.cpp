@@ -43,8 +43,13 @@ void initialize() {
   pros::lcd::initialize();
   pros::lcd::set_text(1, "Hello PROS User!");
 
-  pros::lcd::register_btn1_cb(on_center_button);
-  optical.set_led_pwm(100);
+  // pros::lcd::register_btn1_cb(on_center_button);
+  // optical.set_led_pwm(100);
+
+  pros::vision_signature_s_t BLUE_GOAL = pros::Vision::signature_from_utility (2, -2307, -1597, -1952, 8373, 9299, 8836, 8.200, 1);
+	pros::vision_signature_s_t RED_GOAL = pros::Vision::signature_from_utility(1, 541, 11747, 6144, -841, 845, 2, 0.800, 0);
+	vision.set_signature(2, &BLUE_GOAL);
+	vision.set_signature(1, &RED_GOAL);
 }
 
 /**
@@ -70,6 +75,8 @@ string autstr;
 void competition_initialize() {
     while(true) {
       
+      atn = 3;
+
       if(selec.get_value() == true) {
         atn ++;
         delay(350);
@@ -80,7 +87,7 @@ void competition_initialize() {
         con.print(0, 0, "Aut 0: %s", autstr);
       }
       else if (atn == 1) {
-        autstr = "Roller";
+        autstr = "SOLO";
         con.print(0, 0, "Aut 1: %s", autstr);
       }
       else if (atn == 2) {

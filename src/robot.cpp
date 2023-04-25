@@ -69,3 +69,6 @@ pros::c::gps_status_s_t gpsData;
 
 //optical
 pros::Optical optical(OPTICAL_PORT);
+
+
+    pros::Vision vision (18);
