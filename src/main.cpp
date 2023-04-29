@@ -69,15 +69,12 @@ void disabled() {}
  * starts.
  */
 
-int atn;
+int atn = 2;
 string autstr;
 
 void competition_initialize() {
     while(true) {
-      
-      atn = 3;
-
-      if(selec.get_value() == true) {
+      if(selec.get_value() == 1) {
         atn ++;
         delay(350);
       }
@@ -99,7 +96,7 @@ void competition_initialize() {
         con.print(0, 0, "Aut 3: %s", autstr);
       }
       else if (atn == 4) {
-       autstr = "ENon-Roller";
+       autstr = "BLANK";
         con.print(0, 0, "Aut 4: %s", autstr);
       }
       else if (atn == 5) {
@@ -227,26 +224,30 @@ void opcontrol() {
 			INTAKE.move(0);
 		}
 
-bool cataPressed;
-bool cataPrimed;
+    bool cataPressed;
+    bool cataPrimed;
 
     //cata
     cataPrimed = catalim.get_value();
+    if(con.get_digital(E_CONTROLLER_DIGITAL_DOWN)){
+      CATA.move(-127);
+    } else {
+      // printf("Catalim %i", cataPrimed);
+      if (con.get_digital(E_CONTROLLER_DIGITAL_L1)) {
+        cataPressed = true;
+      }
+      if (cataPrimed == false){
+        CATA.move(-127);
+        cataPressed = false;
+      }
+      else if (cataPressed == true && cataPrimed == true) {
+        CATA.move(-127);
+      }
+      else {
+        CATA.move(0);
+      }
+  }
 
-    printf("Catalim %i", cataPrimed);
-    if (con.get_digital(E_CONTROLLER_DIGITAL_L1)) {
-      cataPressed = true;
-    }
-    if(cataPrimed == false){
-      CATA.move(-127);
-      cataPressed = false;
-    }
-    else if (cataPressed == true && cataPrimed == true) {
-      CATA.move(-127);
-    }
-    else {
-      CATA.move(0);
-    }
     
     //pid tester
 		if (con.get_digital(E_CONTROLLER_DIGITAL_X)) {
@@ -269,6 +270,9 @@ bool cataPrimed;
         anglerToggle = false;
 			}
 		}
+   
+
+    
 
     //expansion
     if (con.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT) && con.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {

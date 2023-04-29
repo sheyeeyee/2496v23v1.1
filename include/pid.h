@@ -33,7 +33,7 @@ extern float viewvol;
 
 
 //tune turn constants here: setConstants(TURN_KP, TURN_KI, TURN_KD);
-#define TURN_KP 12 * 0.68 //12 23 //21.5
+#define TURN_KP 13 * 0.68 //12 23 //21.5 //12
 #define TURN_KI 0.1 //0,05 0.07 // 0.34
 #define TURN_KD 100 * 0.65 //80 //197
 

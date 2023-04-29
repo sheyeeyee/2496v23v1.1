@@ -81,9 +81,6 @@ void autonomous() {
     // driveShoot(-200);
 
 
-
-
-
     delay(99999);
 ////SAVE 2SHOT
     // driveShoot(-400);
@@ -163,43 +160,49 @@ void autonomous() {
 
 //22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
-  //NON-ROLLER Hnonroller
+  //NON-ROLLER
   else if (atn == 2) {
     //back toward center field
     INTAKE.move(127);
     driveStraight(1500);
-    driveTurn(-137); //135
+
+    driveTurn(-134); //135 //133
     // driveStraight(30);
-    driveShoot(-120); //-120 //save
+
+    driveShoot(-100); //-120 //save
     // CATA.move(-127);
     // delay(250);
     // extender.set_value(true);
-    driveStraight(140);
-    driveTurn(-86); //88
+
+    driveStraight(120);//140
+    driveTurn(-88); //88
+
     driveStraight(1300);
-    driveTurn(68);
-    CATA.move(-127);
-    delay(250);
-    // driveShoot(150);
-    driveTurn(-70); //72 //67
+    driveTurn(66);
+
+    // CATA.move(-127);
+    // delay(250);
+    driveShoot(75);//100 /
+
+    driveTurn(-71); //72 //67 //75//76 //73
     INTAKE.move(0);
-    driveStraight(970);   //960
-    LF.move(20);
-    LM.move(20);
-    LB.move(20);
-    RF.move(20);
-    RM.move(20);
-    RB.move(20);
+    driveStraight(970); //960
+
+    LF.move(40);
+    LM.move(40);
+    LB.move(40);
+    RF.move(30);
+    RM.move(30);
+    RB.move(30);
     delay(800);
 
-    INTAKE.move_relative(-700, -600);
+    INTAKE.move_relative(-800, -600);
     delay(800);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     // CATA.move(-127);
     // delay(250);
     // CATA.move(0);
 
-
-delay(9000000);
+// delay(9000000);
 
     //////save 3 shot good w roller 
     // INTAKE.move(127);
@@ -221,8 +224,6 @@ delay(9000000);
 
     // INTAKE.move_relative(-700, -600);
     // delay(800);
-
-
   }
 
 //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -230,36 +231,40 @@ delay(9000000);
   //ELIMS ROLLER (starts next to low goal) //9 Hroller
   else if (atn == 3) {
 
-    LF.move(10);
-    LM.move(10);
-    LB.move(10);
-    RF.move(20);
-    RM.move(20);
-    RB.move(20);
-    delay(800);
+    LF.move(20);
+    LM.move(20);
+    LB.move(20);
+    RF.move(40);
+    RM.move(40);
+    RB.move(40);
+    delay(900); //800
 
     INTAKE.move_relative(-700, -600);
-    delay(600);
+    delay(600); 
     driveStraight(-130);
     driveTurn(-9);
     // CATA.move(-127);
     // delay(250);
-    driveShoot(-50); //140
-    INTAKE.move(127);
-    driveTurn(-124); //122
-    angler.set_value(true);
-    driveStraight(790); //700 //770
-    angler.set_value(false);
-    delay(1600);
-    driveTurn(114); //113 //111
-    driveShoot(-150);
+
+    driveShoot(-80);//140//50
+    driveStraight(30);
+    INTAKE.move(0);
+    CATA.move(0);
+
+    // driveTurn(-125); //122 //124
+
+    // angler.set_value(true);
+    // driveStraight(790); //700 //770
+    // angler.set_value(false);
+    // delay(1600);
+    //     INTAKE.move(-127); 
+    // driveTurn(114);//113 //111
+    // driveShoot(-190); //-175
 
     //awppppppppppppp
 
     // driveTurn(-112);
     // driveStraight(4000);
-
-
 
 
     // INTAKE.move(127);
@@ -306,266 +311,266 @@ delay(9000000);
   //ELIMS NON-ROLLER
   else if (atn == 4) {
     //drive toward center field
-    INTAKE.move(127);
-    driveStraight(1675); //1600
+//     INTAKE.move(127);
+//     driveStraight(1675); //1600
 
-    //huge turn toward high goal
-    driveTurn(-136);//138
-    delay(300);
+//     //huge turn toward high goal
+//     driveTurn(-136);//138
+//     delay(300);
     
-    //shoot 2-3 discs
-    CATA.move(-127);
-    delay(250);
-    CATA.move(0);
+//     //shoot 2-3 discs
+//     CATA.move(-127);
+//     delay(250);
+//     CATA.move(0);
 
-    //release bands
-    extender.set_value(true);
-    delay(500);
-    extender.set_value(false);
-    delay(500);
+//     //release bands
+//     extender.set_value(true);
+//     delay(500);
+//     extender.set_value(false);
+//     delay(500);
 
-    while(catalim.get_value() == false) CATA.move(-127);
-    CATA.move(0);
+//     while(catalim.get_value() == false) CATA.move(-127);
+//     CATA.move(0);
 
-    //turn toward 2 discs and intake
-    driveTurn(-91);//89
-    driveStraight(2400);
+//     //turn toward 2 discs and intake
+//     driveTurn(-91);//89
+//     driveStraight(2400);
 
-    //toward roller
-    driveTurn(45);
-    // driveStraight(150);
-    INTAKE.move(0);
-    LF.move(50);
-    LM.move(50);
-    LB.move(50);
-    RF.move(50);
-    RM.move(50);
-    RB.move(50);
-    //spin roller
-    delay(280);
-    INTAKE.move(0);
-    LF.move(10);
-    LM.move(10);
-    LB.move(10);
-    RF.move(10);
-    RM.move(10);
-    RB.move(10);
-    delay(800);
+//     //toward roller
+//     driveTurn(45);
+//     // driveStraight(150);
+//     INTAKE.move(0);
+//     LF.move(50);
+//     LM.move(50);
+//     LB.move(50);
+//     RF.move(50);
+//     RM.move(50);
+//     RB.move(50);
+//     //spin roller
+//     delay(280);
+//     INTAKE.move(0);
+//     LF.move(10);
+//     LM.move(10);
+//     LB.move(10);
+//     RF.move(10);
+//     RM.move(10);
+//     RB.move(10);
+//     delay(800);
 
-    INTAKE.move_relative(-800, -600);
-    delay(1000);
-    // driveShoot(-150);
-    driveStraight(-150);
-    // driveTurn(10);
+//     INTAKE.move_relative(-800, -600);
+//     delay(1000);
+//     // driveShoot(-150);
+//     driveStraight(-150);
+//     // driveTurn(10);
   }
 
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+// //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   
-  //SKILLS
+//   //SKILLS
   else if (atn == 5) {
-    //run intake to ensure discs fall into the right place
-    INTAKE.move(127);
-    delay(300);
+//     //run intake to ensure discs fall into the right place
+//     INTAKE.move(127);
+//     delay(300);
       
-    //shoot three cycles
-    int i = 0;
-    while (i <= 2) {
-      while(catalim.get_value() == false) CATA.move(-127);
-      CATA.move(0);
-      delay(1500);
-      CATA.move(-127);
-      delay(400);
+//     //shoot three cycles
+//     int i = 0;
+//     while (i <= 2) {
+//       while(catalim.get_value() == false) CATA.move(-127);
+//       CATA.move(0);
+//       delay(1500);
+//       CATA.move(-127);
+//       delay(400);
       
-      CATA.move(0);
-      i++;
-    }
-    CATA.move(0);
+//       CATA.move(0);
+//       i++;
+//     }
+//     CATA.move(0);
 
 
-    //reposition by going backwards for enough space to turn towards next spot
-    driveStraight(-603);
-    driveTurn(36);
-    //intake up for 3-stack
-    angler.set_value(true);
-    driveStraight(1670); //1670
-    angler.set_value(false);
-    delay(600);
+//     //reposition by going backwards for enough space to turn towards next spot
+//     driveStraight(-603);
+//     driveTurn(36);
+//     //intake up for 3-stack
+//     angler.set_value(true);
+//     driveStraight(1670); //1670
+//     angler.set_value(false);
+//     delay(600);
 
-    //turn toward roller
-    driveTurn(-28);
-    driveStraight(1000);
-    INTAKE.move(0);
+//     //turn toward roller
+//     driveTurn(-28);
+//     driveStraight(1000);
+//     INTAKE.move(0);
 
-    //move forward to far (first) roller
-    INTAKE.move(0);
-    LF.move(60);
-    LM.move(60);
-    LB.move(60);
-    RF.move(60);
-    RM.move(60);
-    RB.move(60);
-    delay(450);
+//     //move forward to far (first) roller
+//     INTAKE.move(0);
+//     LF.move(60);
+//     LM.move(60);
+//     LB.move(60);
+//     RF.move(60);
+//     RM.move(60);
+//     RB.move(60);
+//     delay(450);
 
-    //less voltage toward roller to prevent too much friction
-    LF.move(10);
-    LM.move(10);
-    LB.move(10);
-    RF.move(10);
-    RM.move(10);
-    RB.move(10);
+//     //less voltage toward roller to prevent too much friction
+//     LF.move(10);
+//     LM.move(10);
+//     LB.move(10);
+//     RF.move(10);
+//     RM.move(10);
+//     RB.move(10);
 
-    //spin the intake a certain amount
-    // INTAKE.move(127);
-    INTAKE.move_relative(1000, 600);
-    delay(800);
-    INTAKE.move(127);
+//     //spin the intake a certain amount
+//     // INTAKE.move(127);
+//     INTAKE.move_relative(1000, 600);
+//     delay(800);
+//     INTAKE.move(127);
       
-    //back out from roller
-    driveStraight(-780); // -820
-    //turn toward other roller
-    driveTurn(-88);
-    //move to roller
-    driveStraight(600);
+//     //back out from roller
+//     driveStraight(-780); // -820
+//     //turn toward other roller
+//     driveTurn(-88);
+//     //move to roller
+//     driveStraight(600);
       
-    //move forward to second roller
-    INTAKE.move(0);
-    LF.move(60);
-    LM.move(60);
-    LB.move(60);
-    RF.move(60);
-    RM.move(60);
-    RB.move(60);
-    delay(450);
+//     //move forward to second roller
+//     INTAKE.move(0);
+//     LF.move(60);
+//     LM.move(60);
+//     LB.move(60);
+//     RF.move(60);
+//     RM.move(60);
+//     RB.move(60);
+//     delay(450);
     
-    LF.move(10);
-    LM.move(10);
-    LB.move(10);
-    RF.move(10);
-    RM.move(10);
-    RB.move(10);
-    //spin the intake a certain amount for second roller
-    INTAKE.move_relative(1000, 600);
-    delay(800);
-    driveStraight(-700);
+//     LF.move(10);
+//     LM.move(10);
+//     LB.move(10);
+//     RF.move(10);
+//     RM.move(10);
+//     RB.move(10);
+//     //spin the intake a certain amount for second roller
+//     INTAKE.move_relative(1000, 600);
+//     delay(800);
+//     driveStraight(-700);
 
-    //turn toward low goal shot
-    driveTurn(-15);
+//     //turn toward low goal shot
+//     driveTurn(-15);
 
-    //back to low goal shot
-    driveStraight(-1800);
+//     //back to low goal shot
+//     driveStraight(-1800);
 
-    //turn to aim
-    driveTurn(18); //19 //17
+//     //turn to aim
+//     driveTurn(18); //19 //17
     
-    //shoot
-    CATA.move(-127);
-    delay(190);
+//     //shoot
+//     CATA.move(-127);
+//     delay(190);
 
-    //turn to go forward away from low goal
-    driveTurn(-15); //14 //16
+//     //turn to go forward away from low goal
+//     driveTurn(-15); //14 //16
 
-    //forward out of low goal shot position
-    driveStraight(1075); //950 //1000
+//     //forward out of low goal shot position
+//     driveStraight(1075); //950 //1000
 
-    //turn to face 3 discs in row
-    driveTurn(-123); //124
-    INTAKE.move(127);
-    driveSlow(2000);
+//     //turn to face 3 discs in row
+//     driveTurn(-123); //124
+//     INTAKE.move(127);
+//     driveSlow(2000);
 
-    //turn to shoot at low goal corner
-    driveTurn(90); //85
-    // driveSmall(-200);
-    delay(200);
-    CATA.move(-127);
-    delay(190);
+//     //turn to shoot at low goal corner
+//     driveTurn(90); //85
+//     // driveSmall(-200);
+//     delay(200);
+//     CATA.move(-127);
+//     delay(190);
 
-    while(catalim.get_value() == false) {
-      CATA.move(-127);
-    }
-    CATA.move(0);
+//     while(catalim.get_value() == false) {
+//       CATA.move(-127);
+//     }
+//     CATA.move(0);
 
-    // driveSmall(150);
+//     // driveSmall(150);
 
-    //turn to 3-stack
-    driveTurn(-84); //86 //-82 //83
-    angler.set_value(true);
-    driveStraight(1000); //1670 //950 //850
-    angler.set_value(false);
-    delay(800);
+//     //turn to 3-stack
+//     driveTurn(-84); //86 //-82 //83
+//     angler.set_value(true);
+//     driveStraight(1000); //1670 //950 //850
+//     angler.set_value(false);
+//     delay(800);
 
-    //turn to aim second low goal shot
-    driveTurn(86);
-    delay(350);
-    driveStraight(-570); //500
-    driveTurn(-34); //25 //28 //32
-    CATA.move(-127);
-    delay(190);
+//     //turn to aim second low goal shot
+//     driveTurn(86);
+//     delay(350);
+//     driveStraight(-570); //500
+//     driveTurn(-34); //25 //28 //32
+//     CATA.move(-127);
+//     delay(190);
         
-    //turn away from second low goal shot
-    driveTurn(-19); //25 //-22 //-21
+//     //turn away from second low goal shot
+//     driveTurn(-19); //25 //-22 //-21
 
-    //drive to roller
-    driveStraight(1500);//1600
-    driveTurn(-85); //-86
-    driveStraight(320);
-    INTAKE.move(0);
-    LF.move(60);
-    LM.move(60);
-    LB.move(60);
-    RF.move(60);
-    RM.move(60);
-    RB.move(60);
-    delay(450);
+//     //drive to roller
+//     driveStraight(1500);//1600
+//     driveTurn(-85); //-86
+//     driveStraight(320);
+//     INTAKE.move(0);
+//     LF.move(60);
+//     LM.move(60);
+//     LB.move(60);
+//     RF.move(60);
+//     RM.move(60);
+//     RB.move(60);
+//     delay(450);
 
-    //less voltage toward roller to prevent too much friction
-    LF.move(10);
-    LM.move(10);
-    LB.move(10);
-    RF.move(10);
-    RM.move(10);
-    RB.move(10);
+//     //less voltage toward roller to prevent too much friction
+//     LF.move(10);
+//     LM.move(10);
+//     LB.move(10);
+//     RF.move(10);
+//     RM.move(10);
+//     RB.move(10);
 
-    //spin the intake a certain amount
-    INTAKE.move_relative(1000, 600);
-    delay(800);
-    INTAKE.move(127);
+//     //spin the intake a certain amount
+//     INTAKE.move_relative(1000, 600);
+//     delay(800);
+//     INTAKE.move(127);
         
-    //back out from roller
-    driveStraight(-820);
+//     //back out from roller
+//     driveStraight(-820);
 
-    //turn toward other roller
-    driveTurn(88);
+//     //turn toward other roller
+//     driveTurn(88);
 
-    //move to roller
-    driveStraight(550);
+//     //move to roller
+//     driveStraight(550);
      
-    //move forward to second roller
-    INTAKE.move(0);
-    LF.move(60);
-    LM.move(60);
-    LB.move(60);
-    RF.move(60);
-    RM.move(60);
-    RB.move(60);
-    delay(450);
+//     //move forward to second roller
+//     INTAKE.move(0);
+//     LF.move(60);
+//     LM.move(60);
+//     LB.move(60);
+//     RF.move(60);
+//     RM.move(60);
+//     RB.move(60);
+//     delay(450);
     
-    LF.move(10);
-    LM.move(10);
-    LB.move(10);
-    RF.move(10);
-    RM.move(10);
-    RB.move(10);
+//     LF.move(10);
+//     LM.move(10);
+//     LB.move(10);
+//     RF.move(10);
+//     RM.move(10);
+//     RB.move(10);
   
-    //spin the intake a certain amount for second roller
-    INTAKE.move_relative(1000, 600);
-    delay(800);
+//     //spin the intake a certain amount for second roller
+//     INTAKE.move_relative(1000, 600);
+//     delay(800);
 
-    driveStraight(-760);
-    driveTurn(-44);
-    driveStraight(500);
+//     driveStraight(-760);
+//     driveTurn(-44);
+//     driveStraight(500);
 
-    //expansion
-    expand.set_value(true);
+//     //expansion
+//     expand.set_value(true);
   }
 
 //55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555

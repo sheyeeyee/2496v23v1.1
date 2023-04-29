@@ -160,6 +160,9 @@ void driveStraight(int target) {
              if (abs(target) < 350 ){
              setConstants(1, 0.01, 9); //0.4 //0.85
         } 
+          if (abs(target) == 30 ){
+             setConstants(1.5, 0.01, 9); //0.4 //0.85
+        } 
     
         // temp cata reset
         if (catalim.get_value() == false) CATA.move(-127);
@@ -269,9 +272,19 @@ void driveTurn(int target) { //target is inputted in autons
          setConstants(10, 0.015, 50); //0.4
     } else if (abs(target) > 120) {
         setConstants(9, 0.007, 55); //9
+    } else if (abs(target) == 88) {
+        setConstants(11.1, 0.004, 55);
     } else if (abs(target) == 87) {
         setConstants(9, 0.007, 55);
-    }
+    } else if (abs(target) == 66) {
+        setConstants(10, 0.017, 55);
+    } else if (abs(target) == 134) {
+        setConstants(9, 0.006, 55);
+    } else if (abs(target) == 134) {
+        setConstants(9, 0.007, 55);
+    } else if (abs(target) == 71) {
+        setConstants(9.8, 0.007, 55);
+    } 
     // else if (abs(target) < 45){
     //      setConstants(1800, 0.425, 18000);
     // }
@@ -482,9 +495,11 @@ void driveSmall(int target) {
 void driveShoot(int target) {
 
     
-   
-        
-    int timeout = 3500; //3500
+   int timeout = 1500; //3500
+    if(abs(target) < 140){
+int timeout = 1000; //3500
+    }
+    
 
 
     // if (target < 850){
@@ -534,28 +549,35 @@ void driveShoot(int target) {
     while(true) {
         int safe;
         // temp cata reset //(150 < time)
-        if((abs(error) < 200) || (catalim.get_value() == false)){
+        if((abs(error) < 200) || (catalim.get_value() == 1)){
             CATA.move(-127);
         }
         else CATA.move(0);
 
-        if(catalim.get_value() == 0){
-            CATA.move(0);
-        }
-
-
+        // if(catalim.get_value() == 1){
+        //     CATA.move(0);
+        // }
 
 
         setConstants(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
-             if (abs(target) < 350 ){
+        if (abs(target) < 350) {
+             setConstants(0.95, 0.1, 9); //0.4 //0.85 //0.87
+        } else if (abs(target) < 150) {
              setConstants(0.95, 0.1, 9); //0.4 //0.85 //0.87
         }
         
-         if (abs(target) == 140){
+         if (abs(target) == 140) {
              setConstants(1.5, 0.1, 9); //0.4 //0.85
+        }
+         if (abs(target) == 30) {
+             setConstants(2, 0.1, 9); //0.4 //0.85
+        }
+         if (abs(target) == 30) {
+             setConstants(2, 0.1, 9); //0.4 //0.85
         }
     
         // temp cata reset
+
 
 
         encoderAvg = (LB.get_position() + RB.get_position()) / 2;
@@ -606,10 +628,10 @@ void driveShoot(int target) {
 
         chasMove2( (voltage + heading_error + h), (voltage + heading_error  + h), (voltage + heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h), (voltage - heading_error + h));
         if (abs(target - encoderAvg) <= 3) count++;
-        if (count >= 20 || time > timeout){
-            if(catalim.get_value() == 0){
-            CATA.move(0);
-            break;
+        if (count >= 20 || time > timeout) {
+            if (catalim.get_value() == 0) {
+                CATA.move(0);
+                break;
             }
         } 
 
